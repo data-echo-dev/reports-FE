@@ -47,8 +47,49 @@ const useAuthProvider = () => {
         return { error }
       })
   }
+
+  const signIn = ({ email, password }) => {
+    return auth
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        setUser(response.user)
+        getUserAdditionalData(user)
+        return response.user
+      })
+      .catch((error) => {
+        return { error }
+      })
+  }
+
+  const getUserAdditionalData = (user: firebase.User) => {
+    return db
+      .collection('users')
+      .doc(user.uid)
+      .get()
+      .then((userData) => {
+        if (userData.data()) {
+          setUser(userData.data())
+        }
+      })
+  }
+
+  // handleAuthStateChanged & the useEffect allow you to refresh a page & remain logged in.
+  // need to read into this
+  const handleAuthStateChanged = (user) => {
+    setUser(user)
+    if (user) {
+      getUserAdditionalData(user)
+    }
+  }
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged(handleAuthStateChanged)
+
+    return () => unsub()
+  }, [])
+
   return {
     user,
     signUp,
+    signIn,
   }
 }
