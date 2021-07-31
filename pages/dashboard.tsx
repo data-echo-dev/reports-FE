@@ -1,7 +1,9 @@
-import { useAuth } from '../hooks/useAuth'
+import { useRequireAuth } from '../hooks/useRequireAuth'
 const DashBoardPage: React.FC = () => {
-  const auth = useAuth()
+  // why won't useRequireAuth push an unlogged in user to the login page?
+  const auth = useRequireAuth()
   if (!auth.user) return null
+
   return (
     <div className="flex min-h-screen bg-gray-200">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
