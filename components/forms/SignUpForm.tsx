@@ -1,5 +1,6 @@
+import Router from 'next/router'
 import { useState } from 'react'
-import { auth, db } from '../../config/firebase'
+import { useAuth } from '../../hooks/useAuth'
 
 interface SignUpData {
   name: string
@@ -7,39 +8,15 @@ interface SignUpData {
   password: string
 }
 
-const signUp = ({ name, email, password }) => {
-  return auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((response) => {
-      console.log(response)
-      return createUser({ uid: response?.user?.uid, email, name })
-    })
-    .catch((error) => {
-      return { error }
-    })
-}
-
-const createUser = (user) => {
-  return db
-    .collection('users')
-    .doc(user.uid)
-    .set(user)
-    .then(() => {
-      console.log('Success')
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-
 const SignUpForm: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const auth = useAuth()
 
   const onSubmit = (data: SignUpData) => {
-    return signUp(data).then((user) => {
-      console.log(user)
+    return auth.signUp(data).then(() => {
+      Router.push('/dashboard')
     })
   }
 
