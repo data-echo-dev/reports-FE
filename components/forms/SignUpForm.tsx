@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { auth } from '../../config/firebase'
+import { auth, db } from '../../config/firebase'
 
 interface SignUpData {
   name: string
@@ -13,9 +12,23 @@ const signUp = ({ name, email, password }) => {
     .createUserWithEmailAndPassword(email, password)
     .then((response) => {
       console.log(response)
+      return createUser({ uid: response?.user?.uid, email, name })
     })
     .catch((error) => {
       return { error }
+    })
+}
+
+const createUser = (user) => {
+  return db
+    .collection('users')
+    .doc(user.uid)
+    .set(user)
+    .then(() => {
+      console.log('Success')
+    })
+    .catch((error) => {
+      console.log(error)
     })
 }
 
@@ -24,12 +37,6 @@ const SignUpForm: React.FC = () => {
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm()
-
   const onSubmit = (data: SignUpData) => {
     return signUp(data).then((user) => {
       console.log(user)
@@ -37,7 +44,7 @@ const SignUpForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form>
       <label
         htmlFor="name"
         className="block text-sm font-medium leading-5 text-gray-700"
@@ -80,7 +87,7 @@ const SignUpForm: React.FC = () => {
       <div className="mt-6">
         <span className="block w-full rounded-md shadow-sm">
           <button
-            type="submit"
+            type="button"
             className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
             onClick={() => onSubmit({ name, email, password })}
           >
