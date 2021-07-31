@@ -12,6 +12,12 @@ const DashBoardPage: React.FC = () => {
           <p className="mt-2 text-center text-gray-600 text-md">
             {`You are logged in with ${auth.user.email}`}
           </p>
+          <button
+            onClick={() => auth.signOut()}
+            className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+          >
+            Sign out
+          </button>
         </div>
       </div>
     </div>

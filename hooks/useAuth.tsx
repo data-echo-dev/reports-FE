@@ -1,3 +1,4 @@
+import Router from 'next/router'
 import {
   useState,
   useEffect,
@@ -22,6 +23,17 @@ export const useAuth: any = () => {
 const useAuthProvider = () => {
   const [user, setUser] = useState(null)
 
+  const signUp = ({ name, email, password }) => {
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        auth?.currentUser?.sendEmailVerification()
+        return createUser({ uid: response?.user?.uid, email, name })
+      })
+      .catch((error) => {
+        return { error }
+      })
+  }
   const createUser = (user) => {
     return db
       .collection('users')
@@ -30,18 +42,6 @@ const useAuthProvider = () => {
       .then(() => {
         setUser(user)
         return user
-      })
-      .catch((error) => {
-        return { error }
-      })
-  }
-
-  const signUp = ({ name, email, password }) => {
-    return auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((response) => {
-        auth?.currentUser?.sendEmailVerification()
-        return createUser({ uid: response?.user?.uid, email, name })
       })
       .catch((error) => {
         return { error }
@@ -60,7 +60,6 @@ const useAuthProvider = () => {
         return { error }
       })
   }
-
   const getUserAdditionalData = (user: firebase.User) => {
     return db
       .collection('users')
@@ -87,9 +86,30 @@ const useAuthProvider = () => {
     return () => unsub()
   }, [])
 
+  // this effect updates the application's state whenever the user document changes
+  // read into .onSnapshot
+  useEffect(() => {
+    if (user?.uid) {
+      // Subscribe to user document on mount
+      const unsubscribe = db
+        .collection('users')
+        .doc(user?.uid)
+        .onSnapshot((doc) => setUser(doc.data()))
+      return () => unsubscribe()
+    }
+  }, [])
+
+  const signOut = () => {
+    return auth.signOut().then(() => {
+      setUser(false)
+      Router.push('/')
+    })
+  }
+
   return {
     user,
     signUp,
     signIn,
+    signOut,
   }
 }
