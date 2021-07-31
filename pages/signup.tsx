@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SignUpForm from '../components/forms/SignUpForm'
 const SignUpPage: React.FC = () => {
   return (
     <div className="flex min-h-screen bg-gray-200">
@@ -17,7 +18,7 @@ const SignUpPage: React.FC = () => {
           </p>
         </div>
         <div className="px-4 py-8 mt-8 bg-white shadow sm:rounded-lg sm:px-10">
-          Todo: Create Sign up form component and add here
+          <SignUpForm />
         </div>
       </div>
     </div>
