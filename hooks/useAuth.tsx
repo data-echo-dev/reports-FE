@@ -106,10 +106,17 @@ const useAuthProvider = () => {
     })
   }
 
+  const sendPasswordResetEmail = (email) => {
+    return auth.sendPasswordResetEmail(email).then((response) => {
+      return response
+    })
+  }
+
   return {
     user,
     signUp,
     signIn,
     signOut,
+    sendPasswordResetEmail,
   }
 }

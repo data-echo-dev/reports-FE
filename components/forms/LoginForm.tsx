@@ -1,4 +1,5 @@
 import Router from 'next/router'
+import Link from 'next/link'
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 
@@ -46,6 +47,15 @@ const LoginForm: React.FC = () => {
         name="password"
         onChange={(e) => setPassword(e.target.value)}
       />
+      <div className="flex items-end mt-4">
+        <div className="text-sm leading-5">
+          <Link href="/reset-password">
+            <a className="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline">
+              Forgot your password?
+            </a>
+          </Link>
+        </div>
+      </div>
       <div className="mt-6">
         <span className="block w-full rounded-md shadow-sm">
           <button
