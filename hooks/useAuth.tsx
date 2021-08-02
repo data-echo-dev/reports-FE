@@ -7,8 +7,9 @@ import {
   ReactNode,
 } from 'react'
 import { auth, db } from '../config/firebase'
+import firebase from 'firebase/app'
 
-const authContext = createContext({ user: {} })
+const authContext = createContext<firebase.User | null>(null)
 const { Provider } = authContext
 
 export function AuthProvider(props: { children: ReactNode }): JSX.Element {
@@ -21,7 +22,8 @@ export const useAuth: any = () => {
 
 // Provider hook that creates an auth object and handles it's state
 const useAuthProvider = () => {
-  const [user, setUser] = useState(null)
+  // Q: will I have to create a custom user type?
+  const [user, setUser] = useState<firebase.User | null>(null)
 
   const signUp = ({ name, email, password }) => {
     return auth
@@ -67,6 +69,7 @@ const useAuthProvider = () => {
       .get()
       .then((userData) => {
         if (userData.data()) {
+          // this is why I might need a custom user type?
           setUser(userData.data())
         }
       })
@@ -101,7 +104,7 @@ const useAuthProvider = () => {
 
   const signOut = () => {
     return auth.signOut().then(() => {
-      setUser(false)
+      setUser(null)
       Router.push('/')
     })
   }
