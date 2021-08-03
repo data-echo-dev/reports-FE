@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Router from 'next/router'
 import {
   useState,

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Router from 'next/router'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -21,6 +22,8 @@ const LoginForm: React.FC = () => {
     setIsLoading(true)
     setError(null)
     return auth.signIn(data).then((response) => {
+      console.log(response)
+
       setIsLoading(false)
       response.error ? setError(response.error) : Router.push('/dashboard')
     })
