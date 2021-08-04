@@ -1,8 +1,21 @@
 import { useRequireAuth } from '../hooks/useRequireAuth'
+import { db } from '../config/firebase'
+
+async function getReports(auth) {
+  const reportsRef = db.collection('reports')
+  const reports = await reportsRef.where('teacher', '==', auth.user.uid).get()
+  reports.forEach((doc) => {
+    console.log(doc.id, '=>', doc.data())
+  })
+}
+
+// TODO: query reports where teacher = signed in user
+// TODO: query reports where signed in user has a role that's allowed to view certain reports
+
 const DashBoardPage: React.FC = () => {
-  // why won't useRequireAuth push an unlogged in user to the login page?
   const auth = useRequireAuth()
   if (!auth.user) return null
+  getReports(auth)
 
   return (
     <div className="flex min-h-screen bg-gray-200">
