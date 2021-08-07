@@ -27,6 +27,8 @@ const useAuthProvider = () => {
   const [user, setUser] = useState<firebase.User | null>(null)
 
   const signUp = ({ name, email, password }) => {
+    console.log(auth)
+
     return auth
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
