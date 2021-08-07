@@ -12,16 +12,26 @@ const SignUpForm: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [error, setError] = useState(null)
   const auth = useAuth()
 
   const onSubmit = (data: SignUpData) => {
-    return auth.signUp(data).then(() => {
+    return auth.signUp(data).then((response) => {
+      if (response.error) {
+        setError(response.error.message)
+        return
+      }
       Router.push('/dashboard')
     })
   }
 
   return (
     <form>
+      {error && (
+        <div className="p-2 mb-4 text-center text-red-500 border border-red-600 border-dashed rounded">
+          <span>{error}</span>
+        </div>
+      )}
       <label
         htmlFor="name"
         className="block text-sm font-medium leading-5 text-gray-700"
