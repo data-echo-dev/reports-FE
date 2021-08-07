@@ -1,18 +1,31 @@
+// @ts-nocheck
 import Router from 'next/router'
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 
 const ResetPasswordForm: React.FC = () => {
   const [email, setEmail] = useState('')
+  const [error, setError] = useState(null)
   const auth = useAuth()
 
   const onSubmit = (data: { email: string }) => {
-    auth.sendPasswordResetEmail(data.email)
-    Router.push('/login')
+    auth.sendPasswordResetEmail(data.email).then(
+      () => {
+        Router.push('/login')
+      },
+      (error) => {
+        setError(error.message)
+      }
+    )
   }
 
   return (
     <form>
+      {error && (
+        <div className="p-2 mb-4 text-center text-red-500 border border-red-600 border-dashed rounded">
+          <span>{error}</span>
+        </div>
+      )}
       <label
         htmlFor="email"
         className="block text-sm font-medium leading-5 text-gray-700"
