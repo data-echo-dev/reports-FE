@@ -8,6 +8,7 @@ assume these are written in order of importance/priority. start from the top
 
 # architecture
 - initial firebase setup was done following [this](https://betterprogramming.pub/implement-user-authentication-with-next-js-and-firebase-fb9414adba08) tutorial
+- [better tutorial](https://www.youtube.com/watch?v=awd_oYcmrRA) to follow for next project
 
 # backlog
 - [ ] button situation with the forms has to be addressed, if I fill in a form and press enter, nothing happens. can't go to production with this.

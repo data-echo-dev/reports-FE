@@ -1,11 +1,22 @@
 // @ts-nocheck
 import { useRequireAuth } from '../hooks/useRequireAuth'
-import { db } from '../config/firebase'
+import { db, auth as otherAuth } from '../config/firebase'
+import { useEffect } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 async function getReports(auth) {
   const reportsRef = db.collection('reports')
-  const reports = await reportsRef.where('teacher', '==', auth.user.uid).get()
-  reports.forEach((doc) => {
+  // const reports = await reportsRef
+  //   .where('organisation', '==', auth.user.organisation)
+  //   .where('teacher', '==', auth.user.uid)
+  //   .get()
+
+  const reports = await reportsRef
+    .where('roles', 'array-contains-any', auth.user.roles)
+    .get()
+
+  return reports.forEach((doc) => {
     console.log(doc.id, '=>', doc.data())
   })
 }
@@ -14,9 +25,35 @@ async function getReports(auth) {
 // TODO: query reports where signed in user has a role that's allowed to view certain reports
 
 const DashBoardPage: React.FC = () => {
+  const [user, loading, error] = useAuthState(otherAuth)
+  console.log(user)
+
+  // useEffect(() => {
+  //   if (auth?.user?.roles) {
+  //     console.log(auth?.user?.roles)
+  //     getReports(auth)
+  //   }
+  //   // return () => {
+  //   //   cleanup
+  //   // }
+  // }, [auth])
   const auth = useRequireAuth()
-  if (!auth.user) return null
+  console.log(auth)
   getReports(auth)
+
+  // useEffect(() => {
+  //   const unsub = getReports(auth)
+
+  //   return () => unsub()
+  // }, [auth])
+  // user && getReports(auth)
+  if (!auth.user) return null
+  // Votes Collection
+  const [reports, reportsLoading, reportsError] = useCollection(
+    db.collection('reports'),
+    {}
+  )
+  // console.log(reports)
 
   return (
     <div className="flex min-h-screen bg-gray-200">

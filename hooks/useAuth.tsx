@@ -106,7 +106,7 @@ const useAuthProvider = () => {
   const signOut = () => {
     return auth.signOut().then(() => {
       setUser(null)
-      Router.push('/')
+      Router.push('/login')
     })
   }
 
