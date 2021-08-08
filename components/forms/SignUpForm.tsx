@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Router from 'next/router'
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
@@ -75,7 +76,7 @@ const SignUpForm: React.FC = () => {
         <span className="block w-full rounded-md shadow-sm">
           <button
             type="button"
-            className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+            className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-600 focus:ring-4 focus:shadow-outline-indigo active:bg-indigo-700"
             onClick={() => onSubmit({ name, email, password })}
           >
             Sign up
