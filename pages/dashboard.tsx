@@ -7,14 +7,15 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 
 async function getReports(auth) {
   const reportsRef = db.collection('reports')
-  // const reports = await reportsRef
-  //   .where('organisation', '==', auth.user.organisation)
-  //   .where('teacher', '==', auth.user.uid)
-  //   .get()
-
   const reports = await reportsRef
+    .where('organisation', '==', auth.user.organisation)
+    .where('teacher', '==', auth.user.uid)
     .where('roles', 'array-contains-any', auth.user.roles)
     .get()
+
+  // const reports = await reportsRef
+  //   .where('roles', 'array-contains-any', auth.user.roles)
+  //   .get()
 
   return reports.forEach((doc) => {
     console.log(doc.id, '=>', doc.data())
