@@ -2,6 +2,7 @@
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import LinksGrid from '../components/Grids/LinksGrid'
 import OrgsGrid from '../components/Grids/OrgsGrid'
+import UsersGrid from '../components/Grids/UsersGrid'
 import { db } from '../config/firebase'
 import { useState } from 'react'
 
@@ -9,6 +10,7 @@ const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth()
   const [reports, setReports] = useState(null)
   const [orgs, setOrgs] = useState(null)
+  const [users, setUsers] = useState(null)
 
   if (!auth.user) return null
   console.log(auth.user)
@@ -51,6 +53,7 @@ const DashBoardPage: React.FC = () => {
     const usersRef = db.collection('users')
     const users = await usersRef.get()
 
+    setUsers(users)
     return users.forEach((doc) => {
       console.log(doc.id, '=>', doc.data())
     })
@@ -111,39 +114,21 @@ const DashBoardPage: React.FC = () => {
                   </a>
                 </>
               )}
+              <button
+                className="flex items-center w-full p-2 my-6 text-red-800 transition-colors duration-200 rounded-lg hover:text-red-800 hover:bg-red-100 dark:hover:text-white dark:hover:bg-red-600 dark:text-red-100 dark:bg-red-600"
+                onClick={() => auth.signOut()}
+              >
+                <span className="mx-4 text-lg font-normal">Sign Out</span>
+                <span className="flex-grow text-right"></span>
+              </button>
             </nav>
           </div>
 
           <LinksGrid reportsData={reports} />
           <OrgsGrid orgsData={orgs} />
+          <UsersGrid usersData={users} />
         </div>
       </div>
-
-      {/* <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="mt-24 text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-            {`Welcome ${auth.user.name}!`}
-          </h2>
-          <p className="mt-2 text-center text-gray-600 text-md">
-            {`You are logged in with ${auth.user.email}`}
-          </p>
-          <div className="flex items-center justify-center">
-            <button onClick={() => getOrgReports(auth)} disabled={!auth}>
-              Org Links
-            </button>
-            <button onClick={() => getTeacherReports(auth)} disabled={!auth}>
-              My Links
-            </button>
-            {auth.user.isSuperAdmin && <button>Things</button>}
-          </div>
-          <button
-            onClick={() => auth.signOut()}
-            className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
-          >
-            Sign out
-          </button>
-        </div>
-      </div> */}
     </div>
   )
 }
