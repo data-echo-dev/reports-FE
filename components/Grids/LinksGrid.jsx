@@ -8,6 +8,7 @@ const LinksGrid = ({reportsData}) => {
         cleanedUp.push(doc.data())
       })
     console.log(cleanedUp);
+
     return (
   <div className="flex items-center justify-center w-full min-h-screen bg-gray-900">
     <div className="col-span-12">
@@ -27,7 +28,7 @@ const LinksGrid = ({reportsData}) => {
                     <tr key={report.id} className="bg-gray-800">
                     <td className="p-3">
                         <div className="flex align-items-center">
-                        <div className>{report.title}</div>
+                        <div >{report.title}</div>
                         </div>
                     </td>
                     <td className="p-3">

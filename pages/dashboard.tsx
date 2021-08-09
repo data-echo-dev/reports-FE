@@ -1,12 +1,14 @@
 // @ts-nocheck
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import LinksGrid from '../components/Grids/LinksGrid'
+import OrgsGrid from '../components/Grids/OrgsGrid'
 import { db } from '../config/firebase'
 import { useState } from 'react'
 
 const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth()
   const [reports, setReports] = useState(null)
+  const [orgs, setOrgs] = useState(null)
 
   if (!auth.user) return null
   console.log(auth.user)
@@ -39,6 +41,7 @@ const DashBoardPage: React.FC = () => {
     const orgsRef = db.collection('organisations')
     const orgs = await orgsRef.get()
 
+    setOrgs(orgs)
     return orgs.forEach((doc) => {
       console.log(doc.id, '=>', doc.data())
     })
@@ -112,6 +115,7 @@ const DashBoardPage: React.FC = () => {
           </div>
 
           <LinksGrid reportsData={reports} />
+          <OrgsGrid orgsData={orgs} />
         </div>
       </div>
 
