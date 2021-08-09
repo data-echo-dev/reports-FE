@@ -3,6 +3,7 @@ import { useRequireAuth } from '../hooks/useRequireAuth'
 import LinksGrid from '../components/Grids/LinksGrid'
 import OrgsGrid from '../components/Grids/OrgsGrid'
 import UsersGrid from '../components/Grids/UsersGrid'
+import ReportsGrid from '../components/Grids/ReportsGrid'
 import { db } from '../config/firebase'
 import { useState } from 'react'
 
@@ -39,6 +40,17 @@ const DashBoardPage: React.FC = () => {
       console.log(doc.id, '=>', doc.data())
     })
   }
+
+  async function getReports(): void {
+    const reportsRef = db.collection('reports')
+    const reports = await reportsRef.get()
+
+    setReports(reports)
+    return reports.forEach((doc) => {
+      console.log(doc.id, '=>', doc.data())
+    })
+  }
+
   async function getOrgs(): void {
     const orgsRef = db.collection('organisations')
     const orgs = await orgsRef.get()
@@ -103,15 +115,15 @@ const DashBoardPage: React.FC = () => {
                     </span>
                     <span className="flex-grow text-right"></span>
                   </button>
-                  <a
+                  <button
                     className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
-                    href="#"
+                    onClick={() => getReports()}
                   >
                     <span className="mx-4 text-lg font-normal">
                       Report Management
                     </span>
                     <span className="flex-grow text-right"></span>
-                  </a>
+                  </button>
                 </>
               )}
               <button
@@ -124,9 +136,11 @@ const DashBoardPage: React.FC = () => {
             </nav>
           </div>
 
+          {/* TODO: what's the cleanest way to make sure only one is rendered at a time? */}
           <LinksGrid reportsData={reports} />
           <OrgsGrid orgsData={orgs} />
           <UsersGrid usersData={users} />
+          <ReportsGrid reportsData={reports} />
         </div>
       </div>
     </div>
