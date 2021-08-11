@@ -73,7 +73,7 @@ const DashBoardPage: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-200">
-      <div className="relative w-screen bg-white dark:bg-gray-800">
+      <div className="relative w-full bg-white dark:bg-gray-800">
         <div className="flex flex-col sm:flex-row sm:justify-around">
           <div className="h-screen w-80">
             <nav className="px-6 mt-10 ">
