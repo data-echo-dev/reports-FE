@@ -6,6 +6,7 @@ import UsersGrid from '../components/Grids/UsersGrid'
 import ReportsGrid from '../components/Grids/ReportsGrid'
 import { db } from '../config/firebase'
 import { useState } from 'react'
+import Link from 'next/link'
 
 const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth()
@@ -87,14 +88,16 @@ const DashBoardPage: React.FC = () => {
                 </span>
                 <span className="flex-grow text-right"></span>
               </button>
-              <button
-                className="flex items-center w-full p-2 my-6 text-gray-800 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-100 dark:bg-gray-600"
-                onClick={() => getTeacherReports(auth)}
-                disabled={!auth}
-              >
-                <span className="mx-4 text-lg font-normal">My Reports</span>
-                <span className="flex-grow text-right"></span>
-              </button>
+              <Link href={'/my-reports'}>
+                <button
+                  className="flex items-center w-full p-2 my-6 text-gray-800 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-100 dark:bg-gray-600"
+                  // onClick={() => getTeacherReports(auth)}
+                  disabled={!auth}
+                >
+                  <span className="mx-4 text-lg font-normal">My Reports</span>
+                  <span className="flex-grow text-right"></span>
+                </button>
+              </Link>
               {auth.user.isSuperAdmin && (
                 <>
                   <button
