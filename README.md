@@ -7,6 +7,7 @@ assume these are written in order of importance/priority. start from the top
 - [x] check out the TODO's in the codebase
 - [ ] separate grid components into own pages
 - [ ] separate dashboard nav into its own component.
+- [ ] persistent nav(collapsable) + basic layout
 
 # architecture
 - initial firebase setup was done following [this](https://betterprogramming.pub/implement-user-authentication-with-next-js-and-firebase-fb9414adba08) tutorial
