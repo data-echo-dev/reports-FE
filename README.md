@@ -6,8 +6,11 @@ assume these are written in order of importance/priority. start from the top
 - [x] Query & display all reports that a signed in user is allowed to see (refer to `array-contains` snippet that's in the notebook)
 - [x] check out the TODO's in the codebase
 - [ ] separate grid components into own pages
+  - [x] ~~my reports is done~~
+  - [ ] organisation reports
 - [ ] separate dashboard nav into its own component.
 - [ ] persistent nav(collapsable) + basic layout
+- [ ] fix build errors
 
 # architecture
 - initial firebase setup was done following [this](https://betterprogramming.pub/implement-user-authentication-with-next-js-and-firebase-fb9414adba08) tutorial
