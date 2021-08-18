@@ -1,39 +1,11 @@
 // @ts-nocheck
 import { useRequireAuth } from '../hooks/useRequireAuth'
-import LinksGrid from '../components/Grids/LinksGrid'
-import OrgsGrid from '../components/Grids/OrgsGrid'
-import UsersGrid from '../components/Grids/UsersGrid'
-import ReportsGrid from '../components/Grids/ReportsGrid'
-import { db } from '../config/firebase'
-import { useState } from 'react'
 import Link from 'next/link'
 
 const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth()
-  const [reports, setReports] = useState(null)
-  const [users, setUsers] = useState(null)
 
   if (!auth.user) return null
-
-  async function getReports(): void {
-    const reportsRef = db.collection('reports')
-    const reports = await reportsRef.get()
-
-    setReports(reports)
-    return reports.forEach((doc) => {
-      console.log(doc.id, '=>', doc.data())
-    })
-  }
-
-  // async function getUsers(): void {
-  //   const usersRef = db.collection('users')
-  //   const users = await usersRef.get()
-
-  //   setUsers(users)
-  //   return users.forEach((doc) => {
-  //     console.log(doc.id, '=>', doc.data())
-  //   })
-  // }
 
   return (
     <div className="flex min-h-screen bg-gray-200">
@@ -79,15 +51,17 @@ const DashBoardPage: React.FC = () => {
                       <span className="flex-grow text-right"></span>
                     </button>
                   </Link>
-                  <button
-                    className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
-                    onClick={() => getReports()}
-                  >
-                    <span className="mx-4 text-lg font-normal">
-                      Report Management
-                    </span>
-                    <span className="flex-grow text-right"></span>
-                  </button>
+                  <Link href={'/report-management'}>
+                    <button
+                      className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
+                      // onClick={() => getReports()}
+                    >
+                      <span className="mx-4 text-lg font-normal">
+                        Report Management
+                      </span>
+                      <span className="flex-grow text-right"></span>
+                    </button>
+                  </Link>
                 </>
               )}
               <button
@@ -100,10 +74,7 @@ const DashBoardPage: React.FC = () => {
             </nav>
           </div>
 
-          {/* <LinksGrid reportsData={reports} /> */}
-          {/* <OrgsGrid orgsData={orgs} /> */}
-          {/* <UsersGrid usersData={users} /> */}
-          <ReportsGrid reportsData={reports} />
+          {/* <ReportsGrid reportsData={reports} /> */}
         </div>
       </div>
     </div>
