@@ -25,7 +25,7 @@ const UsersGrid = ({usersData}) => {
             <tbody>
                 {
                     cleanedUp.map((user) => (
-                    <tr key={user.uid} className="bg-gray-800">
+                    <tr key={user.email} className="bg-gray-800">
                     <td className="p-3">
                         {user.name}
                     </td>

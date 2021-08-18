@@ -25,15 +25,15 @@ const DashBoardPage: React.FC = () => {
     })
   }
 
-  async function getUsers(): void {
-    const usersRef = db.collection('users')
-    const users = await usersRef.get()
+  // async function getUsers(): void {
+  //   const usersRef = db.collection('users')
+  //   const users = await usersRef.get()
 
-    setUsers(users)
-    return users.forEach((doc) => {
-      console.log(doc.id, '=>', doc.data())
-    })
-  }
+  //   setUsers(users)
+  //   return users.forEach((doc) => {
+  //     console.log(doc.id, '=>', doc.data())
+  //   })
+  // }
 
   return (
     <div className="flex min-h-screen bg-gray-200">
@@ -44,7 +44,6 @@ const DashBoardPage: React.FC = () => {
               <Link href={'/org-reports'}>
                 <button
                   className="flex items-start w-full p-2 my-6 text-left text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
-                  // onClick={() => getOrgReports(auth)}
                   disabled={!auth}
                 >
                   <span className="mx-4 text-lg font-normal">
@@ -56,7 +55,6 @@ const DashBoardPage: React.FC = () => {
               <Link href={'/my-reports'}>
                 <button
                   className="flex items-center w-full p-2 my-6 text-gray-800 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-100 dark:bg-gray-600"
-                  // onClick={() => getTeacherReports(auth)}
                   disabled={!auth}
                 >
                   <span className="mx-4 text-lg font-normal">My Reports</span>
@@ -66,25 +64,21 @@ const DashBoardPage: React.FC = () => {
               {auth.user.isSuperAdmin && (
                 <>
                   <Link href={'/org-management'}>
-                    <button
-                      className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
-                      // onClick={() => getOrgs()}
-                    >
+                    <button className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
                       <span className="mx-4 text-lg font-normal">
                         Org Management
                       </span>
                       <span className="flex-grow text-right"></span>
                     </button>
                   </Link>
-                  <button
-                    className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
-                    onClick={() => getUsers()}
-                  >
-                    <span className="mx-4 text-lg font-normal">
-                      User Management
-                    </span>
-                    <span className="flex-grow text-right"></span>
-                  </button>
+                  <Link href={'/user-management'}>
+                    <button className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
+                      <span className="mx-4 text-lg font-normal">
+                        User Management
+                      </span>
+                      <span className="flex-grow text-right"></span>
+                    </button>
+                  </Link>
                   <button
                     className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
                     onClick={() => getReports()}
@@ -108,7 +102,7 @@ const DashBoardPage: React.FC = () => {
 
           {/* <LinksGrid reportsData={reports} /> */}
           {/* <OrgsGrid orgsData={orgs} /> */}
-          <UsersGrid usersData={users} />
+          {/* <UsersGrid usersData={users} /> */}
           <ReportsGrid reportsData={reports} />
         </div>
       </div>
