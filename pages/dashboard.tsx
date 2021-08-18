@@ -15,19 +15,18 @@ const DashBoardPage: React.FC = () => {
   const [users, setUsers] = useState(null)
 
   if (!auth.user) return null
-  console.log(auth.user)
 
-  async function getTeacherReports(auth): void {
-    const reportsRef = db.collection('reports')
-    const reportsTeacher = await reportsRef
-      .where('organisation', '==', auth.user.organisation)
-      .where('teacher', '==', auth.user.uid)
-      .get()
-    setReports(reportsTeacher)
-    return reportsTeacher.forEach((doc) => {
-      console.log(doc.id, '=>', doc.data())
-    })
-  }
+  // async function getTeacherReports(auth): void {
+  //   const reportsRef = db.collection('reports')
+  //   const reportsTeacher = await reportsRef
+  //     .where('organisation', '==', auth.user.organisation)
+  //     .where('teacher', '==', auth.user.uid)
+  //     .get()
+  //   setReports(reportsTeacher)
+  //   return reportsTeacher.forEach((doc) => {
+  //     console.log(doc.id, '=>', doc.data())
+  //   })
+  // }
 
   async function getOrgReports(auth): void {
     const reportsRef = db.collection('reports')
@@ -78,16 +77,18 @@ const DashBoardPage: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:justify-around">
           <div className="h-screen w-80">
             <nav className="px-6 mt-10 ">
-              <button
-                className="flex items-start w-full p-2 my-6 text-left text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
-                onClick={() => getOrgReports(auth)}
-                disabled={!auth}
-              >
-                <span className="mx-4 text-lg font-normal">
-                  Organisation Reports
-                </span>
-                <span className="flex-grow text-right"></span>
-              </button>
+              <Link href={'/org-reports'}>
+                <button
+                  className="flex items-start w-full p-2 my-6 text-left text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
+                  // onClick={() => getOrgReports(auth)}
+                  disabled={!auth}
+                >
+                  <span className="mx-4 text-lg font-normal">
+                    Organisation Reports
+                  </span>
+                  <span className="flex-grow text-right"></span>
+                </button>
+              </Link>
               <Link href={'/my-reports'}>
                 <button
                   className="flex items-center w-full p-2 my-6 text-gray-800 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-100 dark:bg-gray-600"

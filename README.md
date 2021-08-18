@@ -7,7 +7,7 @@ assume these are written in order of importance/priority. start from the top
 - [x] check out the TODO's in the codebase
 - [ ] separate grid components into own pages
   - [x] ~~my reports is done~~
-  - [ ] organisation reports
+  - [x] ~~organisation reports~~
 - [ ] separate dashboard nav into its own component.
 - [ ] persistent nav(collapsable) + basic layout
 - [ ] fix build errors
