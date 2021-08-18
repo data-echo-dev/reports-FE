@@ -2,7 +2,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-const SingleOrganisationPage = (context) => {
+const SingleOrganisationPage = () => {
   const router = useRouter()
   const {
     query: { id },
