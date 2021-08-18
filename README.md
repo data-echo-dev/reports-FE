@@ -11,7 +11,14 @@ assume these are written in order of importance/priority. start from the top
 - [x] separate dashboard nav into its own component.
   - [x] SideNav styling needs work, I think the width is what needs work
 - [x] persistent nav(collapsable) + basic layout
-- [ ] fix build errors
+- [x] fix build errors
+- [ ] "Cannot read property 'uid' of null" when trying to login
+  - seems like you get logged in, but the auth state isn't set correctly in the app? or in the login screen. because the sidenav appears(which needs a logged in user), but yet you still can't access the dashboard?
+- [ ] creating of individual reports, users, & orgs
+- [ ] reading of individual reports, users, & orgs
+- [ ] updating of individual reports, users, & orgs
+- [ ] deleting of individual reports, users, & orgs - from grid & single item's page
+- [ ] need to start the switch to an org firebase account
 
 # architecture
 - initial firebase setup was done following [this](https://betterprogramming.pub/implement-user-authentication-with-next-js-and-firebase-fb9414adba08) tutorial
@@ -19,4 +26,3 @@ assume these are written in order of importance/priority. start from the top
 
 # backlog
 - [ ] button situation with the forms has to be addressed, if I fill in a form and press enter, nothing happens. can't go to production with this.
-- [ ] "Cannot read property 'uid' of null" when trying to login
