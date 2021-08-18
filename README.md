@@ -5,11 +5,12 @@ assume these are written in order of importance/priority. start from the top
   - [x] SignUpForm: seems this functionality is broken. fix it then error handling
 - [x] Query & display all reports that a signed in user is allowed to see (refer to `array-contains` snippet that's in the notebook)
 - [x] check out the TODO's in the codebase
-- [ ] separate grid components into own pages
+- [x] separate grid components into own pages
   - [x] ~~my reports is done~~
   - [x] ~~organisation reports~~
-- [ ] separate dashboard nav into its own component.
-- [ ] persistent nav(collapsable) + basic layout
+- [x] separate dashboard nav into its own component.
+  - [x] SideNav styling needs work, I think the width is what needs work
+- [x] persistent nav(collapsable) + basic layout
 - [ ] fix build errors
 
 # architecture
