@@ -3,9 +3,12 @@ import React from 'react'
 
 const ReportsGrid = ({reportsData}) => {
     let cleanedUp = []
+    const thingy = []
     reportsData?.forEach((doc) => {
+        thingy.push(doc.id)
         cleanedUp.push(doc.data())
       })
+      console.log(thingy);
     
     return (
         <div className="flex items-center justify-center w-full min-h-screen bg-gray-900">
