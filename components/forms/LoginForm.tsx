@@ -22,8 +22,12 @@ const LoginForm: React.FC = () => {
     setIsLoading(true)
     setError(null)
     return auth.signIn(data).then((response) => {
+      if (response.error) {
+        setIsLoading(false)
+        return setError(response.error)
+      }
       setIsLoading(false)
-      response.error ? setError(response.error) : Router.push('/dashboard')
+      Router.push('/dashboard')
     })
   }
 

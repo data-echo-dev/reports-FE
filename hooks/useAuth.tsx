@@ -55,9 +55,11 @@ const useAuthProvider = () => {
     return auth
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        setUser(response.user)
-        getUserAdditionalData(user)
-        return response.user
+        if (response.user) {
+          setUser(response.user)
+          getUserAdditionalData(user)
+          return response.user
+        }
       })
       .catch((error) => {
         return { error }
@@ -82,13 +84,14 @@ const useAuthProvider = () => {
     setUser(user)
     if (user) {
       getUserAdditionalData(user)
+      Router.push('/dashboard')
     }
   }
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(handleAuthStateChanged)
 
     return () => unsub()
-  }, [])
+  }, [user?.uid])
 
   // this effect updates the application's state whenever the user document changes
   // read into .onSnapshot
@@ -101,7 +104,7 @@ const useAuthProvider = () => {
         .onSnapshot((doc) => setUser(doc.data()))
       return () => unsubscribe()
     }
-  }, [])
+  }, [user?.uid])
 
   const signOut = () => {
     return auth.signOut().then(() => {
