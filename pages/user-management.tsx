@@ -22,7 +22,7 @@ const UserManagement = () => {
 
   if (!auth.user) return null
   // Create a function for fetching your data
-  const fetchData = () => {
+  function fetchData() {
     const usersRef = db.collection('users')
     usersRef
       .get()
