@@ -15,8 +15,6 @@ const OrgManagement = () => {
   if (status === 'error') {
     return `Error: ${error.message}`
   }
-  // setOrgs(data)
-  console.log(data)
 
   if (!auth.user) return null
 
