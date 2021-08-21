@@ -26,7 +26,7 @@ const OrgsGrid = ({orgsData}) => {
                     <tr key={org.id} className="bg-gray-800">
                     <td className="p-3">
                         <div className="flex align-items-center">
-                        <div className>{org.name}</div>
+                        <div >{org.name}</div>
                         </div>
                     </td>
                     <td className="p-3">
