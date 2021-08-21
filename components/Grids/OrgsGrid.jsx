@@ -2,17 +2,12 @@ import React from 'react'
 import Link from 'next/link'
 
 const OrgsGrid = ({orgsData}) => {
-    let cleanedUp = []
-    orgsData?.forEach((doc) => {
-        cleanedUp.push(doc.data())
-      })
-    console.log(cleanedUp);
     
     return (
         <div className="flex items-center justify-center w-full min-h-screen bg-gray-900">
     <div className="col-span-12">
       <div className="overflow-auto lg:overflow-visible ">
-          {cleanedUp.length > 0 && (
+          {orgsData.length > 0 && (
             <table className="table space-y-6 text-sm text-gray-400 border-separate">
             <thead className="text-gray-500 bg-gray-800">
                 <tr>
@@ -22,7 +17,7 @@ const OrgsGrid = ({orgsData}) => {
             </thead>
             <tbody>
                 {
-                    cleanedUp.map((org) => (
+                    orgsData.map((org) => (
                     <tr key={org.id} className="bg-gray-800">
                     <td className="p-3">
                         <div className="flex align-items-center">
