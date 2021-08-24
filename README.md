@@ -17,6 +17,7 @@ assume these are written in order of importance/priority. start from the top
 - [ ] creating of individual reports, users, & orgs
 - [ ] **reading of individual reports, users, & orgs**
 - [ ] updating of individual reports, users, & orgs
+  - [x] strategy to take care of the frontend's state changes (most notably the roles, as that comes in an array of strings)
 - [ ] deleting of individual reports, users, & orgs - from grid & single item's page
 - [ ] need to start the switch to an org firebase account
 

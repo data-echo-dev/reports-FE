@@ -19,7 +19,7 @@ const OrgManagement = () => {
   if (!auth.user) return null
 
   return (
-    <div>
+    <div className="w-full">
       <OrgsGrid orgsData={data} />
     </div>
   )
