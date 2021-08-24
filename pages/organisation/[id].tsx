@@ -4,13 +4,7 @@ import { useRouter } from 'next/router'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
 
-const SingleOrganisationPage = () => {
-  const router = useRouter()
-  const {
-    query: { id },
-  } = router
-  console.log(id)
-
+const SingleOrganisationPage = ({ params: { id } }) => {
   // Subscribe to Firestore document
   const { data, status, error } = useFirestoreQuery(
     db.collection('organisations').doc(id)
@@ -38,3 +32,10 @@ const SingleOrganisationPage = () => {
 }
 
 export default SingleOrganisationPage
+
+export async function getServerSideProps(context) {
+  const { params } = context
+
+  console.log(params)
+  return { props: { params } }
+}

@@ -15,7 +15,7 @@ assume these are written in order of importance/priority. start from the top
 - [x] "Cannot read property 'uid' of null" when trying to login
   - seems like you get logged in, but the auth state isn't set correctly in the app? or in the login screen. because the sidenav appears(which needs a logged in user), but yet you still can't access the dashboard?
 - [ ] creating of individual reports, users, & orgs
-- [ ] reading of individual reports, users, & orgs
+- [ ] **reading of individual reports, users, & orgs**
 - [ ] updating of individual reports, users, & orgs
 - [ ] deleting of individual reports, users, & orgs - from grid & single item's page
 - [ ] need to start the switch to an org firebase account
