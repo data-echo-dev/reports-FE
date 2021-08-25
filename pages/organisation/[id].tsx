@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
 import PageTitle from '../../components/PageTitle'
+import { MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
 
 const SingleOrganisationPage = ({ params: { id } }) => {
   // Subscribe to Firestore document
@@ -47,9 +48,23 @@ const SingleOrganisationPage = ({ params: { id } }) => {
     setRoles([...roles])
   }
 
+  function removeRole(e): void {
+    const removeIndex = Number(e.target.attributes.index?.value)
+    const copy = roles
+    copy.splice(removeIndex, 1)
+    setRoles([...copy])
+    console.log(roles)
+  }
+
   function handleNameChange(e): void {
     const value = e.target.value
     setName(value)
+  }
+
+  function addRole(): void {
+    const rolesPlusOne = roles
+    rolesPlusOne.push('')
+    setRoles([...rolesPlusOne])
   }
 
   return (
@@ -89,30 +104,45 @@ const SingleOrganisationPage = ({ params: { id } }) => {
           />
         </div>
         {roles.map((role, index) => (
-          <div
-            key={index}
-            className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500"
-          >
-            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-              <label htmlFor="username" className="px-1 text-gray-600 bg-white">
-                Role {index + 1}
-              </label>
+          <div key={index} className="flex">
+            <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
+              <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+                <label
+                  htmlFor="username"
+                  className="px-1 text-gray-600 bg-white"
+                >
+                  Role {index + 1}
+                </label>
+              </div>
+              <input
+                index={index}
+                value={role}
+                onChange={handleRoleChange}
+                autoComplete="false"
+                tabIndex={0}
+                type="text"
+                className="block w-full h-full px-1 py-1 outline-none "
+              />
             </div>
-            <input
-              index={index}
-              value={role}
-              onChange={handleRoleChange}
-              autoComplete="false"
-              tabIndex={0}
-              type="text"
-              className="block w-full h-full px-1 py-1 outline-none"
-            />
+            <button type="button">
+              <MinusCircleIcon
+                index={index}
+                onClick={removeRole}
+                className="w-6 h-6"
+              />
+            </button>
           </div>
         ))}
       </div>
-      <div className="pt-3 mt-6 space-x-3 border-t">
-        <button className="px-3 py-1 text-gray-100 transition-all duration-300 bg-green-500 rounded hover:shadow-inner hover:bg-green-700">
-          Role
+      <div className="flex pt-3 mt-6 space-x-3 border-t">
+        <button
+          onClick={addRole}
+          className="px-3 py-1 text-gray-100 transition-all duration-300 bg-green-500 rounded hover:shadow-inner hover:bg-green-700"
+        >
+          <div className="flex">
+            <PlusIcon className="w-6 h-6" />
+            <span>Role</span>
+          </div>
         </button>
         <button className="px-3 py-1 text-gray-100 transition-all duration-300 bg-blue-500 rounded hover:shadow-inner hover:bg-blue-700">
           Update
