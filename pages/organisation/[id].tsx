@@ -111,6 +111,9 @@ const SingleOrganisationPage = ({ params: { id } }) => {
         ))}
       </div>
       <div className="pt-3 mt-6 space-x-3 border-t">
+        <button className="px-3 py-1 text-gray-100 transition-all duration-300 bg-green-500 rounded hover:shadow-inner hover:bg-green-700">
+          Role
+        </button>
         <button className="px-3 py-1 text-gray-100 transition-all duration-300 bg-blue-500 rounded hover:shadow-inner hover:bg-blue-700">
           Update
         </button>

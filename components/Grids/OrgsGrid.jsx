@@ -4,7 +4,7 @@ import Link from 'next/link'
 const OrgsGrid = ({orgsData}) => {
     
     return (
-        <div className="flex items-center justify-center w-full min-h-screen bg-gray-900">
+        <div className="flex items-center justify-center w-full h-full bg-gray-600">
     <div className="col-span-12">
       <div className="overflow-auto lg:overflow-visible ">
           {orgsData.length > 0 && (
