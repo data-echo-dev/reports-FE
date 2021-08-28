@@ -4,6 +4,7 @@ import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
 import PageTitle from '../../components/PageTitle'
 import { MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
+import { updateOrg } from '../../CRUD/org'
 
 const SingleOrganisationPage = ({ params: { id } }) => {
   // Subscribe to Firestore document
@@ -26,7 +27,6 @@ const SingleOrganisationPage = ({ params: { id } }) => {
   useEffect(() => {
     if (data) {
       const { name, id: orgId, roles } = data
-      console.log(roles)
       setName(name)
       setOrgId(orgId)
       setRoles(roles)
@@ -53,7 +53,6 @@ const SingleOrganisationPage = ({ params: { id } }) => {
     const copy = roles
     copy.splice(removeIndex, 1)
     setRoles([...copy])
-    console.log(roles)
   }
 
   function handleNameChange(e): void {
@@ -65,6 +64,11 @@ const SingleOrganisationPage = ({ params: { id } }) => {
     const rolesPlusOne = roles
     rolesPlusOne.push('')
     setRoles([...rolesPlusOne])
+  }
+
+  const consolidated = {
+    name,
+    roles,
   }
 
   return (
@@ -144,7 +148,10 @@ const SingleOrganisationPage = ({ params: { id } }) => {
             <span>Role</span>
           </div>
         </button>
-        <button className="px-3 py-1 text-gray-100 transition-all duration-300 bg-blue-500 rounded hover:shadow-inner hover:bg-blue-700">
+        <button
+          onClick={() => updateOrg(consolidated)}
+          className="px-3 py-1 text-gray-100 transition-all duration-300 bg-blue-500 rounded hover:shadow-inner hover:bg-blue-700"
+        >
           Update
         </button>
         <button className="px-3 py-1 text-gray-100 transition-all duration-300 bg-red-500 rounded hover:shadow-inner hover:bg-red-700">
