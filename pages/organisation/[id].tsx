@@ -30,6 +30,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
       setName(name)
       setOrgId(orgId)
       setRoles(roles)
+      console.log(roles)
     }
   }, [data])
 
@@ -48,8 +49,8 @@ const SingleOrganisationPage = ({ params: { id } }) => {
     setRoles([...roles])
   }
 
-  function removeRole(e): void {
-    const removeIndex = Number(e.target.attributes.index?.value)
+  function removeRole(data): void {
+    const removeIndex = roles.findIndex((role) => role === data)
     const copy = roles
     copy.splice(removeIndex, 1)
     setRoles([...copy])
@@ -67,6 +68,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
   }
 
   const consolidated = {
+    id,
     name,
     roles,
   }
@@ -131,7 +133,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
             <button type="button">
               <MinusCircleIcon
                 index={index}
-                onClick={removeRole}
+                onClick={() => removeRole(role)}
                 className="w-6 h-6"
               />
             </button>
