@@ -8,7 +8,7 @@ function Layout(props) {
     <div className="flex flex-col min-h-screen">
 
       <main className="flex w-full mx-auto md:pb-16">
-      <SideNav />
+          <SideNav />
         {props.children}
       </main>
     </div>
