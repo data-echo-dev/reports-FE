@@ -24,7 +24,7 @@ const SideNav = () => {
     
     return (
       
-          <span className='m-4'>
+          <span className='absolute top-0 m-4'>
             <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
               <MenuIcon className='w-5 h-5 text-green-300'/>
             </Button>
@@ -66,7 +66,7 @@ const SideNav = () => {
                   {auth.user.isSuperAdmin && (
                     <>
                       <Link href={'/org-management'}>
-                        <button onClick={onClose} className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
+                        <button onClick={onClose} className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
                           <span className="mx-4 text-lg font-normal">
                             Org Management
                           </span>
@@ -74,7 +74,7 @@ const SideNav = () => {
                         </button>
                       </Link>
                       <Link href={'/user-management'}>
-                        <button onClick={onClose} className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
+                        <button onClick={onClose} className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
                           <span className="mx-4 text-lg font-normal">
                             User Management
                           </span>
@@ -84,7 +84,7 @@ const SideNav = () => {
                       <Link href={'/report-management'}>
                         <button
                           onClick={onClose}
-                          className="flex items-center p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
+                          className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
                           <span className="mx-4 text-lg font-normal">
                             Report Management
                           </span>
