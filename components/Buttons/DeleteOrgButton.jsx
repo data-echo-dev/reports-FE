@@ -9,12 +9,18 @@ import {
   Button
 } from "@chakra-ui/react"
 import {TrashIcon} from '@heroicons/react/outline'
+import { useRequireAuth } from '../../hooks/useRequireAuth';
+import {deleteOrg} from '../../CRUD/org'
 
-function DeleteOrgButton() {
+function DeleteOrgButton({orgID}) {
+    const auth = useRequireAuth()
+
     const [isOpen, setIsOpen] = React.useState(false)
     const onClose = () => setIsOpen(false)
     const cancelRef = React.useRef()
   
+    if (!auth.user) return null
+
     return (
     <>
         <Button size='sm' colorScheme="red" onClick={() => setIsOpen(true)}>
@@ -40,9 +46,12 @@ function DeleteOrgButton() {
                 <Button ref={cancelRef} onClick={onClose}>
                   Cancel
                 </Button>
-                <Button colorScheme="red" onClick={onClose} ml={3}>
-                  Delete
-                </Button>
+                {auth.user.isSuperAdmin && (
+                  <Button colorScheme="red" onClick={() => deleteOrg(orgID)} ml={3}>
+                    Delete
+                  </Button>
+                  )
+                }
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialogOverlay>

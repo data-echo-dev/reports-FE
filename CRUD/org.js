@@ -18,4 +18,8 @@ const updateOrg = (data) => {
   })
 }
 
-export {addOrg, updateOrg}
+const deleteOrg = (id) => {
+  db.collection('organisations').doc(id).delete().then(() => console.log('it gone bruh')).catch((error) => console.error("Error deleting the doc:", error))
+}
+
+export {addOrg, updateOrg, deleteOrg}

@@ -38,7 +38,7 @@ const OrgsGrid = ({orgsData}) => {
                                 </svg>
                                 </Button>
                             </Link>
-                            <DeleteOrgButton/>
+                            <DeleteOrgButton orgID={org.id}/>
                         </span>
                     </td>
                     </tr>

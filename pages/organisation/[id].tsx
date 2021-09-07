@@ -5,6 +5,9 @@ import { db } from '../../config/firebase'
 import PageTitle from '../../components/PageTitle'
 import { MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
 import { updateOrg } from '../../CRUD/org'
+import DeleteOrgButton from '../../components/Buttons/DeleteOrgButton'
+
+// TODO: this page should have auth
 
 const SingleOrganisationPage = ({ params: { id } }) => {
   // Subscribe to Firestore document
@@ -146,7 +149,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
           className="px-3 py-1 text-gray-100 transition-all duration-300 bg-green-500 rounded hover:shadow-inner hover:bg-green-700"
         >
           <div className="flex">
-            <PlusIcon className="w-6 h-6" />
+            <PlusIcon className="w-5 h-5" />
             <span>Role</span>
           </div>
         </button>
@@ -154,10 +157,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
           onClick={() => updateOrg(consolidated)}
           className="px-3 py-1 text-gray-100 transition-all duration-300 bg-blue-500 rounded hover:shadow-inner hover:bg-blue-700"
         >
-          Update
-        </button>
-        <button className="px-3 py-1 text-gray-100 transition-all duration-300 bg-red-500 rounded hover:shadow-inner hover:bg-red-700">
-          Delete
+          Save
         </button>
       </div>
     </div>
