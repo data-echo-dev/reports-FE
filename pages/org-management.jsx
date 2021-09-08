@@ -6,6 +6,7 @@ import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 import PageTitle from '../components/PageTitle'
 import { PlusIcon } from '@heroicons/react/outline'
 import { addOrg } from '../CRUD/org'
+import { Button } from '@chakra-ui/button'
 
 const OrgManagement = () => {
   const auth = useRequireAuth()
@@ -24,17 +25,21 @@ const OrgManagement = () => {
   return (
     <div className="w-full">
       <PageTitle text="Organisation Management" />
-      <button
-        disabled={!auth.user}
-        onClick={addOrg}
-        className="px-3 py-1 text-gray-100 transition-all duration-300 bg-green-500 rounded hover:shadow-inner hover:bg-green-700"
-      >
-        <div className="flex">
-          <PlusIcon className="w-6 h-6" />
-          <span>Org</span>
-        </div>
-      </button>
-      <OrgsGrid orgsData={data} />
+      <div className='flex flex-col justify-center'>
+        <span className='flex justify-end max-w-full md:mx-12 lg:mx-32 xl:mx-60'>
+
+        <Button
+          disabled={!auth.user}
+          onClick={addOrg}
+          colorScheme='facebook'
+          leftIcon={<PlusIcon className='w-5 h-5'/>}
+        >
+            Org
+        </Button>
+        
+        </span>
+        <OrgsGrid orgsData={data} />
+      </div>
     </div>
   )
 }
