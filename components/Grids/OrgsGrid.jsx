@@ -17,7 +17,7 @@ import DeleteOrgButton from '../Buttons/DeleteOrgButton'
 const OrgsGrid = ({ orgsData }) => (
   <div className="flex items-center justify-center w-full h-full ">
     {orgsData.length > 0 && (
-      <Table className='max-w-6xl' colorScheme='linkedin' variant="striped">
+      <Table className="max-w-6xl" colorScheme="facebook" variant="striped">
         <TableCaption>Organisations</TableCaption>
         <Thead>
           <Tr>
@@ -32,7 +32,14 @@ const OrgsGrid = ({ orgsData }) => (
               <Td>{org.name}</Td>
               <Td>
                 {org.roles?.map((role) => (
-                  <Badge variant="subtle" colorScheme='messenger' className='mr-1' key={`${role}-your-boat`}>{role}</Badge>
+                  <Badge
+                    variant="subtle"
+                    colorScheme="messenger"
+                    className="mr-1"
+                    key={`${role}-your-boat`}
+                  >
+                    {role}
+                  </Badge>
                 ))}
               </Td>
               <Td>
