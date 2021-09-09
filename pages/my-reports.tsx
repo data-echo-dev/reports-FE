@@ -1,10 +1,12 @@
 // @ts-nocheck
+import { useEffect, useRef, useState } from 'react'
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import ReportsGrid from '../components/Grids/ReportsGrid'
 import { db } from '../config/firebase'
-import { useEffect, useRef, useState } from 'react'
 
 const MyReports = () => {
+  // TODO: change the data fetching to useHook
+
   useEffect(() => {
     isMounted.current = true
     fetchData()
