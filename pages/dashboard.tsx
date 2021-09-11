@@ -5,6 +5,7 @@ const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth()
 
   if (!auth.user) return null
+  console.log(auth.user)
 
   return <main>hi</main>
 }

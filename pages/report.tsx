@@ -1,7 +1,7 @@
 // @ts-nocheck
+import { useEffect, useRef, useState } from 'react'
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import { db } from '../config/firebase'
-import { useEffect, useRef, useState } from 'react'
 
 const SingleReport = ({ data }) => {
   const auth = useRequireAuth()
@@ -9,7 +9,12 @@ const SingleReport = ({ data }) => {
   // Create Ref
   const isMounted = useRef(false)
 
-  return <div dangerouslySetInnerHTML={{ __html: `${data.url}` }} />
+  return (
+    <div
+      className="w-screen h-screen"
+      dangerouslySetInnerHTML={{ __html: `${data.url}` }}
+    />
+  )
 }
 
 export default SingleReport
