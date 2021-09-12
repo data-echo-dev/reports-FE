@@ -1,46 +1,49 @@
 // @ts-nocheck
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import { db } from '../config/firebase'
-import { useEffect, useRef, useState } from 'react'
 import ReportsGrid from '../components/Grids/ReportsGrid'
+import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
+import PageTitle from '../components/PageTitle'
+import { Button } from '@chakra-ui/button'
+import { PlusIcon } from '@heroicons/react/outline'
 
 const ReportManagement = () => {
-  useEffect(() => {
-    isMounted.current = true
-    fetchData()
-    // this is run when component unmount
-    return () => (isMounted.current = false)
-  }, [])
-
-  // Create Ref
-  const isMounted = useRef(false)
-  // Create Your Required States
-  const [reports, setReports] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
   const auth = useRequireAuth()
-
-  if (!auth.user) return null
-  // Create a function for fetching your data
-  const fetchData = () => {
-    const reportsRef = db.collection('reports')
-    reportsRef
-      .get()
-      .then((response) => {
-        if (isMounted.current) {
-          setReports(response)
-          setIsLoading(false)
-        }
-      })
-      .catch((error) => {
-        // check ref before updating state
-        isMounted.current && setError(error)
-      })
+  
+  const { data: organisations, status: statusOrgs, error: errorOrgs } = useFirestoreQuery(
+    db.collection('organisations')
+  )
+  
+  const { data: reports, status, error } = useFirestoreQuery(
+    db.collection('reports')
+  )
+  if (status === 'loading') {
+    return 'Loading...'
+  }
+  if (status === 'error') {
+    return `Error: ${error.message}`
   }
 
+  if (!auth.user) return null
+
   return (
-    <div>
-      <ReportsGrid reportsData={reports} />
+    <div className="w-full">
+      <PageTitle text="Report Management" />
+      <div className='flex flex-col justify-center'>
+        <span className='flex justify-end max-w-full md:mx-12 lg:mx-32 xl:mx-60'>
+
+        <Button
+          disabled={!auth.user}
+          // onClick={addOrg}
+          colorScheme='facebook'
+          leftIcon={<PlusIcon className='w-5 h-5'/>}
+          >
+            Report
+        </Button>
+        
+        </span>
+             <ReportsGrid reportsData={reports} orgs={organisations}/>
+      </div>
     </div>
   )
 }

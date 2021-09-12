@@ -11,12 +11,21 @@ import {
   Td,
   TableCaption,
 } from '@chakra-ui/react'
+import { ExternalLinkIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline'
 
-const ReportsGrid = ({ reportsData }) => (
-  <div className="flex items-center justify-center w-full h-full ">
+const ReportsGrid = ({ reportsData, orgs }) => {
+console.log(orgs);
+
+function organisationMapper(id){
+  const theOrg = orgs.find(organisation => organisation.id === id)
+  return theOrg.name
+}
+
+return ( 
+<div className="flex items-center justify-center w-full h-full ">
     {reportsData.length > 0 && (
       <Table className="max-w-6xl" colorScheme="facebook" variant="striped">
-        <TableCaption>My Reports</TableCaption>
+        <TableCaption>Reports</TableCaption>
         <Thead>
           <Tr>
             <Th>Title</Th>
@@ -34,18 +43,31 @@ const ReportsGrid = ({ reportsData }) => (
                   <div>{report.title}</div>
                 </div>
               </Td>
-              {/* <Td >
-
-                        {report.url}
-                    </Td> */}
-              <Td>{report.organisation}</Td>
+              <Td>{organisationMapper(report.organisation)}</Td>
               <Td>
                 {report.roles?.map((role) => (
-                  <span key={`${role}-your-boat`}>{role}</span>
+                  <Badge
+                  variant="subtle"
+                  colorScheme="messenger"
+                  className="mr-1"
+                  key={`${role}-your-boat`}
+                >
+                  {role}
+                </Badge>
                 ))}
               </Td>
               <Td>
-                <span className="flex items-center justify-center w-full">
+                <span className="flex items-center justify-start w-full space-x-2">
+                  <Link href={`/report/${report.id}`}>
+                    <Button size="sm" colorScheme="facebook">
+                      <PencilIcon className='w-5 h-5'/>
+                    </Button>
+                  </Link>
+                  <Button size='sm' colorScheme="red" >
+                    <TrashIcon className='w-5 h-5 text-red-200'/>
+                  </Button>
+                  <Button size='sm' colorScheme="green">
+                    
                   <Link
                     href={{
                       pathname: '/report',
@@ -53,21 +75,9 @@ const ReportsGrid = ({ reportsData }) => (
                     }}
                     target="_blank"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6 mx-auto text-gray-400 hover:text-gray-100 hover:cursor-pointer"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
+                    <ExternalLinkIcon className='w-5 h-5'/>
                   </Link>
+                  </Button>
                 </span>
               </Td>
             </Tr>
@@ -77,5 +87,7 @@ const ReportsGrid = ({ reportsData }) => (
     )}
   </div>
 )
+}
+
 
 export default ReportsGrid
