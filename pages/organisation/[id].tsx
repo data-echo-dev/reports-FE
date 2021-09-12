@@ -5,11 +5,13 @@ import { db } from '../../config/firebase'
 import PageTitle from '../../components/PageTitle'
 import { MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
 import { updateOrg } from '../../CRUD/org'
-import DeleteOrgButton from '../../components/Buttons/DeleteOrgButton'
+import { useRequireAuth } from '../../hooks/useRequireAuth'
 
 // TODO: this page should have auth
 
 const SingleOrganisationPage = ({ params: { id } }) => {
+  const auth = useRequireAuth()
+
   // Subscribe to Firestore document
   const [orgId, setOrgId] = useState('')
   const [name, setName] = useState('')
@@ -25,6 +27,9 @@ const SingleOrganisationPage = ({ params: { id } }) => {
   } = useFirestoreQuery(
     db.collection('reports').where('organisation', '==', id)
   )
+
+  console.log(reports);
+  
 
   // initialise form data
   useEffect(() => {
@@ -75,6 +80,8 @@ const SingleOrganisationPage = ({ params: { id } }) => {
     name,
     roles,
   }
+
+  if (!auth.user) return null
 
   return (
     <div className="w-full p-6 bg-white rounded-lg shadow">
