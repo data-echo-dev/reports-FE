@@ -44,9 +44,5 @@ const MyReports = () => {
 export default MyReports
 
 export async function getServerSideProps(context) {
-  // const {req} = context
-  
-  // const fakeData = await res.json()
-  
   return { props: {  } }
 }
