@@ -79,9 +79,10 @@ return (
                       pathname: '/report',
                       query: { id: `${report.id}` },
                     }}
-                    target="_blank"
                   >
-                    <ExternalLinkIcon className='w-5 h-5'/>
+                    <a>
+                      <ExternalLinkIcon className='w-5 h-5'/>
+                    </a>
                   </Link>
                   </Button>
                 </span>
