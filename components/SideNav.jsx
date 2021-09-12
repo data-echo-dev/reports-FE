@@ -41,6 +41,16 @@ const SideNav = () => {
       
                 <DrawerBody>
                   <nav>
+                  <Link href={'/my-reports'}>
+                    <button
+                      onClick={onClose}
+                      className="flex items-center w-full p-2 my-6 text-gray-800 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-100 dark:bg-gray-600"
+                      disabled={!auth}
+                    >
+                      <span className="mx-4 text-lg font-normal">My Reports</span>
+                      <span className="flex-grow text-right"></span>
+                    </button>
+                  </Link>
                   <Link href={'/org-reports'}>
                     <button
                       onClick={onClose}
@@ -50,16 +60,6 @@ const SideNav = () => {
                       <span className="mx-4 text-lg font-normal">
                         Organisation Reports
                       </span>
-                      <span className="flex-grow text-right"></span>
-                    </button>
-                  </Link>
-                  <Link href={'/my-reports'}>
-                    <button
-                      onClick={onClose}
-                      className="flex items-center w-full p-2 my-6 text-gray-800 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-100 dark:bg-gray-600"
-                      disabled={!auth}
-                    >
-                      <span className="mx-4 text-lg font-normal">My Reports</span>
                       <span className="flex-grow text-right"></span>
                     </button>
                   </Link>
@@ -73,20 +73,20 @@ const SideNav = () => {
                           <span className="flex-grow text-right"></span>
                         </button>
                       </Link>
-                      <Link href={'/user-management'}>
-                        <button onClick={onClose} className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
-                          <span className="mx-4 text-lg font-normal">
-                            User Management
-                          </span>
-                          <span className="flex-grow text-right"></span>
-                        </button>
-                      </Link>
                       <Link href={'/report-management'}>
                         <button
                           onClick={onClose}
                           className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
                           <span className="mx-4 text-lg font-normal">
                             Report Management
+                          </span>
+                          <span className="flex-grow text-right"></span>
+                        </button>
+                      </Link>
+                      <Link href={'/user-management'}>
+                        <button onClick={onClose} className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 ">
+                          <span className="mx-4 text-lg font-normal">
+                            User Management
                           </span>
                           <span className="flex-grow text-right"></span>
                         </button>
