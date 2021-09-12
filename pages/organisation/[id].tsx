@@ -7,7 +7,6 @@ import { MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
 import { updateOrg } from '../../CRUD/org'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
-// TODO: this page should have auth
 
 const SingleOrganisationPage = ({ params: { id } }) => {
   const auth = useRequireAuth()
@@ -27,9 +26,6 @@ const SingleOrganisationPage = ({ params: { id } }) => {
   } = useFirestoreQuery(
     db.collection('reports').where('organisation', '==', id)
   )
-
-  console.log(reports);
-  
 
   // initialise form data
   useEffect(() => {
