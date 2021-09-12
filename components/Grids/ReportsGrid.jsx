@@ -12,9 +12,11 @@ import {
   TableCaption,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline'
+import { useRequireAuth } from '../../hooks/useRequireAuth'
 
 const ReportsGrid = ({ reportsData, orgs }) => {
-console.log(orgs);
+  const auth = useRequireAuth()
+
 
 function organisationMapper(id){
   const theOrg = orgs.find(organisation => organisation.id === id)
@@ -58,7 +60,9 @@ return (
               </Td>
               <Td>
                 <span className="flex items-center justify-start w-full space-x-2">
-                  <Link href={`/report/${report.id}`}>
+                {auth.user.isSuperAdmin && 
+                  <>
+                    <Link href={`/report/${report.id}`}>
                     <Button size="sm" colorScheme="facebook">
                       <PencilIcon className='w-5 h-5'/>
                     </Button>
@@ -66,7 +70,9 @@ return (
                   <Button size='sm' colorScheme="red" >
                     <TrashIcon className='w-5 h-5 text-red-200'/>
                   </Button>
-                  <Button size='sm' colorScheme="green">
+                  </>
+                  }
+                  <Button size='sm' colorScheme="green" title='View Report'>
                     
                   <Link
                     href={{

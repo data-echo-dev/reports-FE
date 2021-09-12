@@ -2,49 +2,46 @@
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import ReportsGrid from '../components/Grids/ReportsGrid'
 import { db } from '../config/firebase'
-import { useEffect, useRef, useState } from 'react'
+import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
+import PageTitle from '../components/PageTitle'
 
 const OrgReports = () => {
-  useEffect(() => {
-    isMounted.current = true
-    fetchData()
-    // this is run when component unmount
-    return () => (isMounted.current = false)
-  }, [])
-
-  // Create Ref
-  const isMounted = useRef(false)
-  // Create Your Required States
-  const [reports, setReports] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
   const auth = useRequireAuth()
 
-  if (!auth.user) return null
-  // Create a function for fetching your data
-  const fetchData = () => {
-    const reportsRef = db.collection('reports')
-    reportsRef
+  const { data: organisations, status: statusOrgs, error: errorOrgs } = useFirestoreQuery(
+    db.collection('organisations')
+  )
+  const { data: reports, status, error } = useFirestoreQuery(
+    db
+      .collection('reports')
       .where('organisation', '==', auth.user.organisation)
       .where('roles', 'array-contains-any', auth.user.roles)
-      .get()
-      .then((response) => {
-        if (isMounted.current) {
-          setReports(response)
-          setIsLoading(false)
-        }
-      })
-      .catch((error) => {
-        // check ref before updating state
-        isMounted.current && setError(error)
-      })
+  )
+  if (status === 'loading') {
+    return 'Loading...'
   }
+  if (status === 'error') {
+    return `Error: ${error.message}`
+  }
+  
+  console.log(reports);
+  
+
+  if (!auth.user) return null
 
   return (
-    <div>
-      <ReportsGrid reportsData={reports} />
+    <div className="w-full">
+      <PageTitle text="Organisation Reports" />
+
+      <div className="flex flex-col justify-center">
+        <ReportsGrid reportsData={reports} orgs={organisations}/>
+      </div>
     </div>
   )
 }
 
 export default OrgReports
+
+export async function getServerSideProps(context) {
+  return { props: {  } }
+}
