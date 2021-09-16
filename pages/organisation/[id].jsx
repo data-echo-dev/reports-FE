@@ -1,20 +1,21 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
+import { MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
 import PageTitle from '../../components/PageTitle'
-import { MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
 import { updateOrg } from '../../CRUD/org'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
-
 
 const SingleOrganisationPage = ({ params: { id } }) => {
   const auth = useRequireAuth()
 
-  // Subscribe to Firestore document
+  // state
   const [orgId, setOrgId] = useState('')
   const [name, setName] = useState('')
   const [roles, setRoles] = useState([])
+
+  // Subscribe to Firestore document
   const { data, status, error } = useFirestoreQuery(
     db.collection('organisations').doc(id)
   )
@@ -30,11 +31,11 @@ const SingleOrganisationPage = ({ params: { id } }) => {
   // initialise form data
   useEffect(() => {
     if (data) {
-      const { name, id: orgId, roles } = data
-      setName(name)
-      setOrgId(orgId)
-      setRoles(roles)
-      console.log(roles)
+      const { name: zita, id: organisationId, roles: rolesRenamed } = data
+      setName(zita)
+      setOrgId(organisationId)
+      setRoles(rolesRenamed)
+      console.log(rolesRenamed)
     }
   }, [data])
 
@@ -45,27 +46,27 @@ const SingleOrganisationPage = ({ params: { id } }) => {
     return `Error: ${error.message}`
   }
 
-  function handleRoleChange(e): void {
-    const value = e.target.value
+  function handleRoleChange(e) {
+    const { value } = e.target
     const updateIndex = Number(e.target.attributes.index.value)
     roles.splice(updateIndex, 1, value)
     // remember when Mitchell helped me with this line below that one time?
     setRoles([...roles])
   }
 
-  function removeRole(data): void {
-    const removeIndex = roles.findIndex((role) => role === data)
+  function removeRole(dataRenamed) {
+    const removeIndex = roles.findIndex((role) => role === dataRenamed)
     const copy = roles
     copy.splice(removeIndex, 1)
     setRoles([...copy])
   }
 
-  function handleNameChange(e): void {
-    const value = e.target.value
+  function handleNameChange(e) {
+    const { value } = e.target
     setName(value)
   }
 
-  function addRole(): void {
+  function addRole() {
     const rolesPlusOne = roles
     rolesPlusOne.push('')
     setRoles([...rolesPlusOne])
@@ -148,6 +149,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
       </div>
       <div className="flex pt-3 mt-6 space-x-3 border-t">
         <button
+          type="button"
           onClick={addRole}
           className="px-3 py-1 text-gray-100 transition-all duration-300 bg-green-500 rounded hover:shadow-inner hover:bg-green-700"
         >
@@ -157,6 +159,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
           </div>
         </button>
         <button
+          type="button"
           onClick={() => updateOrg(consolidated)}
           className="px-3 py-1 text-gray-100 transition-all duration-300 bg-blue-500 rounded hover:shadow-inner hover:bg-blue-700"
         >
