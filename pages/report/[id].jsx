@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from 'react'
+import React, { useState } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
@@ -7,6 +7,15 @@ import { useRequireAuth } from '../../hooks/useRequireAuth'
 
 const SingleReport = ({ params: { id } }) => {
   const auth = useRequireAuth()
+
+  // state
+  const [reportID, setReportID] = useState('')
+  const [organisationID, setOrganisationID] = useState('')
+  const [title, setTitle] = useState('')
+  const [roles, setRoles] = useState([])
+  const [teacherID, setTeacherID] = useState('')
+  const [url, setUrl] = useState('')
+
   const { data, status, error } = useFirestoreQuery(
     db.collection('reports').doc(id)
   )
@@ -56,16 +65,22 @@ const SingleReport = ({ params: { id } }) => {
                 Organisation
               </label>
             </div>
-            <input
+            <select
               id="org"
-              readOnly
               autoComplete="false"
               tabIndex={0}
               type="text"
-              value={organisationMapper(data.organisation)}
+              value={organisationMapper(data.organisation) || ''}
               // value={data.organisation}
-              className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
-            />
+              className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+            >
+              {orgStatus === 'success' &&
+                organisations?.map((org) => (
+                  <option value={org.id} key={org.id}>
+                    {org.name}
+                  </option>
+                ))}
+            </select>
           </div>
           <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
@@ -75,12 +90,11 @@ const SingleReport = ({ params: { id } }) => {
             </div>
             <input
               id="org"
-              readOnly
               autoComplete="false"
               tabIndex={0}
               type="text"
               value={data.title}
-              className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
+              className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             />
           </div>
           <div className="relative p-1 transition-all duration-500 border rounded ">
