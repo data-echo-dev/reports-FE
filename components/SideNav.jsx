@@ -23,7 +23,12 @@ const SideNav = () => {
 
   return (
     <span className="absolute top-0 m-4">
-      <Button ref={btnRef} bgColor="primary.blue" onClick={onOpen}>
+      <Button
+        ref={btnRef}
+        bgColor="primary.blue"
+        className="opacity-80"
+        onClick={onOpen}
+      >
         <MenuIcon className="w-5 h-5 text-primary-black" />
       </Button>
       <Drawer

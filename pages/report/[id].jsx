@@ -26,6 +26,7 @@ const SingleReport = ({ params: { id } }) => {
   } = useFirestoreQuery(db.collection('organisations'))
 
   // TODO: firestore query for teachers. these are just users of a currently selected org. this will need a mapper function too.
+  // the state that's in OrganisationID can be interpolated into the firestore query, that should re-render on org ID change
   // TODO: figure out the UX for roles on this page. these are also dependent on the selected org, as that's the source of truth for roles that can be assigned to a report.
 
   function organisationMapper(orgId) {
