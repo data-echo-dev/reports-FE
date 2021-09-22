@@ -25,6 +25,10 @@ const SingleReport = ({ params: { id } }) => {
     error: orgError,
   } = useFirestoreQuery(db.collection('organisations'))
 
+  const { data: teachers, status: teachersStatus, error: teachersError} = useFirestoreQuery(db.collection('users').where('organisation', '==', organisationID))
+  console.log(organisationID);
+  console.log(teachers);
+
   // init form data
   useEffect(() => {
     if (data) {
@@ -54,7 +58,11 @@ const SingleReport = ({ params: { id } }) => {
     const { value } = e.target
     setOrganisationID(value)
   }
-
+  
+  function handleTeacherChange(e){
+    const { value } = e.target
+    setTeacherID(value)
+  }
 
   if (!auth.user) return null
   return (
@@ -122,15 +130,22 @@ const SingleReport = ({ params: { id } }) => {
                 Teacher
               </label>
             </div>
-            <input
+            <select
               id="org"
-              readOnly
               autoComplete="false"
               tabIndex={0}
               type="text"
-              value={data.teacher}
-              className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
-            />
+              value={teacherID || ''}
+              onChange={handleTeacherChange}
+              className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+            >
+              {teachersStatus === 'success' &&
+                teachers?.map((teacher) => (
+                  <option value={teacher.uid} key={teacher.uid}>
+                    {teacher.name}
+                  </option>
+                ))}
+            </select>
           </div>
           <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
