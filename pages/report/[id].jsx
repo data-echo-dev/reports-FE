@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
@@ -25,6 +25,20 @@ const SingleReport = ({ params: { id } }) => {
     error: orgError,
   } = useFirestoreQuery(db.collection('organisations'))
 
+  // init form data
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      const {id, organisation, roles, teacher, title, url} = data
+      setReportID(id)
+      setOrganisationID(organisation)
+      setTitle(title)
+      setRoles(roles)
+      setTeacherID(teacher)
+      setUrl(url)
+    }
+  }, [data])
+
   // TODO: firestore query for teachers. these are just users of a currently selected org. this will need a mapper function too.
   // the state that's in OrganisationID can be interpolated into the firestore query, that should re-render on org ID change
   // TODO: figure out the UX for roles on this page. these are also dependent on the selected org, as that's the source of truth for roles that can be assigned to a report.
@@ -36,7 +50,11 @@ const SingleReport = ({ params: { id } }) => {
     }
   }
 
-  console.log(orgStatus)
+  function handleOrgChange(e){
+    const { value } = e.target
+    setOrganisationID(value)
+  }
+
 
   if (!auth.user) return null
   return (
@@ -71,8 +89,8 @@ const SingleReport = ({ params: { id } }) => {
               autoComplete="false"
               tabIndex={0}
               type="text"
-              value={organisationMapper(data.organisation) || ''}
-              // value={data.organisation}
+              value={organisationID || ''}
+              onChange={handleOrgChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             >
               {orgStatus === 'success' &&
