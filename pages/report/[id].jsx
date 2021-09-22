@@ -5,6 +5,9 @@ import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
+  // TODO: figure out the UX for roles on this page. these are also dependent on the selected org, as that's the source of truth for roles that can be assigned to a report.
+
+
 const SingleReport = ({ params: { id } }) => {
   const auth = useRequireAuth()
 
@@ -43,17 +46,7 @@ const SingleReport = ({ params: { id } }) => {
     }
   }, [data])
 
-  // TODO: firestore query for teachers. these are just users of a currently selected org. this will need a mapper function too.
-  // the state that's in OrganisationID can be interpolated into the firestore query, that should re-render on org ID change
-  // TODO: figure out the UX for roles on this page. these are also dependent on the selected org, as that's the source of truth for roles that can be assigned to a report.
-
-  function organisationMapper(orgId) {
-    if (orgStatus === 'success') {
-      const theOrg = organisations?.find((org) => org.id === orgId)
-      return theOrg.name
-    }
-  }
-
+  
   function handleOrgChange(e){
     const { value } = e.target
     setOrganisationID(value)
@@ -62,6 +55,16 @@ const SingleReport = ({ params: { id } }) => {
   function handleTeacherChange(e){
     const { value } = e.target
     setTeacherID(value)
+  }
+  
+  function handleURLChange(e){
+    const { value } = e.target
+    setUrl(value)
+  }
+  
+  function handleTitleChange(e){
+    const { value } = e.target
+    setTitle(value)
   }
 
   if (!auth.user) return null
@@ -82,7 +85,7 @@ const SingleReport = ({ params: { id } }) => {
               autoComplete="false"
               tabIndex={0}
               type="text"
-              value={id}
+              value={reportID}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
             />
           </div>
@@ -120,7 +123,8 @@ const SingleReport = ({ params: { id } }) => {
               autoComplete="false"
               tabIndex={0}
               type="text"
-              value={data.title}
+              value={title}
+              onChange={handleTitleChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             />
           </div>
@@ -155,12 +159,12 @@ const SingleReport = ({ params: { id } }) => {
             </div>
             <textarea
               id="org"
-              readOnly
               autoComplete="false"
               tabIndex={0}
               type="text"
-              value={data.url}
-              className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
+              value={url || ''}
+              onChange={handleURLChange}
+              className="block w-full h-full px-1 py-1 text-gray-900 outline-none"
             />
           </div>
         </div>
