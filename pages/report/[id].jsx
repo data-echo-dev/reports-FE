@@ -6,6 +6,10 @@ import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
   // TODO: figure out the UX for roles on this page. these are also dependent on the selected org, as that's the source of truth for roles that can be assigned to a report.
+  // TODO: make the `consolidated` object
+  // TODO: make a crud file for report, following org pattern
+  // TODO: make an update function
+  // TODO: add one or two more users in different orgs to make sure all is working well
 
 
 const SingleReport = ({ params: { id } }) => {
