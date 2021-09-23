@@ -1,16 +1,16 @@
 // @ts-nocheck
+import { Badge } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
-  // TODO: figure out the UX for roles on this page. these are also dependent on the selected org, as that's the source of truth for roles that can be assigned to a report.
-  // TODO: make the `consolidated` object
-  // TODO: make a crud file for report, following org pattern
-  // TODO: make an update function
-  // TODO: add one or two more users in different orgs to make sure all is working well
-
+// TODO: figure out the UX for roles on this page. these are also dependent on the selected org, as that's the source of truth for roles that can be assigned to a report.
+// TODO: make the `consolidated` object
+// TODO: make a crud file for report, following org pattern
+// TODO: make an update function
+// TODO: add one or two more users in different orgs to make sure all is working well
 
 const SingleReport = ({ params: { id } }) => {
   const auth = useRequireAuth()
@@ -19,7 +19,8 @@ const SingleReport = ({ params: { id } }) => {
   const [reportID, setReportID] = useState('')
   const [organisationID, setOrganisationID] = useState('')
   const [title, setTitle] = useState('')
-  const [roles, setRoles] = useState([])
+  const [selectedRoles, setSelectedRoles] = useState([])
+  const [availableRoles, setAvailableRoles] = useState([])
   const [teacherID, setTeacherID] = useState('')
   const [url, setUrl] = useState('')
 
@@ -32,41 +33,59 @@ const SingleReport = ({ params: { id } }) => {
     error: orgError,
   } = useFirestoreQuery(db.collection('organisations'))
 
-  const { data: teachers, status: teachersStatus, error: teachersError} = useFirestoreQuery(db.collection('users').where('organisation', '==', organisationID))
-  console.log(organisationID);
-  console.log(teachers);
+  const {
+    data: teachers,
+    status: teachersStatus,
+    error: teachersError,
+  } = useFirestoreQuery(
+    db.collection('users').where('organisation', '==', organisationID)
+  )
+  // this query allows us to get roles of an org
+  const {
+    data: singleOrg,
+    status: singleOrgStatus,
+    error: singleOrgError,
+  } = useFirestoreQuery(
+    db.collection('organisations').where('id', '==', organisationID)
+  )
+
+  // console.log(organisationID)
+  // console.log(teachers)
 
   // init form data
   useEffect(() => {
     if (data) {
-      console.log(data);
-      const {id, organisation, roles, teacher, title, url} = data
+      console.log(data)
+      const { id, organisation, roles, teacher, title, url } = data
       setReportID(id)
       setOrganisationID(organisation)
       setTitle(title)
-      setRoles(roles)
+      setSelectedRoles(roles)
       setTeacherID(teacher)
       setUrl(url)
     }
-  }, [data])
 
-  
-  function handleOrgChange(e){
+    if (singleOrg) {
+      setAvailableRoles(singleOrg[0].roles)
+    }
+  }, [data, singleOrg])
+
+  function handleOrgChange(e) {
     const { value } = e.target
     setOrganisationID(value)
   }
-  
-  function handleTeacherChange(e){
+
+  function handleTeacherChange(e) {
     const { value } = e.target
     setTeacherID(value)
   }
-  
-  function handleURLChange(e){
+
+  function handleURLChange(e) {
     const { value } = e.target
     setUrl(value)
   }
-  
-  function handleTitleChange(e){
+
+  function handleTitleChange(e) {
     const { value } = e.target
     setTitle(value)
   }
@@ -170,6 +189,25 @@ const SingleReport = ({ params: { id } }) => {
               onChange={handleURLChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none"
             />
+          </div>
+          <div className="relative p-1 transition-all duration-500 border rounded ">
+            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
+                Roles
+              </label>
+            </div>
+            <div className="flex justify-between">
+              <div className="relative p-1 transition-all duration-500 border rounded ">
+                {availableRoles.map((role, index) => (
+                  <Badge key={index} variant="solid" colorScheme="blue">
+                    {role}
+                  </Badge>
+                ))}
+              </div>
+              <div className="relative p-1 transition-all duration-500 border rounded ">
+                role
+              </div>
+            </div>
           </div>
         </div>
       )}
