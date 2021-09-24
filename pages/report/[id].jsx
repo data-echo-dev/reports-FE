@@ -100,6 +100,16 @@ const SingleReport = ({ params: { id } }) => {
     }
   }
 
+  function deselectRole(e) {
+    const value = e.target.textContent
+    const currentlyActiveRoles = [...selectedRoles]
+
+    const iHaveBeenRemoved = currentlyActiveRoles.filter(
+      (role) => role !== value
+    )
+    setSelectedRoles([...iHaveBeenRemoved])
+  }
+
   if (!auth.user) return null
   return (
     <div className="w-full p-6 bg-white rounded-lg shadow">
@@ -223,7 +233,13 @@ const SingleReport = ({ params: { id } }) => {
               </div>
               <div className="relative p-1 transition-all duration-500 border rounded ">
                 {selectedRoles?.map((role, index) => (
-                  <Badge key={index} variant="solid" colorScheme="blue">
+                  <Badge
+                    className="cursor-pointer"
+                    onClick={deselectRole}
+                    key={index}
+                    variant="solid"
+                    colorScheme="blue"
+                  >
                     {role}
                   </Badge>
                 ))}
