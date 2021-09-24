@@ -6,6 +6,7 @@ const theme = extendTheme({
     primary: {
       black: '#000000',
       blue: '#0082b3',
+      white: '#F1F1F1',
     },
     secondary: {
       100: '#339bc2',

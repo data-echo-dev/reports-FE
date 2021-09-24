@@ -10,10 +10,12 @@ const SingleReport = ({ data }) => {
   const isMounted = useRef(false)
 
   return (
-    <div
-      className="w-screen h-screen"
-      dangerouslySetInnerHTML={{ __html: `${data.url}` }}
-    />
+    <main className="mt-16">
+      <div
+        className="w-screen h-screen"
+        dangerouslySetInnerHTML={{ __html: `${data.url}` }}
+      />
+    </main>
   )
 }
 

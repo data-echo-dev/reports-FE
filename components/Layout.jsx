@@ -1,18 +1,12 @@
-import SideNav from "./SideNav";
+import SideNav from './SideNav'
 
-
-function Layout(props) {
-  
-
+function Layout({ children }) {
   return (
-    <div className="flex flex-col min-h-screen">
-
-          <SideNav />
-      <main className="flex w-full mx-auto md:pb-16">
-        {props.children}
-      </main>
+    <div className="flex flex-col min-h-screen bg-primary-white">
+      <SideNav />
+      <section className="flex w-full mx-auto md:pb-16">{children}</section>
     </div>
-  );
+  )
 }
 
-export default Layout;
+export default Layout
