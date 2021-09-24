@@ -12,8 +12,8 @@ import {
   TableCaption,
 } from '@chakra-ui/react'
 
-import DeleteOrgButton from '../Buttons/DeleteOrgButton'
 import { PencilIcon } from '@heroicons/react/outline'
+import DeleteOrgButton from '../Buttons/DeleteOrgButton'
 
 const OrgsGrid = ({ orgsData }) => (
   <div className="flex items-center justify-center w-full h-full ">
@@ -47,7 +47,7 @@ const OrgsGrid = ({ orgsData }) => (
                 <span className="flex items-center justify-start w-full space-x-2">
                   <Link href={`/organisation/${org.id}`}>
                     <Button size="sm" colorScheme="facebook">
-                      <PencilIcon className='w-5 h-5 text-blue-300'/>
+                      <PencilIcon className="w-5 h-5 text-blue-300" />
                     </Button>
                   </Link>
                   <DeleteOrgButton orgID={org.id} />

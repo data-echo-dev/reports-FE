@@ -3,13 +3,11 @@ import { Badge, Button } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
+import { updateReport } from '../../CRUD/report'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
-// TODO: figure out the UX for roles on this page. these are also dependent on the selected org, as that's the source of truth for roles that can be assigned to a report.
-// TODO: make the `consolidated` object
-// TODO: make a crud file for report, following org pattern
-// TODO: make an update function
+// TODO: can't change the organisation of a report, so far seems to just be new report?
 // TODO: add one or two more users in different orgs to make sure all is working well
 
 const SingleReport = ({ params: { id } }) => {
@@ -23,6 +21,15 @@ const SingleReport = ({ params: { id } }) => {
   const [availableRoles, setAvailableRoles] = useState([])
   const [teacherID, setTeacherID] = useState('')
   const [url, setUrl] = useState('')
+
+  const consolidated = {
+    reportID,
+    organisationID,
+    title,
+    selectedRoles,
+    teacherID,
+    url,
+  }
 
   const { data, status, error } = useFirestoreQuery(
     db.collection('reports').doc(id)
@@ -218,7 +225,7 @@ const SingleReport = ({ params: { id } }) => {
             </div>
             <div className="flex justify-between">
               <div className="relative p-1 transition-all duration-500 border rounded ">
-                {availableRoles.map((role, index) => (
+                {availableRoles?.map((role, index) => (
                   <Badge
                     key={index}
                     className="cursor-pointer"
@@ -246,6 +253,9 @@ const SingleReport = ({ params: { id } }) => {
               </div>
             </div>
           </div>
+          <button type="button" onClick={() => updateReport(consolidated)}>
+            Update
+          </button>
         </div>
       )}
     </div>
