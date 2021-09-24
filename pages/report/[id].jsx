@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Badge } from '@chakra-ui/react'
+import { Badge, Button } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
@@ -88,6 +88,16 @@ const SingleReport = ({ params: { id } }) => {
   function handleTitleChange(e) {
     const { value } = e.target
     setTitle(value)
+  }
+
+  function selectRole(e) {
+    const value = e.target.textContent
+    const currentlyActiveRoles = [...selectedRoles]
+
+    if (!currentlyActiveRoles.includes(value)) {
+      currentlyActiveRoles.push(value)
+      setSelectedRoles([...currentlyActiveRoles])
+    }
   }
 
   if (!auth.user) return null
@@ -199,13 +209,24 @@ const SingleReport = ({ params: { id } }) => {
             <div className="flex justify-between">
               <div className="relative p-1 transition-all duration-500 border rounded ">
                 {availableRoles.map((role, index) => (
-                  <Badge key={index} variant="solid" colorScheme="blue">
+                  <Badge
+                    key={index}
+                    className="cursor-pointer"
+                    variant="solid"
+                    type="button"
+                    colorScheme="blue"
+                    onClick={selectRole}
+                  >
                     {role}
                   </Badge>
                 ))}
               </div>
               <div className="relative p-1 transition-all duration-500 border rounded ">
-                role
+                {selectedRoles?.map((role, index) => (
+                  <Badge key={index} variant="solid" colorScheme="blue">
+                    {role}
+                  </Badge>
+                ))}
               </div>
             </div>
           </div>
