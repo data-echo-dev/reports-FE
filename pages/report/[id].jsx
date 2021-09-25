@@ -66,7 +66,7 @@ const SingleReport = ({ params: { id } }) => {
       console.log(data)
       const { id, organisation, roles, teacher, title, url } = data
       setReportID(id)
-      setOrganisationID(organisation)
+      setOrganisationID(organisationID || organisation)
       setTitle(title)
       setSelectedRoles(roles)
       setTeacherID(teacher)
@@ -151,7 +151,7 @@ const SingleReport = ({ params: { id } }) => {
               autoComplete="false"
               tabIndex={0}
               type="text"
-              value={organisationID || ''}
+              value={organisationID}
               onChange={handleOrgChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             >
