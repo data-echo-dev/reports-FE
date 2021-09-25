@@ -113,11 +113,22 @@ const useAuthProvider = () => {
   const sendPasswordResetEmail = (email) =>
     auth.sendPasswordResetEmail(email).then((response) => response)
 
+  const deleteUser = (id) =>
+    auth
+      .deleteUser(id)
+      .then(() => {
+        console.log('successfully deleted user')
+      })
+      .catch((error) => {
+        console.log('Error deleting user:', error)
+      })
+
   return {
     user,
     signUp,
     signIn,
     signOut,
     sendPasswordResetEmail,
+    deleteUser,
   }
 }

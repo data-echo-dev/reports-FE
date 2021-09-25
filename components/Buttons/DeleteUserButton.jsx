@@ -9,11 +9,12 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { TrashIcon } from '@heroicons/react/outline'
-import { useRequireAuth } from '../../hooks/useRequireAuth'
-import { deleteOrg } from '../../CRUD/org'
+// import { useRequireAuth } from '../../hooks/useRequireAuth'
+import {auth} from '../../config/firebase'
+// import {useAuth} from '../../hooks/useAuth'
 
-function DeleteOrgButton({ orgID }) {
-  const auth = useRequireAuth()
+function DeleteOrgButton({ userID }) {
+  // const auth = useRequireAuth()
 
   const [isOpen, setIsOpen] = React.useState(false)
   const onClose = () => setIsOpen(false)
@@ -23,12 +24,7 @@ function DeleteOrgButton({ orgID }) {
 
   return (
     <>
-      <Button
-        disabled
-        size="sm"
-        colorScheme="red"
-        onClick={() => setIsOpen(true)}
-      >
+      <Button size="sm" colorScheme="red" onClick={() => setIsOpen(true)}>
         <TrashIcon className="w-5 h-5 text-red-200" />
       </Button>
 
@@ -40,11 +36,11 @@ function DeleteOrgButton({ orgID }) {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Organisation
+              Delete User
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Delete this Organisation? <br />
+              Delete this User? <br />
               You can't undo this action afterwards
             </AlertDialogBody>
 
@@ -55,7 +51,7 @@ function DeleteOrgButton({ orgID }) {
               {auth.user.isSuperAdmin && (
                 <Button
                   colorScheme="red"
-                  onClick={() => deleteOrg(orgID)}
+                  onClick={() => auth.(userID)}
                   ml={3}
                 >
                   Delete

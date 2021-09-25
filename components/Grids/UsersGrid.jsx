@@ -73,7 +73,7 @@ const UsersGrid = ({ usersData, orgs }) => {
                             <PencilIcon className="w-5 h-5" />
                           </Button>
                         </Link>
-                        <DeleteUserButton userID="as" />
+                        <DeleteUserButton userID={user.uid} />
                       </span>
                     </Td>
                   </Tr>
