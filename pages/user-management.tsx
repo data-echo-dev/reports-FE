@@ -1,46 +1,23 @@
 // @ts-nocheck
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import { db } from '../config/firebase'
-import { useEffect, useRef, useState } from 'react'
 import UsersGrid from '../components/Grids/UsersGrid'
+import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
+import PageTitle from '../components/PageTitle'
 
 const UserManagement = () => {
-  useEffect(() => {
-    isMounted.current = true
-    fetchData()
-    // this is run when component unmount
-    return () => (isMounted.current = false)
-  }, [])
-
-  // Create Ref
-  const isMounted = useRef(false)
-  // Create Your Required States
-  const [users, setUsers] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
   const auth = useRequireAuth()
+  const { data, status, error } = useFirestoreQuery(db.collection('users'))
+  console.log(data)
 
   if (!auth.user) return null
-  // Create a function for fetching your data
-  function fetchData() {
-    const usersRef = db.collection('users')
-    usersRef
-      .get()
-      .then((response) => {
-        if (isMounted.current) {
-          setUsers(response)
-          setIsLoading(false)
-        }
-      })
-      .catch((error) => {
-        // check ref before updating state
-        isMounted.current && setError(error)
-      })
-  }
 
   return (
-    <div>
-      <UsersGrid usersData={users} />
+    <div className="w-full">
+      <PageTitle text="User Management" />
+      <div className="flex flex-col justify-center">
+        {data && <UsersGrid usersData={data} />}
+      </div>
     </div>
   )
 }

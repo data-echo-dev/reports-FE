@@ -11,11 +11,7 @@ import {
   Td,
   TableCaption,
 } from '@chakra-ui/react'
-import {
-  ExternalLinkIcon,
-  PencilIcon,
-  TrashIcon,
-} from '@heroicons/react/outline'
+import { ExternalLinkIcon, PencilIcon } from '@heroicons/react/outline'
 import DeleteReportButton from '../Buttons/DeleteReportButton'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 

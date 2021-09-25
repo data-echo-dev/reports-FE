@@ -7,8 +7,8 @@ import {
   createContext,
   ReactNode,
 } from 'react'
-import { auth, db } from '../config/firebase'
 import firebase from 'firebase/app'
+import { auth, db } from '../config/firebase'
 
 const authContext = createContext<firebase.User | null>(null)
 const { Provider } = authContext
@@ -17,9 +17,7 @@ export function AuthProvider(props: { children: ReactNode }): JSX.Element {
   const auth = useAuthProvider()
   return <Provider value={auth}>{props.children}</Provider>
 }
-export const useAuth: any = () => {
-  return useContext(authContext)
-}
+export const useAuth: any = () => useContext(authContext)
 
 // Provider hook that creates an auth object and handles it's state
 const useAuthProvider = () => {
@@ -27,18 +25,23 @@ const useAuthProvider = () => {
   const [user, setUser] = useState<firebase.User | null>(null)
 
   const signUp = ({ name, email, password }) => {
+    const UNASSIGNED_ORG = 'XNcDtlEkoTFw3ybonFua'
+
     return auth
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         auth?.currentUser?.sendEmailVerification()
-        return createUser({ uid: response?.user?.uid, email, name })
+        return createUser({
+          uid: response?.user?.uid,
+          email,
+          name,
+          organisation: UNASSIGNED_ORG,
+        })
       })
-      .catch((error) => {
-        return { error }
-      })
+      .catch((error) => ({ error }))
   }
-  const createUser = (user) => {
-    return db
+  const createUser = (user) =>
+    db
       .collection('users')
       .doc(user.uid)
       .set(user)
@@ -46,13 +49,10 @@ const useAuthProvider = () => {
         setUser(user)
         return user
       })
-      .catch((error) => {
-        return { error }
-      })
-  }
+      .catch((error) => ({ error }))
 
-  const signIn = ({ email, password }) => {
-    return auth
+  const signIn = ({ email, password }) =>
+    auth
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         if (response.user) {
@@ -61,12 +61,9 @@ const useAuthProvider = () => {
           return response.user
         }
       })
-      .catch((error) => {
-        return { error }
-      })
-  }
-  const getUserAdditionalData = (user: firebase.User) => {
-    return db
+      .catch((error) => ({ error }))
+  const getUserAdditionalData = (user: firebase.User) =>
+    db
       .collection('users')
       .doc(user.uid)
       .get()
@@ -76,7 +73,6 @@ const useAuthProvider = () => {
           setUser(userData.data())
         }
       })
-  }
 
   // handleAuthStateChanged & the useEffect allow you to refresh a page & remain logged in.
   // need to read into this
@@ -106,18 +102,14 @@ const useAuthProvider = () => {
     }
   }, [user?.uid])
 
-  const signOut = () => {
-    return auth.signOut().then(() => {
+  const signOut = () =>
+    auth.signOut().then(() => {
       setUser(null)
       Router.push('/login')
     })
-  }
 
-  const sendPasswordResetEmail = (email) => {
-    return auth.sendPasswordResetEmail(email).then((response) => {
-      return response
-    })
-  }
+  const sendPasswordResetEmail = (email) =>
+    auth.sendPasswordResetEmail(email).then((response) => response)
 
   return {
     user,
