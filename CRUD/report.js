@@ -43,7 +43,7 @@ const updateReport = (data) => {
 }
 
 const deleteReport = (id) => {
-  db.collection('organisations')
+  db.collection('reports')
     .doc(id)
     .delete()
     .then(() => console.log('it gone bruh'))

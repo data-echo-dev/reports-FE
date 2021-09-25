@@ -16,6 +16,7 @@ import {
   PencilIcon,
   TrashIcon,
 } from '@heroicons/react/outline'
+import DeleteReportButton from '../Buttons/DeleteReportButton'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
 const ReportsGrid = ({ reportsData, orgs }) => {
@@ -73,9 +74,7 @@ const ReportsGrid = ({ reportsData, orgs }) => {
                             <PencilIcon className="w-5 h-5" />
                           </Button>
                         </Link>
-                        <Button size="sm" colorScheme="red">
-                          <TrashIcon className="w-5 h-5 text-red-200" />
-                        </Button>
+                        <DeleteReportButton reportID={report.id} />
                       </>
                     )}
                     <Button size="sm" colorScheme="green" title="View Report">

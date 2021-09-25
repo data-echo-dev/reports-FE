@@ -7,9 +7,6 @@ import { updateReport } from '../../CRUD/report'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
-// TODO: make sure create & delete functions are tested & working
-// TODO: add one or two more users in different orgs to make sure all is working well
-
 const SingleReport = ({ params: { id } }) => {
   const auth = useRequireAuth()
 
