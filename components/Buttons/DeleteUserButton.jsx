@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { TrashIcon } from '@heroicons/react/outline'
 // import { useRequireAuth } from '../../hooks/useRequireAuth'
-import {auth} from '../../config/firebase'
+import { auth } from '../../config/firebase'
 // import {useAuth} from '../../hooks/useAuth'
 
 function DeleteOrgButton({ userID }) {
@@ -51,7 +51,7 @@ function DeleteOrgButton({ userID }) {
               {auth.user.isSuperAdmin && (
                 <Button
                   colorScheme="red"
-                  onClick={() => auth.(userID)}
+                  // onClick={() => auth.(userID)}
                   ml={3}
                 >
                   Delete
