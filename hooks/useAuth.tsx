@@ -25,6 +25,7 @@ const useAuthProvider = () => {
   const [user, setUser] = useState<firebase.User | null>(null)
 
   const signUp = ({ name, email, password }) => {
+    const DEFAULT_ROLES = ['Default']
     const UNASSIGNED_ORG = 'XNcDtlEkoTFw3ybonFua'
 
     return auth
@@ -36,6 +37,7 @@ const useAuthProvider = () => {
           email,
           name,
           organisation: UNASSIGNED_ORG,
+          roles: DEFAULT_ROLES,
         })
       })
       .catch((error) => ({ error }))
