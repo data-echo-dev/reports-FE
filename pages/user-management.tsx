@@ -8,6 +8,11 @@ import PageTitle from '../components/PageTitle'
 const UserManagement = () => {
   const auth = useRequireAuth()
   const { data, status, error } = useFirestoreQuery(db.collection('users'))
+  const {
+    data: organisations,
+    status: statusOrgs,
+    error: errorOrgs,
+  } = useFirestoreQuery(db.collection('organisations'))
   console.log(data)
 
   if (!auth.user) return null
@@ -16,7 +21,9 @@ const UserManagement = () => {
     <div className="w-full">
       <PageTitle text="User Management" />
       <div className="flex flex-col justify-center">
-        {data && <UsersGrid usersData={data} />}
+        {data && organisations && (
+          <UsersGrid usersData={data} orgs={organisations} />
+        )}
       </div>
     </div>
   )

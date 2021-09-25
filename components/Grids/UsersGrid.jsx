@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { PencilIcon } from '@heroicons/react/outline'
 import {
   Button,
@@ -13,8 +14,16 @@ import {
 } from '@chakra-ui/react'
 import DeleteUserButton from '../Buttons/DeleteUserButton'
 
-const UsersGrid = ({ usersData }) => {
+const UsersGrid = ({ usersData, orgs }) => {
   console.log(usersData)
+
+  function organisationMapper(id) {
+    const theOrg = orgs.find((organisation) => organisation.id === id)
+    // if (!theOrg) {
+    //   return 'Unassigned'
+    // }
+    return theOrg.name
+  }
 
   return (
     <div className="flex items-center justify-center w-full ">
@@ -41,7 +50,11 @@ const UsersGrid = ({ usersData }) => {
                   <Tr key={user.email}>
                     <Td>{user.name}</Td>
                     <Td>{user.email}</Td>
-                    <Td>{user.organisation ? user.organisation : ''}</Td>
+                    <Td>
+                      {user.organisation
+                        ? organisationMapper(user.organisation)
+                        : ''}
+                    </Td>
                     <Td>
                       {user.roles
                         ? user.roles.map((role) => (
@@ -58,9 +71,11 @@ const UsersGrid = ({ usersData }) => {
                     </Td>
                     <Td className="p-3 whitespace-nowrap">
                       <span className="flex items-center justify-center w-full space-x-2">
-                        <Button size="sm" colorScheme="facebook">
-                          <PencilIcon className="w-5 h-5" />
-                        </Button>
+                        <Link href={`/user/${user.uid}`}>
+                          <Button size="sm" colorScheme="facebook">
+                            <PencilIcon className="w-5 h-5" />
+                          </Button>
+                        </Link>
                         <DeleteUserButton userID="as" />
                       </span>
                     </Td>
