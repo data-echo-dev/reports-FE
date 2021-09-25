@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Badge } from '@chakra-ui/react'
 import PageTitle from '../../components/PageTitle'
+
 import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
@@ -48,20 +50,53 @@ const SingleUser = ({ params: { id } }) => {
       const {
         email: databaseEmail,
         name: databaseName,
-        organisation,
-        roles,
+        organisation: databaseOrganisation,
+        roles: databaseRoles,
       } = data
-      setEmail(databaseEmail)
-      setName(databaseName)
+
+      setEmail(email || databaseEmail)
+      setName(name || databaseName)
       setUserID(id)
-      setOrganisationID(organisation)
-      setSelectedRoles(roles)
+      setOrganisationID(organisationID || databaseOrganisation)
+      setSelectedRoles(databaseRoles || selectedRoles)
     }
 
     if (singleOrg) {
       setAvailableRoles(singleOrg[0].roles)
     }
-  })
+  }, [data, singleOrg])
+
+  function handleOrgChange(e) {
+    const { value } = e.target
+    setOrganisationID(value)
+  }
+  function handleNameChange(e) {
+    const { value } = e.target
+    setName(value)
+  }
+  function handleEmailChange(e) {
+    const { value } = e.target
+    setEmail(value)
+  }
+  function selectRole(e) {
+    const value = e.target.textContent
+    const currentlyActiveRoles = [...selectedRoles]
+
+    if (!currentlyActiveRoles.includes(value)) {
+      currentlyActiveRoles.push(value)
+      setSelectedRoles([...currentlyActiveRoles])
+    }
+  }
+
+  function deselectRole(e) {
+    const value = e.target.textContent
+    const currentlyActiveRoles = [...selectedRoles]
+
+    const iHaveBeenRemoved = currentlyActiveRoles.filter(
+      (role) => role !== value
+    )
+    setSelectedRoles([...iHaveBeenRemoved])
+  }
 
   if (!auth.user) return null
   return (
@@ -97,7 +132,7 @@ const SingleUser = ({ params: { id } }) => {
               tabIndex={0}
               type="text"
               value={organisationID}
-              // onChange={handleOrgChange}
+              onChange={handleOrgChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             >
               {orgStatus === 'success' &&
@@ -107,6 +142,74 @@ const SingleUser = ({ params: { id } }) => {
                   </option>
                 ))}
             </select>
+          </div>
+          <div className="relative p-1 transition-all duration-500 border rounded ">
+            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
+                Name
+              </label>
+            </div>
+            <input
+              id="org"
+              autoComplete="false"
+              tabIndex={0}
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+              className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+            />
+          </div>
+          <div className="relative p-1 transition-all duration-500 border rounded ">
+            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
+                Email
+              </label>
+            </div>
+            <input
+              id="org"
+              autoComplete="false"
+              tabIndex={0}
+              type="text"
+              value={email}
+              onChange={handleEmailChange}
+              className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+            />
+          </div>
+          <div className="relative p-1 transition-all duration-500 border rounded ">
+            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
+                Roles
+              </label>
+            </div>
+            <div className="flex justify-between">
+              <div className="relative p-1 transition-all duration-500 border rounded ">
+                {availableRoles?.map((role, index) => (
+                  <Badge
+                    key={index}
+                    className="cursor-pointer"
+                    variant="solid"
+                    type="button"
+                    colorScheme="blue"
+                    onClick={selectRole}
+                  >
+                    {role}
+                  </Badge>
+                ))}
+              </div>
+              <div className="relative p-1 transition-all duration-500 border rounded ">
+                {selectedRoles?.map((role, index) => (
+                  <Badge
+                    className="cursor-pointer"
+                    onClick={deselectRole}
+                    key={index}
+                    variant="solid"
+                    colorScheme="blue"
+                  >
+                    {role}
+                  </Badge>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}
