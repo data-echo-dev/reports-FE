@@ -19,9 +19,6 @@ const UsersGrid = ({ usersData, orgs }) => {
 
   function organisationMapper(id) {
     const theOrg = orgs.find((organisation) => organisation.id === id)
-    // if (!theOrg) {
-    //   return 'Unassigned'
-    // }
     return theOrg.name
   }
 
