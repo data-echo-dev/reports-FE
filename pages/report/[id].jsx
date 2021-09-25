@@ -64,13 +64,20 @@ const SingleReport = ({ params: { id } }) => {
   useEffect(() => {
     if (data) {
       console.log(data)
-      const { id, organisation, roles, teacher, title, url } = data
+      const {
+        // id,
+        organisation,
+        roles,
+        teacher,
+        title: databaseTitle,
+        url: databaseUrl,
+      } = data
       setReportID(id)
       setOrganisationID(organisationID || organisation)
-      setTitle(title)
+      setTitle(title || databaseTitle)
       setSelectedRoles(roles)
       setTeacherID(teacher)
-      setUrl(url)
+      setUrl(url || databaseUrl)
     }
 
     if (singleOrg) {
