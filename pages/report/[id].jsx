@@ -31,7 +31,6 @@ const SingleReport = ({ params: { id } }) => {
   const { data, status, error } = useFirestoreQuery(
     db.collection('reports').doc(id)
   )
-  console.log(data)
   const {
     data: organisations,
     status: orgStatus,
