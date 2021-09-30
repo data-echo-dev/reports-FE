@@ -11,5 +11,12 @@ if (!admin.apps.length) {
   })
 }
 
-export default admin.firestore()
-console.log(admin.apps)
+// export default admin.firestore()
+
+const auth = admin.auth()
+const db = admin.firestore()
+const now = admin.firestore.Timestamp.now()
+const storage = admin.storage()
+export { auth, db, now, storage }
+
+// console.log(admin.apps)

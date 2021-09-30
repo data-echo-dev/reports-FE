@@ -1,12 +1,11 @@
-import firebase from '../../../config/firebase-admin'
+import { auth, db } from '../../../config/firebase-admin'
 
 // TODO: write code to delete user
 // TODO: write code to update user details
 // update & delete have to take care of firestore(email address) & authentication (identifier)
 
 export default (req, res) => {
-  firebase
-    .collection('users')
+  db.collection('users')
     .doc(req.query.id)
     .get()
     .then((doc) => {
