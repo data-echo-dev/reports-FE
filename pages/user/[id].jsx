@@ -99,6 +99,15 @@ const SingleUser = ({ params: { id } }) => {
     setSelectedRoles([...iHaveBeenRemoved])
   }
 
+  function updateOan(oanId) {
+    fetch(`/api/user/${oanId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(consolidated),
+    })
+  }
   if (!auth.user) return null
   return (
     <div className="w-full p-6 bg-white rounded-lg shadow">
@@ -213,7 +222,10 @@ const SingleUser = ({ params: { id } }) => {
               </div>
             </div>
           </div>
-          <button type="button" onClick={() => updateUser(consolidated)}>
+          {/* <button type="button" onClick={() => updateUser(consolidated)}>
+            Update
+          </button> */}
+          <button type="button" onClick={() => updateOan(userID)}>
             Update
           </button>
         </div>
