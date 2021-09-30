@@ -9,18 +9,25 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { TrashIcon } from '@heroicons/react/outline'
-// import { useRequireAuth } from '../../hooks/useRequireAuth'
-import { auth } from '../../config/firebase'
-// import {useAuth} from '../../hooks/useAuth'
+import { useRequireAuth } from '../../hooks/useRequireAuth'
 
-function DeleteOrgButton({ userID }) {
-  // const auth = useRequireAuth()
+function DeleteUserButton({ userID }) {
+  const auth = useRequireAuth()
 
   const [isOpen, setIsOpen] = React.useState(false)
   const onClose = () => setIsOpen(false)
   const cancelRef = React.useRef()
 
-  if (!auth.user) return null
+  // if (!auth.user) return null
+
+  function deleteOan(oanID) {
+    fetch(`/api/user/${oanID}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
 
   return (
     <>
@@ -51,7 +58,7 @@ function DeleteOrgButton({ userID }) {
               {auth.user.isSuperAdmin && (
                 <Button
                   colorScheme="red"
-                  // onClick={() => auth.(userID)}
+                  onClick={() => deleteOan(userID)}
                   ml={3}
                 >
                   Delete
@@ -65,4 +72,4 @@ function DeleteOrgButton({ userID }) {
   )
 }
 
-export default DeleteOrgButton
+export default DeleteUserButton

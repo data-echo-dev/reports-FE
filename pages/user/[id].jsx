@@ -169,8 +169,7 @@ const SingleUser = ({ params: { id } }) => {
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             />
           </div>
-          {/* TODO: figure out how to update user authentication email */}
-          {/* <div className="relative p-1 transition-all duration-500 border rounded ">
+          <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
               <label htmlFor="org" className="px-1 text-gray-600 bg-white">
                 Email
@@ -185,7 +184,7 @@ const SingleUser = ({ params: { id } }) => {
               onChange={handleEmailChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             />
-          </div> */}
+          </div>
           <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
               <label htmlFor="org" className="px-1 text-gray-600 bg-white">

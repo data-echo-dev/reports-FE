@@ -5,12 +5,12 @@ import { auth, db } from '../../../config/firebase-admin'
 // update & delete have to take care of firestore(email address) & authentication (identifier)
 
 export default (req, res) => {
-    const user
+    const uid = req.query.id
     
   switch (req.method) {
     case 'GET':
       db.collection('users')
-        .doc(req.query.id)
+        .doc(uid)
         .get()
         .then((doc) => {
           res.json(doc.data())
@@ -21,8 +21,15 @@ export default (req, res) => {
       // ...
       break
     case 'POST':
-      db.collection('users').doc(req.query.id).update(req.body)
-      auth.updateUser
+      db.collection('users').doc(uid).update(req.body)
+      .then(() => {auth.updateUser(uid, req.body)})
+      .then((userRecord) => res.json(userRecord))
+      .catch(error => res.json({error}))
+      break
+    case 'DELETE':
+      auth.deleteUser(uid)
+      .then(() => console.log('jahman vabaya'))
+      .catch(error => res.json({error}))
       break
     default:
       res.status(405).end() // Method Not Allowed
