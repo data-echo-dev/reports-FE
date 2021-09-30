@@ -2,7 +2,7 @@ import firebase from '../../../config/firebase-admin'
 
 // TODO: write code to delete user
 // TODO: write code to update user details
-// this has to take care of firestore & authentication data
+// update & delete have to take care of firestore(email address) & authentication (identifier)
 
 export default (req, res) => {
   firebase
