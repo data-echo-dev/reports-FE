@@ -99,13 +99,15 @@ const SingleUser = ({ params: { id } }) => {
     setSelectedRoles([...iHaveBeenRemoved])
   }
 
-  function updateOan(oanId) {
-    fetch(`/api/user/${oanId}`, {
-      method: 'POST',
+  async function updateOan(oanId) {
+    await fetch(`/api/user/${oanId}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(consolidated),
+    }).then((res) => {
+      console.log(res.json())
     })
   }
   if (!auth.user) return null

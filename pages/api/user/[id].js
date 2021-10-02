@@ -18,28 +18,52 @@ export default (req, res) => {
         })
       // ...
       break
-    case 'POST':
+    case 'PUT':
       db.collection('users')
         .doc(uid)
         .update(req.body)
-        .then(() => {
-          auth.updateUser(uid, req.body)
+        .then((x) => {
+          console.log(x)
+          res.send({
+            status: 200,
+            message: 'entry added successfully',
+            data: req.body,
+          })
         })
-        .then((userRecord) => res.json(userRecord))
         .catch((error) => res.json({ error }))
+
+      auth
+        .updateUser(uid, req.body)
+        .then((userRecord) => {
+          // See the UserRecord reference doc for the contents of userRecord.
+          console.log('Successfully updated user', userRecord.toJSON())
+          res.send({
+            status: 200,
+            message: 'entry added successfully',
+            data: req.body,
+          })
+        })
+        .catch((error) => {
+          console.log('Error updating user:', error)
+        })
+
       break
     case 'DELETE':
       auth
         .deleteUser(uid)
         .then(() => console.log('jahman vabaya'))
         .catch((error) => res.json({ error }))
+
+      db.collection('users')
+        .doc(uid)
+        .delete()
+        .then(() => console.log('jahman vabaya oan'))
+        .catch((error) => res.json({ error }))
       break
     default:
       res.status(405).end() // Method Not Allowed
       break
   }
-
-  console.log(req.method)
 }
 
 // export default (req, res) => {
