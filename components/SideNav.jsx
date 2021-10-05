@@ -24,7 +24,6 @@ const SideNav = () => {
   return (
     <span className="absolute top-0 m-4">
       <Button
-        size="lg"
         ref={btnRef}
         bgColor="primary.blue"
         className="opacity-80"
@@ -44,7 +43,7 @@ const SideNav = () => {
           <DrawerHeader>Quick Links</DrawerHeader>
 
           <DrawerBody>
-            <nav className="text-left">
+            <nav>
               <Link href="/my-reports">
                 <Button
                   size="lg"
