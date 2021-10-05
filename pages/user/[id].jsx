@@ -5,7 +5,6 @@ import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
-import { updateUser } from '../../CRUD/user'
 
 const SingleUser = ({ params: { id } }) => {
   const auth = useRequireAuth()
@@ -99,6 +98,17 @@ const SingleUser = ({ params: { id } }) => {
     setSelectedRoles([...iHaveBeenRemoved])
   }
 
+  async function updateOan(oanId) {
+    await fetch(`/api/user/${oanId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(consolidated),
+    }).then((res) => {
+      console.log(res.json())
+    })
+  }
   if (!auth.user) return null
   return (
     <div className="w-full p-6 bg-white rounded-lg shadow">
@@ -160,8 +170,7 @@ const SingleUser = ({ params: { id } }) => {
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             />
           </div>
-          {/* TODO: figure out how to update user authentication email */}
-          {/* <div className="relative p-1 transition-all duration-500 border rounded ">
+          <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
               <label htmlFor="org" className="px-1 text-gray-600 bg-white">
                 Email
@@ -176,7 +185,7 @@ const SingleUser = ({ params: { id } }) => {
               onChange={handleEmailChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             />
-          </div> */}
+          </div>
           <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
               <label htmlFor="org" className="px-1 text-gray-600 bg-white">
@@ -213,7 +222,7 @@ const SingleUser = ({ params: { id } }) => {
               </div>
             </div>
           </div>
-          <button type="button" onClick={() => updateUser(consolidated)}>
+          <button type="button" onClick={() => updateOan(userID)}>
             Update
           </button>
         </div>
