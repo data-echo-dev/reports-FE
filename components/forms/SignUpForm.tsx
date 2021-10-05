@@ -3,6 +3,7 @@ import Router from 'next/router'
 import { Button, Input } from "@chakra-ui/react";
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
+import FormButton from '../Buttons/FormButton';
 
 interface SignUpData {
   name: string
@@ -16,10 +17,15 @@ const SignUpForm: React.FC = () => {
   const [name, setName] = useState('')
   const [error, setError] = useState(null)
   const auth = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const onSubmit = (data: SignUpData) => {
+    setIsLoading(true)
+    
     return auth.signUp(data).then((response) => {
       if (response.error) {
+        setIsLoading(false)
         setError(response.error.message)
         return
       }
@@ -75,16 +81,11 @@ const SignUpForm: React.FC = () => {
       />
       <div className="mt-6">
         <span className="block w-full rounded-md shadow-sm">
-          <Button
-            type="button"
-            bgColor="primary.blue"
-            className="opacity-80 hover:text-primary-blue"
-            isFullWidth
-            color="primary.white"
+          <FormButton
+          title='Sign Up'
+          isLoading={isLoading}
             onClick={() => onSubmit({ name, email, password })}
-          >
-            Sign up
-          </Button>
+          />
         </span>
       </div>{' '}
     </form>

@@ -3,18 +3,22 @@ import Router from 'next/router'
 import { useState } from 'react'
 import { Button, Input } from '@chakra-ui/react'
 import { useAuth } from '../../hooks/useAuth'
+import FormButton from '../Buttons/FormButton'
 
 const ResetPasswordForm: React.FC = () => {
   const [email, setEmail] = useState('')
   const [error, setError] = useState(null)
   const auth = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = (data: { email: string }) => {
+    setIsLoading(true)
     auth.sendPasswordResetEmail(data.email).then(
       () => {
         Router.push('/login')
       },
       (error) => {
+        setIsLoading(false)
         setError(error.message)
       }
     )
@@ -41,16 +45,11 @@ const ResetPasswordForm: React.FC = () => {
       />
       <div className="mt-6">
         <span className="block w-full rounded-md shadow-sm">
-          <Button
-            type="button"
-            bgColor="primary.blue"
-            className="opacity-80 hover:text-primary-blue"
-            isFullWidth
-            color="primary.white"
+          <FormButton
+            title="Send reset link"
+            isLoading={isLoading}
             onClick={() => onSubmit({ email })}
-          >
-            Send reset link
-          </Button>
+          />
         </span>
       </div>{' '}
     </form>
