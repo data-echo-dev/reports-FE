@@ -18,7 +18,7 @@ function DeleteUserButton({ userID }) {
   const onClose = () => setIsOpen(false)
   const cancelRef = React.useRef()
 
-  // if (!auth.user) return null
+  if (!auth.user) return null
 
   function deleteOan(oanID) {
     fetch(`/api/user/${oanID}`, {
