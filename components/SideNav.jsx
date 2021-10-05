@@ -24,6 +24,7 @@ const SideNav = () => {
   return (
     <span className="absolute top-0 m-4">
       <Button
+        size="lg"
         ref={btnRef}
         bgColor="primary.blue"
         className="opacity-80"
@@ -43,63 +44,72 @@ const SideNav = () => {
           <DrawerHeader>Quick Links</DrawerHeader>
 
           <DrawerBody>
-            <nav>
+            <nav className="text-left">
               <Link href="/my-reports">
-                <button
+                <Button
+                  size="lg"
+                  variant="ghost"
                   onClick={onClose}
-                  className="flex items-center w-full p-2 my-6 text-gray-800 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-100 dark:bg-gray-600"
                   disabled={!auth}
+                  isFullWidth
+                  className="text-left"
+                  colorScheme="blue"
                 >
-                  <span className="mx-4 text-lg font-normal">My Reports</span>
+                  <span className="my-4">My Reports</span>
                   <span className="flex-grow text-right" />
-                </button>
+                </Button>
               </Link>
               <Link href="/org-reports">
-                <button
+                <Button
+                  textAlign="left"
+                  size="lg"
                   onClick={onClose}
-                  className="flex items-start w-full p-2 my-6 text-left text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
                   disabled={!auth}
+                  isFullWidth
+                  variant="ghost"
+                  colorScheme="blue"
                 >
-                  <span className="mx-4 text-lg font-normal">
-                    Organisation Reports
-                  </span>
+                  <span className="my-4">Organisation Reports</span>
                   <span className="flex-grow text-right" />
-                </button>
+                </Button>
               </Link>
               {auth.user.isSuperAdmin && (
                 <>
                   <Link href="/org-management">
-                    <button
+                    <Button
+                      size="lg"
                       onClick={onClose}
-                      className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
+                      isFullWidth
+                      variant="ghost"
+                      colorScheme="blue"
                     >
-                      <span className="mx-4 text-lg font-normal">
-                        Org Management
-                      </span>
+                      <span className="my-4">Org Management</span>
                       <span className="flex-grow text-right" />
-                    </button>
+                    </Button>
                   </Link>
                   <Link href="/report-management">
-                    <button
+                    <Button
+                      size="lg"
                       onClick={onClose}
-                      className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
+                      isFullWidth
+                      colorScheme="blue"
+                      variant="ghost"
                     >
-                      <span className="mx-4 text-lg font-normal">
-                        Report Management
-                      </span>
+                      <span className="my-4">Report Management</span>
                       <span className="flex-grow text-right" />
-                    </button>
+                    </Button>
                   </Link>
                   <Link href="/user-management">
-                    <button
+                    <Button
+                      size="lg"
                       onClick={onClose}
-                      className="flex items-center w-full p-2 my-6 text-gray-600 transition-colors duration-200 rounded-lg hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 dark:text-gray-400 "
+                      isFullWidth
+                      variant="ghost"
+                      colorScheme="blue"
                     >
-                      <span className="mx-4 text-lg font-normal">
-                        User Management
-                      </span>
+                      <span className="my-4">User Management</span>
                       <span className="flex-grow text-right" />
-                    </button>
+                    </Button>
                   </Link>
                 </>
               )}
@@ -108,6 +118,7 @@ const SideNav = () => {
 
           <DrawerFooter borderTopWidth="1px">
             <Button
+              size="lg"
               color="red"
               variant="outline"
               mr={3}
