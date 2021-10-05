@@ -44,6 +44,20 @@ const SideNav = () => {
 
           <DrawerBody>
             <nav>
+              <Link href="/dashboard">
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  onClick={onClose}
+                  disabled={!auth}
+                  isFullWidth
+                  className="text-left"
+                  colorScheme="blue"
+                >
+                  <span className="my-4">Dashboard</span>
+                  <span className="flex-grow text-right" />
+                </Button>
+              </Link>
               <Link href="/my-reports">
                 <Button
                   size="lg"
