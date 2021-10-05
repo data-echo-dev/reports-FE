@@ -1,7 +1,5 @@
 import { auth, db } from '../../../config/firebase-admin'
 
-// TODO: figure out how to properly resolve these requests for the frontend
-
 export default (req, res) => {
   const uid = req.query.id
 
@@ -35,7 +33,6 @@ export default (req, res) => {
       auth
         .updateUser(uid, req.body)
         .then((userRecord) => {
-          // See the UserRecord reference doc for the contents of userRecord.
           console.log('Successfully updated user', userRecord.toJSON())
           res.send({
             status: 200,
@@ -61,21 +58,7 @@ export default (req, res) => {
         .catch((error) => res.json({ error }))
       break
     default:
-      res.status(405).end() // Method Not Allowed
+      res.status(405).end() // this is Method Not Allowed
       break
   }
 }
-
-// export default (req, res) => {
-//     switch (req.method) {
-//       case 'GET':
-//         //...
-//         break
-//       case 'POST':
-//         //...
-//         break
-//       default:
-//         res.status(405).end() //Method Not Allowed
-//         break
-//     }
-//   }
