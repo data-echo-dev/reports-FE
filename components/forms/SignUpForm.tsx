@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Router from 'next/router'
-import { Button, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import FormButton from '../Buttons/FormButton';
