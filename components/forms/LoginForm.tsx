@@ -2,6 +2,7 @@
 import Router from 'next/router'
 import Link from 'next/link'
 import { useState } from 'react'
+import { Input, Button } from '@chakra-ui/react'
 import { useAuth } from '../../hooks/useAuth'
 import FormButton from '../Buttons/FormButton'
 
@@ -44,9 +45,8 @@ const LoginForm: React.FC = () => {
       >
         Email address
       </label>
-      <input
+      <Input
         id="email"
-        className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
         type="email"
         name="email"
         onChange={(e) => setEmail(e.target.value)}
@@ -57,9 +57,8 @@ const LoginForm: React.FC = () => {
       >
         Password
       </label>
-      <input
+      <Input
         id="password"
-        className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
         type="password"
         name="password"
         onChange={(e) => setPassword(e.target.value)}
@@ -67,9 +66,12 @@ const LoginForm: React.FC = () => {
       <div className="flex items-end mt-4">
         <div className="text-sm leading-5">
           <Link href="/reset-password">
-            <a className="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline">
+          <Button variant="link" color="secondary.100">
+            <a >
               Forgot your password?
             </a>
+            </Button>
+
           </Link>
         </div>
       </div>
