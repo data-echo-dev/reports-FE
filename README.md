@@ -14,12 +14,12 @@ assume these are written in order of importance/priority. start from the top
 - [x] fix build errors
 - [x] "Cannot read property 'uid' of null" when trying to login
   - seems like you get logged in, but the auth state isn't set correctly in the app? or in the login screen. because the sidenav appears(which needs a logged in user), but yet you still can't access the dashboard?
-- [ ] creating of individual reports, users, & orgs
-- [ ] **reading of individual reports, users, & orgs**
-- [ ] updating of individual reports, users, & orgs
+- [x] creating of individual reports, users, & orgs
+- [x] **reading of individual reports, users, & orgs**
+- [x] updating of individual reports, users, & orgs
   - [x] strategy to take care of the frontend's state changes (most notably the roles, as that comes in an array of strings)
-- [ ] deleting of individual reports, users, & orgs - from grid & single item's page
-- [ ] need to start the switch to an org firebase account
+- [x] deleting of individual reports, users, & orgs - from grid & single item's page
+- [x] need to start the switch to an org firebase account
 
 # architecture
 - initial firebase setup was done following [this](https://betterprogramming.pub/implement-user-authentication-with-next-js-and-firebase-fb9414adba08) tutorial
