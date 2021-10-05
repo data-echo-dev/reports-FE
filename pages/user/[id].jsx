@@ -5,7 +5,6 @@ import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
-import { updateUser } from '../../CRUD/user'
 
 const SingleUser = ({ params: { id } }) => {
   const auth = useRequireAuth()
@@ -223,9 +222,6 @@ const SingleUser = ({ params: { id } }) => {
               </div>
             </div>
           </div>
-          {/* <button type="button" onClick={() => updateUser(consolidated)}>
-            Update
-          </button> */}
           <button type="button" onClick={() => updateOan(userID)}>
             Update
           </button>
