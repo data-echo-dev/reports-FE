@@ -46,10 +46,14 @@ const updateReport = (data) => {
 }
 
 const deleteReport = (id) => {
+  NProgress.start()
   db.collection('reports')
     .doc(id)
     .delete()
-    .then(() => console.log('it gone bruh'))
+    .then(() => {
+      console.log('it gone bruh')
+      NProgress.done()
+    })
     .catch((error) => console.error('Error deleting the doc:', error))
 }
 
