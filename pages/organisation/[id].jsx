@@ -142,7 +142,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
               <MinusCircleIcon
                 index={index}
                 onClick={() => removeRole(role)}
-                className="w-6 h-6"
+                className="w-6 h-6 ml-2 text-red-900 transition duration-500 ease-in-out hover:text-red-500"
               />
             </button>
           </div>

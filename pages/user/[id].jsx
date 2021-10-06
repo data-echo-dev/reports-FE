@@ -192,11 +192,16 @@ const SingleUser = ({ params: { id } }) => {
           <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
               <label htmlFor="org" className="px-1 text-gray-600 bg-white">
-                Roles
+                Available Roles
+              </label>
+            </div>
+            <div className="absolute right-0 px-1 -mt-4 text-xs tracking-wider uppercase">
+              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
+                Selected Roles
               </label>
             </div>
             <div className="flex justify-between">
-              <div className="relative p-1 transition-all duration-500 border rounded ">
+              <div className="relative p-1 space-x-1 transition-all duration-500 border rounded">
                 {availableRoles?.map((role, index) => (
                   <Badge
                     key={index}
@@ -210,7 +215,7 @@ const SingleUser = ({ params: { id } }) => {
                   </Badge>
                 ))}
               </div>
-              <div className="relative p-1 transition-all duration-500 border rounded ">
+              <div className="relative p-1 space-x-1 transition-all duration-500 border rounded ">
                 {selectedRoles?.map((role, index) => (
                   <Badge
                     className="cursor-pointer"
