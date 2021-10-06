@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import Router from 'next/router'
