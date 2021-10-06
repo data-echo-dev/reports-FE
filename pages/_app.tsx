@@ -3,7 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import Router from 'next/router'
 import NProgress from 'nprogress'
 import { AuthProvider } from '../hooks/useAuth'
-import 'nprogress/nprogress.css'
+import '../styles/nprogress.css'
 import Layout from '../components/Layout'
 
 import '../styles/base.css'
