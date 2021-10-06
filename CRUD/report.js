@@ -1,4 +1,5 @@
 import Router from 'next/router'
+import NProgress from 'nprogress'
 import { db } from '../config/firebase'
 
 const addReport = () => {
@@ -18,6 +19,7 @@ const addReport = () => {
 }
 
 const updateReport = (data) => {
+  NProgress.start()
   const {
     organisationID: organisation,
     title,
@@ -38,6 +40,7 @@ const updateReport = (data) => {
     .doc(data.reportID)
     .update(preFlight)
     .then((doc) => {
+      NProgress.done()
       console.log(doc)
     })
 }

@@ -1,13 +1,16 @@
 import Router from 'next/router'
+import NProgress from 'nprogress'
 import { db } from '../config/firebase'
 
 const updateOrg = (data) => {
+  NProgress.start()
   db.collection('organisations')
     .doc(data.id)
     .update(data)
     .then((doc) => {
       console.log(doc)
     })
+  NProgress.done()
 }
 
 const addOrg = async () => {

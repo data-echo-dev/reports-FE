@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Badge } from '@chakra-ui/react'
+import NProgress from 'nprogress'
 import PageTitle from '../../components/PageTitle'
-
 import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
@@ -99,6 +99,7 @@ const SingleUser = ({ params: { id } }) => {
   }
 
   async function updateOan(oanId) {
+    NProgress.start()
     await fetch(`/api/user/${oanId}`, {
       method: 'PUT',
       headers: {
@@ -107,6 +108,7 @@ const SingleUser = ({ params: { id } }) => {
       body: JSON.stringify(consolidated),
     }).then((res) => {
       console.log(res.json())
+      NProgress.done()
     })
   }
   if (!auth.user) return null
