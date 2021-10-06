@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { Badge, Button } from '@chakra-ui/react'
+import { CloudIcon } from '@heroicons/react/outline'
 import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
@@ -257,9 +258,14 @@ const SingleReport = ({ params: { id } }) => {
               </div>
             </div>
           </div>
-          <button type="button" onClick={() => updateReport(consolidated)}>
+          <Button
+            colorScheme="teal"
+            leftIcon={<CloudIcon className="w-5 h-5" />}
+            type="button"
+            onClick={() => updateReport(consolidated)}
+          >
             Update
-          </button>
+          </Button>
         </div>
       )}
     </div>

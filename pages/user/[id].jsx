@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Badge } from '@chakra-ui/react'
+import { Button, Badge } from '@chakra-ui/react'
 import NProgress from 'nprogress'
+import { CloudIcon } from '@heroicons/react/outline'
 import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
@@ -224,9 +225,14 @@ const SingleUser = ({ params: { id } }) => {
               </div>
             </div>
           </div>
-          <button type="button" onClick={() => updateOan(userID)}>
+          <Button
+            colorScheme="teal"
+            leftIcon={<CloudIcon className="w-5 h-5" />}
+            type="button"
+            onClick={() => updateOan(userID)}
+          >
             Update
-          </button>
+          </Button>
         </div>
       )}
     </div>
