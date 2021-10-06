@@ -8,12 +8,13 @@ import { db } from '../config/firebase'
 import PageTitle from '../components/PageTitle'
 
 const MyReports = () => {
-  
   const auth = useRequireAuth()
   // console.log(fakeData);
-  const { data: organisations, status: statusOrgs, error: errorOrgs } = useFirestoreQuery(
-    db.collection('organisations')
-  )
+  const {
+    data: organisations,
+    status: statusOrgs,
+    error: errorOrgs,
+  } = useFirestoreQuery(db.collection('organisations'))
   const { data, status, error } = useFirestoreQuery(
     db
       .collection('reports')
@@ -21,12 +22,11 @@ const MyReports = () => {
       .where('teacher', '==', auth.user?.uid)
   )
   if (status === 'loading') {
-    return 'Loading...'
+    return null
   }
   if (status === 'error') {
     return `Error: ${error.message}`
   }
-
 
   if (!auth.user) return null
 
@@ -35,7 +35,7 @@ const MyReports = () => {
       <PageTitle text="My Reports" />
 
       <div className="flex flex-col justify-center">
-        <ReportsGrid reportsData={data} orgs={organisations}/>
+        <ReportsGrid reportsData={data} orgs={organisations} />
       </div>
     </div>
   )
@@ -44,5 +44,5 @@ const MyReports = () => {
 export default MyReports
 
 export async function getServerSideProps(context) {
-  return { props: {  } }
+  return { props: {} }
 }

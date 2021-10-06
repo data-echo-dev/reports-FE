@@ -52,6 +52,7 @@ const SideNav = () => {
                   disabled={!auth}
                   isFullWidth
                   className="text-left"
+                  color="blue.700"
                   colorScheme="blue"
                 >
                   <span className="my-4">Dashboard</span>
@@ -66,6 +67,7 @@ const SideNav = () => {
                   disabled={!auth}
                   isFullWidth
                   className="text-left"
+                  color="blue.700"
                   colorScheme="blue"
                 >
                   <span className="my-4">My Reports</span>
@@ -80,6 +82,7 @@ const SideNav = () => {
                   disabled={!auth}
                   isFullWidth
                   variant="ghost"
+                  color="blue.700"
                   colorScheme="blue"
                 >
                   <span className="my-4">Organisation Reports</span>
@@ -94,6 +97,7 @@ const SideNav = () => {
                       onClick={onClose}
                       isFullWidth
                       variant="ghost"
+                      color="blue.700"
                       colorScheme="blue"
                     >
                       <span className="my-4">Org Management</span>
@@ -106,6 +110,7 @@ const SideNav = () => {
                       onClick={onClose}
                       isFullWidth
                       colorScheme="blue"
+                      color="blue.700"
                       variant="ghost"
                     >
                       <span className="my-4">Report Management</span>
@@ -118,6 +123,7 @@ const SideNav = () => {
                       onClick={onClose}
                       isFullWidth
                       variant="ghost"
+                      color="blue.700"
                       colorScheme="blue"
                     >
                       <span className="my-4">User Management</span>

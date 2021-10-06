@@ -9,6 +9,7 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { TrashIcon } from '@heroicons/react/outline'
+import NProgress from 'nprogress'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
 function DeleteUserButton({ userID }) {
@@ -21,12 +22,14 @@ function DeleteUserButton({ userID }) {
   if (!auth.user) return null
 
   function deleteOan(oanID) {
+    NProgress.start()
     fetch(`/api/user/${oanID}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
     })
+    NProgress.done()
   }
 
   return (
