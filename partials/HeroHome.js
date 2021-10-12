@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import hero from '../images/hero-image.png'
 import Modal from '../utils/Modal'
 
@@ -47,9 +48,9 @@ function HeroHome() {
               className="mb-4 text-5xl font-extrabold tracking-tighter md:text-6xl leading-tighter"
               data-aos="zoom-y-out"
             >
-              Make your website{' '}
+              Data
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400">
-                wonderful
+                Echo
               </span>
             </h1>
             <div className="max-w-3xl mx-auto">
@@ -58,8 +59,9 @@ function HeroHome() {
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
-                Our landing page template works on all devices, so you only have
-                to set it up once, and get beautiful results forever.
+                We are driven by the belief that data is a core driver to
+                success in academic endeavours. Data is always speaking so much
+                that it “echoes”. We just pause.
               </p>
               <div
                 className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"
@@ -67,12 +69,11 @@ function HeroHome() {
                 data-aos-delay="300"
               >
                 <div>
-                  <a
-                    className="w-full mb-4 text-white bg-blue-600 btn hover:bg-blue-700 sm:w-auto sm:mb-0"
-                    href="#0"
-                  >
-                    Start free trial
-                  </a>
+                  <Link href="/signup">
+                    <a className="w-full mb-4 text-white bg-blue-600 btn hover:bg-blue-700 sm:w-auto sm:mb-0">
+                      Start free trial
+                    </a>
+                  </Link>
                 </div>
                 <div>
                   <a
