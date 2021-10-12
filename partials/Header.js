@@ -61,7 +61,7 @@ function Header() {
           <nav className="flex flex-grow">
             <ul className="flex flex-wrap items-center justify-end flex-grow">
               <li>
-                <Link href="/signin">
+                <Link href="/login">
                   <a className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
                     Sign in
                   </a>
