@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
 import AOS from 'aos'
-import { focusHandling } from 'cruip-js-toolkit'
 
 import Header from '../partials/Header'
 import HeroHome from '../partials/HeroHome'
