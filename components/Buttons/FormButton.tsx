@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react'
 import Spinner from '../icons/spinner'
 
 interface ButtonProps {
@@ -12,8 +13,11 @@ const FormButton = ({
 }: ButtonProps &
   React.ButtonHTMLAttributes<HTMLButtonElement>): JSX.Element => {
   return (
-    <button
-      className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+    <Button
+    bgColor="primary.blue"
+            className="opacity-80 hover:text-primary-blue"
+            isFullWidth
+            color="primary.white"
       type="button"
       {...buttonProps}
     >
@@ -23,7 +27,7 @@ const FormButton = ({
         title
       )}
       {children}
-    </button>
+    </Button>
   )
 }
 export default FormButton

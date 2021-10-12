@@ -8,9 +8,11 @@ import PageTitle from '../components/PageTitle'
 const OrgReports = () => {
   const auth = useRequireAuth()
 
-  const { data: organisations, status: statusOrgs, error: errorOrgs } = useFirestoreQuery(
-    db.collection('organisations')
-  )
+  const {
+    data: organisations,
+    status: statusOrgs,
+    error: errorOrgs,
+  } = useFirestoreQuery(db.collection('organisations'))
   const { data: reports, status, error } = useFirestoreQuery(
     db
       .collection('reports')
@@ -18,14 +20,13 @@ const OrgReports = () => {
       .where('roles', 'array-contains-any', auth.user.roles)
   )
   if (status === 'loading') {
-    return 'Loading...'
+    return null
   }
   if (status === 'error') {
     return `Error: ${error.message}`
   }
-  
-  console.log(reports);
-  
+
+  console.log(reports)
 
   if (!auth.user) return null
 
@@ -34,7 +35,7 @@ const OrgReports = () => {
       <PageTitle text="Organisation Reports" />
 
       <div className="flex flex-col justify-center">
-        <ReportsGrid reportsData={reports} orgs={organisations}/>
+        <ReportsGrid reportsData={reports} orgs={organisations} />
       </div>
     </div>
   )
@@ -43,5 +44,5 @@ const OrgReports = () => {
 export default OrgReports
 
 export async function getServerSideProps(context) {
-  return { props: {  } }
+  return { props: {} }
 }

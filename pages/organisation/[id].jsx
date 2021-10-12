@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
-import { MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
+import { CloudIcon, MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
+import { Button } from '@chakra-ui/react'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
 import PageTitle from '../../components/PageTitle'
@@ -141,30 +142,29 @@ const SingleOrganisationPage = ({ params: { id } }) => {
               <MinusCircleIcon
                 index={index}
                 onClick={() => removeRole(role)}
-                className="w-6 h-6"
+                className="w-6 h-6 ml-2 text-red-900 transition duration-500 ease-in-out hover:text-red-500"
               />
             </button>
           </div>
         ))}
       </div>
       <div className="flex pt-3 mt-6 space-x-3 border-t">
-        <button
+        <Button
           type="button"
           onClick={addRole}
-          className="px-3 py-1 text-gray-100 transition-all duration-300 bg-green-500 rounded hover:shadow-inner hover:bg-green-700"
+          colorScheme="facebook"
+          leftIcon={<PlusIcon className="w-5 h-5" />}
         >
-          <div className="flex">
-            <PlusIcon className="w-5 h-5" />
-            <span>Role</span>
-          </div>
-        </button>
-        <button
+          Role
+        </Button>
+        <Button
           type="button"
           onClick={() => updateOrg(consolidated)}
-          className="px-3 py-1 text-gray-100 transition-all duration-300 bg-blue-500 rounded hover:shadow-inner hover:bg-blue-700"
+          colorScheme="teal"
+          leftIcon={<CloudIcon className="w-5 h-5" />}
         >
-          Save
-        </button>
+          Update
+        </Button>
       </div>
     </div>
   )

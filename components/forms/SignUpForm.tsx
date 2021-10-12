@@ -1,7 +1,9 @@
 // @ts-nocheck
 import Router from 'next/router'
+import { Input } from "@chakra-ui/react";
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
+import FormButton from '../Buttons/FormButton';
 
 interface SignUpData {
   name: string
@@ -15,10 +17,15 @@ const SignUpForm: React.FC = () => {
   const [name, setName] = useState('')
   const [error, setError] = useState(null)
   const auth = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const onSubmit = (data: SignUpData) => {
+    setIsLoading(true)
+    
     return auth.signUp(data).then((response) => {
       if (response.error) {
+        setIsLoading(false)
         setError(response.error.message)
         return
       }
@@ -39,7 +46,7 @@ const SignUpForm: React.FC = () => {
       >
         Name
       </label>
-      <input
+      <Input
         id="name"
         className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
         type="text"
@@ -52,7 +59,7 @@ const SignUpForm: React.FC = () => {
       >
         Email address
       </label>
-      <input
+      <Input
         id="email"
         className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
         type="email"
@@ -65,7 +72,7 @@ const SignUpForm: React.FC = () => {
       >
         Password
       </label>
-      <input
+      <Input
         id="password"
         className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
         type="password"
@@ -74,13 +81,11 @@ const SignUpForm: React.FC = () => {
       />
       <div className="mt-6">
         <span className="block w-full rounded-md shadow-sm">
-          <button
-            type="button"
-            className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-blue-600 focus:ring-4 focus:shadow-outline-indigo active:bg-indigo-700"
+          <FormButton
+          title='Sign Up'
+          isLoading={isLoading}
             onClick={() => onSubmit({ name, email, password })}
-          >
-            Sign up
-          </button>
+          />
         </span>
       </div>{' '}
     </form>
@@ -89,76 +94,3 @@ const SignUpForm: React.FC = () => {
 
 export default SignUpForm
 
-{
-  /* <div className="rounded-md shadow-sm">
-  <label
-    htmlFor="name"
-    className="block text-sm font-medium leading-5 text-gray-700"
-  >
-    Name
-  </label>
-  <input
-    id="name"
-    className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-    type="text"
-    {...register('name')}
-  />
-  {errors.password && (
-    <div className="mt-2 text-xs text-red-600">
-      {errors.password.message}
-    </div>
-  )}
-</div>
-<div className="mt-6">
-  <label
-    htmlFor="email"
-    className="block text-sm font-medium leading-5 text-gray-700"
-  >
-    Email address
-  </label>
-  <div className="mt-1 rounded-md shadow-sm">
-    <input
-      id="email"
-      className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-      type="email"
-      {...register('email')}
-    />
-    {errors.email && (
-      <div className="mt-2 text-xs text-red-600">
-        {errors.email.message}
-      </div>
-    )}
-  </div>
-</div>
-<div className="mt-6">
-  <label
-    htmlFor="password"
-    className="block text-sm font-medium leading-5 text-gray-700"
-  >
-    Password
-  </label>
-  <div className="mt-1 rounded-md shadow-sm">
-    <input
-      id="password"
-      className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-      type="password"
-      {...register('password')}
-    />
-    {errors.password && (
-      <div className="mt-2 text-xs text-red-600">
-        {errors.password.message}
-      </div>
-    )}
-  </div>
-</div>
-<div className="mt-6">
-  <span className="block w-full rounded-md shadow-sm">
-    <button
-      type="submit"
-      className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
-    >
-      Sign up
-    </button>
-  </span>
-</div> */
-}
