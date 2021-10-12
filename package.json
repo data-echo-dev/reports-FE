@@ -25,13 +25,13 @@
     "next": "^10.0.6",
     "next-images": "^1.8.1",
     "nprogress": "^0.2.0",
+    "node-sass": "^5.0.0",
     "postcss": "^8.2.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-firebase-hooks": "^3.0.4",
     "react-hook-form": "^7.12.2",
     "react-transition-group": "^4.4.2",
-    "sass": "^1.42.1",
     "tailwindcss": "^2.0.3"
   },
   "devDependencies": {
