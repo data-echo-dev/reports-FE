@@ -34,11 +34,10 @@ function Features() {
         <div className="pt-12 md:pt-20">
           {/* Section header */}
           <div className="max-w-3xl pb-12 mx-auto text-center md:pb-16">
-            <h1 className="mb-4 h2">Explore the solutions</h1>
+            <h1 className="mb-4 h2">Who we are</h1>
             <p className="text-xl text-gray-600">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
-              cupidatat.
+              An analytics company founded on the belief that “data is ripe to
+              give education the transformative jolt it needs.”
             </p>
           </div>
 
@@ -50,7 +49,7 @@ function Features() {
               data-aos="fade-right"
             >
               <div className="mb-8 md:pr-4 lg:pr-12 xl:pr-16">
-                <h3 className="mb-3 h3">Powerful suite of tools</h3>
+                <h3 className="mb-3 h3">Effective Report Management Tool</h3>
                 <p className="text-xl text-gray-600">
                   Duis aute irure dolor in reprehenderit in voluptate velit esse
                   cillum dolore pariatur. Excepteur sint occaecat cupidatat non
@@ -73,7 +72,7 @@ function Features() {
                 >
                   <div>
                     <div className="mb-1 font-bold leading-snug tracking-tight">
-                      Building the Simple ecosystem
+                      Simple and Intuitive User Interface
                     </div>
                     <div className="text-gray-600">
                       Take collaboration to the next level with security and
