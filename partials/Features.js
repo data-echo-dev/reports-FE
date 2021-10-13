@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Transition from '../utils/Transition.js'
-import image1 from '../images/features-bg.png'
+import image1 from '../images/app1.png'
+import appScreenshot from '../images/hero-image.svg'
 import image2 from '../images/features-element.png'
 
 function Features() {
@@ -49,11 +50,13 @@ function Features() {
               data-aos="fade-right"
             >
               <div className="mb-8 md:pr-4 lg:pr-12 xl:pr-16">
-                <h3 className="mb-3 h3">Effective Report Management Tool</h3>
+                <h3 className="mb-3 h3">
+                  Productive report management & analysis
+                </h3>
                 <p className="text-xl text-gray-600">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa.
+                  Effective interpretation of data can be used to better
+                  understand student needs and employ strategies to
+                  differentiate instruction.
                 </p>
               </div>
               {/* Tabs buttons */}
@@ -75,8 +78,8 @@ function Features() {
                       Simple and Intuitive User Interface
                     </div>
                     <div className="text-gray-600">
-                      Take collaboration to the next level with security and
-                      administrative features built for teams.
+                      Allowing for swift navigation across the application. Get
+                      to what's important quicker.
                     </div>
                   </div>
                   <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 ml-3 bg-white rounded-full shadow">
@@ -103,11 +106,11 @@ function Features() {
                 >
                   <div>
                     <div className="mb-1 font-bold leading-snug tracking-tight">
-                      Building the Simple ecosystem
+                      Get more out of your reports
                     </div>
                     <div className="text-gray-600">
-                      Take collaboration to the next level with security and
-                      administrative features built for teams.
+                      Helps teachers understand their students’ learning
+                      abilities and challenges.
                     </div>
                   </div>
                   <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 ml-3 bg-white rounded-full shadow">
@@ -137,11 +140,11 @@ function Features() {
                 >
                   <div>
                     <div className="mb-1 font-bold leading-snug tracking-tight">
-                      Building the Simple ecosystem
+                      Building personal feedback
                     </div>
                     <div className="text-gray-600">
-                      Take collaboration to the next level with security and
-                      administrative features built for teams.
+                      We aim to spearhead the process of individualizing
+                      learning on all levels of the student’s learning journey.
                     </div>
                   </div>
                   <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 ml-3 bg-white rounded-full shadow">
@@ -188,14 +191,6 @@ function Features() {
                       height="462"
                       alt="Features bg"
                     />
-                    <img
-                      className="absolute left-0 w-full transform md:max-w-none animate-float"
-                      src={image2}
-                      width="500"
-                      height="44"
-                      alt="Element"
-                      style={{ top: '30%' }}
-                    />
                   </div>
                 </Transition>
                 {/* Item 2 */}
@@ -213,18 +208,10 @@ function Features() {
                   <div className="relative inline-flex flex-col">
                     <img
                       className="mx-auto rounded md:max-w-none"
-                      src={image1}
+                      src={appScreenshot}
                       width="500"
                       height="462"
                       alt="Features bg"
-                    />
-                    <img
-                      className="absolute left-0 w-full transform md:max-w-none animate-float"
-                      src={image2}
-                      width="500"
-                      height="44"
-                      alt="Element"
-                      style={{ top: '30%' }}
                     />
                   </div>
                 </Transition>
@@ -247,14 +234,6 @@ function Features() {
                       width="500"
                       height="462"
                       alt="Features bg"
-                    />
-                    <img
-                      className="absolute left-0 w-full transform md:max-w-none animate-float"
-                      src={image2}
-                      width="500"
-                      height="44"
-                      alt="Element"
-                      style={{ top: '30%' }}
                     />
                   </div>
                 </Transition>

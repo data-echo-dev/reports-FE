@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import hero from '../images/hero-image.png'
-import Modal from '../utils/Modal'
+import hero from '../images/hero-image.svg'
+// import Modal from '../utils/Modal'
 
 function HeroHome() {
-  const [videoModalOpen, setVideoModalOpen] = useState(false)
+  // const [videoModalOpen, setVideoModalOpen] = useState(false)
 
   return (
     <section className="relative">
@@ -103,7 +103,7 @@ function HeroHome() {
                   alt="Hero"
                 />
                 <svg
-                  className="absolute inset-0 h-auto max-w-full mx-auto md:max-w-none"
+                  className="absolute inset-0 h-auto max-w-full mx-auto opacity-50 md:max-w-none"
                   width="768"
                   height="432"
                   viewBox="0 0 768 432"
@@ -169,7 +169,7 @@ function HeroHome() {
                   </g>
                 </svg>
               </div>
-              <button
+              {/* <button
                 className="absolute flex items-center p-4 font-medium transform -translate-y-1/2 bg-white rounded-full shadow-lg top-full group"
                 onClick={(e) => {
                   e.preventDefault()
@@ -187,11 +187,11 @@ function HeroHome() {
                   <path d="M10 17l6-5-6-5z" />
                 </svg>
                 <span className="ml-3">Watch the full video (2 min)</span>
-              </button>
+              </button> */}
             </div>
 
             {/* Modal */}
-            <Modal
+            {/* <Modal
               id="modal"
               ariaLabel="modal-headline"
               show={videoModalOpen}
@@ -205,7 +205,7 @@ function HeroHome() {
                   allowFullScreen
                 />
               </div>
-            </Modal>
+            </Modal> */}
           </div>
         </div>
       </div>

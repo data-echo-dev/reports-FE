@@ -60,7 +60,7 @@ function FeaturesBlocks() {
                 </g>
               </svg>
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
-                Initial Contact
+                Feedback
               </h4>
               <p className="text-center text-gray-600">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -101,7 +101,7 @@ function FeaturesBlocks() {
                 </g>
               </svg>
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
-                Discovery Session
+                Individualisation
               </h4>
               <p className="text-center text-gray-600">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -135,7 +135,7 @@ function FeaturesBlocks() {
                 </g>
               </svg>
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
-                Contracting
+                Probabilistic Prediction
               </h4>
               <p className="text-center text-gray-600">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
