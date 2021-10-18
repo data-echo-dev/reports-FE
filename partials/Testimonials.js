@@ -100,18 +100,25 @@ function Testimonials() {
                   />
                 </div>
                 <blockquote className="mb-4 text-xl font-medium">
-                  “ I love this product and would recommend it to anyone. Could
-                  be not easier to use, and our multiple websites are wonderful.
-                  We get nice comments all the time. “
+                  “ Gone are the days when teachers had to page through chunky
+                  exercise books with scattered student marks. That system was
+                  rigid and carried limited ability. With DataEcho, you can
+                  expect to discover deeper insights on student performance,
+                  pickup on trends quickly, and promptly act to assist
+                  struggling students. All thanks to the platforms ability to
+                  harness that data, and add meaning to it, fit to the teachers
+                  context. Less paperwork, increased effectiveness!. “
                 </blockquote>
                 <cite className="block mb-1 text-lg not-italic font-bold">
-                  Darya Finger
+                  <a
+                    className="text-blue-600 hover:underline"
+                    href="https://www.linkedin.com/in/tapiwarufarondoro/"
+                  >
+                    Tapiwarufaro Ndoro
+                  </a>
                 </cite>
                 <div className="text-gray-600">
                   <span>CEO & Co-Founder</span>{' '}
-                  <a className="text-blue-600 hover:underline" href="#0">
-                    @Dropbox
-                  </a>
                 </div>
               </div>
             </div>

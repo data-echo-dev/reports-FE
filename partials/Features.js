@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Transition from '../utils/Transition.js'
 import image1 from '../images/app1.png'
-import appScreenshot from '../images/hero-image.svg'
-import image2 from '../images/features-element.png'
+import getMoreImage from '../images/more.svg'
+import feedbackImage from '../images/feedback.svg'
 
 function Features() {
   const [tab, setTab] = useState(1)
@@ -208,7 +208,7 @@ function Features() {
                   <div className="relative inline-flex flex-col">
                     <img
                       className="mx-auto rounded md:max-w-none"
-                      src={appScreenshot}
+                      src={getMoreImage}
                       width="500"
                       height="462"
                       alt="Features bg"
@@ -230,7 +230,7 @@ function Features() {
                   <div className="relative inline-flex flex-col">
                     <img
                       className="mx-auto rounded md:max-w-none"
-                      src={image1}
+                      src={feedbackImage}
                       width="500"
                       height="462"
                       alt="Features bg"

@@ -62,9 +62,9 @@ function FeaturesBlocks() {
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
                 Feedback
               </h4>
-              <p className="text-center text-gray-600">
+              {/* <p className="text-center text-gray-600">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
+              </p> */}
             </div>
 
             {/* 2nd item */}
@@ -103,9 +103,6 @@ function FeaturesBlocks() {
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
                 Individualisation
               </h4>
-              <p className="text-center text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
             </div>
 
             {/* 3rd item */}
@@ -137,9 +134,6 @@ function FeaturesBlocks() {
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
                 Probabilistic Prediction
               </h4>
-              <p className="text-center text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import hero from '../images/hero-image.svg'
+import hero from '../images/hero-image.png'
 // import Modal from '../utils/Modal'
 
 function HeroHome() {
