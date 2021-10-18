@@ -225,12 +225,12 @@ const SingleReport = ({ params: { id } }) => {
           <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
               <label htmlFor="org" className="px-1 text-gray-600 bg-white">
-                Selected Roles
+                Available Roles
               </label>
             </div>
             <div className="absolute right-0 px-1 -mt-4 text-xs tracking-wider uppercase">
               <label htmlFor="org" className="px-1 text-gray-600 bg-white">
-                Available Roles
+                Selected Roles
               </label>
             </div>
             <div className="flex justify-between">
