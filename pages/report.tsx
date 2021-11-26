@@ -12,7 +12,6 @@ const SingleReport = () => {
   const { data, status, error } = useFirestoreQuery(
     db.collection('reports').doc(queryId)
   )
-  console.log(data?.url)
 
   if (!auth.user) return null
 
