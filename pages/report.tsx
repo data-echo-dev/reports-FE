@@ -29,14 +29,3 @@ const SingleReport = () => {
 }
 
 export default SingleReport
-
-// // This gets called on every request
-// export async function getServerSideProps({ query }) {
-//   // Fetch data from external API
-//   // const snapshot = await db.collection('reports').doc(query.id).get()
-//   // const data = snapshot.data()
-//   // console.log(data)
-//   const data = {}
-
-//   return { props: { data } }
-// }
