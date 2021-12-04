@@ -1,4 +1,5 @@
 // @ts-nocheck
+import React from 'react'
 import { Badge, Center } from '@chakra-ui/layout'
 import PageTitle from '../components/PageTitle'
 import { db } from '../config/firebase'
@@ -15,16 +16,20 @@ const DashBoardPage: React.FC = () => {
   } = useFirestoreQuery(db.collection('organisations'))
 
   function organisationMapper(id) {
+    let theOrg = { name: 'Unassigned Organisation' }
+
     if (organisations) {
-      const theOrg = organisations.find(
+      const search = organisations.find(
         (organisation) => organisation.id === id
       )
-      return theOrg.name
+      if (search) {
+        theOrg = search
+      }
     }
+    return theOrg.name
   }
 
   if (!auth.user) return null
-  console.log(auth.user)
   return (
     <main className="w-full h-full">
       <PageTitle text="DataEcho Dashboard" />
