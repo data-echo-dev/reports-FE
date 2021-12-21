@@ -19,7 +19,14 @@ const ReportsGrid = ({ reportsData, orgs }) => {
   const auth = useRequireAuth()
 
   function organisationMapper(id) {
-    const theOrg = orgs.find((organisation) => organisation.id === id)
+    let theOrg = { name: 'Unassigned Organisation' }
+
+    if (orgs) {
+      const search = orgs.find((organisation) => organisation.id === id)
+      if (search) {
+        theOrg = search
+      }
+    }
     return theOrg.name
   }
 
