@@ -1,3 +1,12 @@
+# Welcome, Victor
+Hey brother, some notes to help you get going as quickly as possible. Please don't hesitate to reach out if anything doesn't make sense.
+
+## some house keeping
+- Make sure to give your environment variables file the following name: `.env.local` 
+- On commit messages and the [pattern I like to follow](https://dev.to/bhekanik/supercharge-your-git-history-with-better-commit-messages-32fk)
+- Short lived feature branches for each ticket (or a combination of two or more tickets, as long as the context is related, and the PR isn't too massive) - [trunk based development](https://trunkbaseddevelopment.com/)
+  - Each PR needs to be reviewed before merging into main
+
 # todo
 assume these are written in order of importance/priority. start from the top
 - error handling must be done for all the forms g😬
