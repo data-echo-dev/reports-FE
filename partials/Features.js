@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
 import Transition from '../utils/Transition.js'
 import image1 from '../images/app1.png'
 import getMoreImage from '../images/more.svg'
@@ -184,12 +185,13 @@ function Features() {
                   leaveEnd="opacity-0 -translate-y-16"
                 >
                   <div className="relative inline-flex flex-col">
-                    <img
+                    <Image
                       className="mx-auto rounded md:max-w-none"
                       src={image1}
                       width="500"
-                      height="462"
+                      height="195"
                       alt="Features bg"
+                      quality={100}
                     />
                   </div>
                 </Transition>
@@ -206,7 +208,7 @@ function Features() {
                   leaveEnd="opacity-0 -translate-y-16"
                 >
                   <div className="relative inline-flex flex-col">
-                    <img
+                    <Image
                       className="mx-auto rounded md:max-w-none"
                       src={getMoreImage}
                       width="500"
@@ -228,7 +230,7 @@ function Features() {
                   leaveEnd="opacity-0 -translate-y-16"
                 >
                   <div className="relative inline-flex flex-col">
-                    <img
+                    <Image
                       className="mx-auto rounded md:max-w-none"
                       src={feedbackImage}
                       width="500"

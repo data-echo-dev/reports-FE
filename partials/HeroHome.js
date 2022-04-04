@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import hero from '../images/hero-image.png'
 // import Modal from '../utils/Modal'
 
@@ -95,7 +96,7 @@ function HeroHome() {
               data-aos-delay="450"
             >
               <div className="flex flex-col justify-center">
-                <img
+                <Image
                   className="mx-auto"
                   src={hero}
                   width="768"
