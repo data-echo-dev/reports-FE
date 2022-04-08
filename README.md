@@ -7,6 +7,10 @@ Hey brother, some notes to help you get going as quickly as possible. Please don
 - Short lived feature branches for each ticket (or a combination of two or more tickets, as long as the context is related, and the PR isn't too massive) - [trunk based development](https://trunkbaseddevelopment.com/)
   - Each PR needs to be reviewed before merging into main
 
+## on Node 17 
+- Been using Node 17 on my machine, that seems to have issues with some of the packages here, so beware.
+- I used nvm to change my node version to 14, and my dependencies installed with no problem after that.
+
 # todo
 assume these are written in order of importance/priority. start from the top
 - error handling must be done for all the forms g😬
