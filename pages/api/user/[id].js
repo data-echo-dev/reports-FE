@@ -1,6 +1,6 @@
 import { auth, db } from '../../../config/firebase-admin'
 
-export default (req, res) => {
+const userApi = (req, res) => {
   const uid = req.query.id
 
   switch (req.method) {
@@ -62,3 +62,5 @@ export default (req, res) => {
       break
   }
 }
+
+export default userApi

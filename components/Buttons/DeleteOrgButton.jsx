@@ -39,7 +39,7 @@ function DeleteOrgButton({orgID}) {
               </AlertDialogHeader>
   
               <AlertDialogBody>
-                Delete this Organisation? <br/>You can't undo this action afterwards
+                Delete this Organisation? <br/>You cannot undo this action afterwards
               </AlertDialogBody>
   
               <AlertDialogFooter>

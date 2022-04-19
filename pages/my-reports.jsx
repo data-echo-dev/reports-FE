@@ -1,5 +1,3 @@
-// @ts-nocheck
-import { useEffect, useRef, useState } from 'react'
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 

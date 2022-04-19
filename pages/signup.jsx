@@ -4,7 +4,7 @@ import { Button } from '@chakra-ui/react'
 
 import SignUpForm from '../components/forms/SignUpForm'
 
-const SignUpPage: React.FC = () => (
+const SignUpPage  = () => (
   <div className="flex flex-col justify-center w-full min-h-screen bg-primary-white">
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="mt-24 text-center">

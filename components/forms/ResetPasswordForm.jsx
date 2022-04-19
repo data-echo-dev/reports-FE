@@ -1,17 +1,16 @@
-// @ts-nocheck
 import Router from 'next/router'
 import { useState } from 'react'
 import { Input } from '@chakra-ui/react'
 import { useAuth } from '../../hooks/useAuth'
 import FormButton from '../Buttons/FormButton'
 
-const ResetPasswordForm: React.FC = () => {
+const ResetPasswordForm = () => {
   const [email, setEmail] = useState('')
   const [error, setError] = useState(null)
   const auth = useAuth()
   const [isLoading, setIsLoading] = useState(false)
 
-  const onSubmit = (data: { email: string }) => {
+  const onSubmit = (data) => {
     setIsLoading(true)
     auth.sendPasswordResetEmail(data.email).then(
       () => {

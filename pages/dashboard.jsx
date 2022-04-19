@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react'
 import { Badge, Center } from '@chakra-ui/layout'
 import PageTitle from '../components/PageTitle'
@@ -6,7 +5,7 @@ import { db } from '../config/firebase'
 import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../hooks/useRequireAuth'
 
-const DashBoardPage: React.FC = () => {
+const DashBoardPage = () => {
   const auth = useRequireAuth()
 
   const {

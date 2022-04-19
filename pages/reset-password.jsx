@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/react'
 import Link from 'next/link'
 import ResetPasswordForm from '../components/forms/ResetPasswordForm'
 
-const ResetPasswordPage: React.FC = () => (
+const ResetPasswordPage = () => (
   <div className="flex flex-col justify-center w-full min-h-screen bg-primary-white">
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="mt-24 text-center">

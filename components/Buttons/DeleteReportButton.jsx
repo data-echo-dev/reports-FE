@@ -40,7 +40,7 @@ function DeleteOrgButton({ reportID }) {
 
             <AlertDialogBody>
               Delete this Report? <br />
-              You can't undo this action afterwards
+              You cannot undo this action afterwards
             </AlertDialogBody>
 
             <AlertDialogFooter>

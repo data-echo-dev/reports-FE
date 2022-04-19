@@ -1,17 +1,11 @@
-// @ts-nocheck
 import Router from 'next/router'
 import { Input } from "@chakra-ui/react";
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import FormButton from '../Buttons/FormButton';
 
-interface SignUpData {
-  name: string
-  email: string
-  password: string
-}
 
-const SignUpForm: React.FC = () => {
+const SignUpForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
@@ -20,7 +14,7 @@ const SignUpForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
 
 
-  const onSubmit = (data: SignUpData) => {
+  const onSubmit = (data) => {
     setIsLoading(true)
     
     return auth.signUp(data).then((response) => {

@@ -51,7 +51,7 @@ function DeleteUserButton({ userID }) {
 
             <AlertDialogBody>
               Delete this User? <br />
-              You can't undo this action afterwards
+              You cannot undo this action afterwards
             </AlertDialogBody>
 
             <AlertDialogFooter>

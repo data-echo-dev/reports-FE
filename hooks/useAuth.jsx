@@ -1,28 +1,26 @@
-// @ts-nocheck
 import Router from 'next/router'
 import {
   useState,
   useEffect,
   useContext,
   createContext,
-  ReactNode,
 } from 'react'
 import firebase from 'firebase/app'
 import { auth, db } from '../config/firebase'
 
-const authContext = createContext<firebase.User | null>(null)
+const authContext = createContext(null)
 const { Provider } = authContext
 
-export function AuthProvider(props: { children: ReactNode }): JSX.Element {
+export function AuthProvider({children}) {
   const auth = useAuthProvider()
-  return <Provider value={auth}>{props.children}</Provider>
+  return <Provider value={auth}>{children}</Provider>
 }
-export const useAuth: any = () => useContext(authContext)
+export const useAuth = () => useContext(authContext)
 
 // Provider hook that creates an auth object and handles it's state
 const useAuthProvider = () => {
   // Q: will I have to create a custom user type?
-  const [user, setUser] = useState<firebase.User | null>(null)
+  const [user, setUser] = useState(null)
 
   const signUp = ({ name, email, password }) => {
     const DEFAULT_ROLES = ['Default']
@@ -64,7 +62,7 @@ const useAuthProvider = () => {
         }
       })
       .catch((error) => ({ error }))
-  const getUserAdditionalData = (user: firebase.User) =>
+  const getUserAdditionalData = (user) =>
     db
       .collection('users')
       .doc(user.uid)

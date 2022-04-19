@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useRouter } from 'next/router'
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import { db } from '../config/firebase'

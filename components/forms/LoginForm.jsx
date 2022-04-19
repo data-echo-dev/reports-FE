@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Router from 'next/router'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -6,12 +5,8 @@ import { Input, Button } from '@chakra-ui/react'
 import { useAuth } from '../../hooks/useAuth'
 import FormButton from '../Buttons/FormButton'
 
-interface LoginData {
-  email: string
-  password: string
-}
 
-const LoginForm: React.FC = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const auth = useAuth()
@@ -19,7 +14,7 @@ const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const onSubmit = (data: LoginData) => {
+  const onSubmit = (data) => {
     setIsLoading(true)
     setError(null)
     return auth.signIn(data).then((response) => {

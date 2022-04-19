@@ -4,7 +4,7 @@ import { Button } from '@chakra-ui/react'
 import Link from 'next/link'
 import LoginForm from '../components/forms/LoginForm'
 
-const LoginPage: React.FC = () => (
+const LoginPage = () => (
   <div className="flex flex-col justify-center w-full min-h-screen bg-primary-white">
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="mt-24 text-center">
@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => (
         </h2>
         <p className="mt-2 text-center text-gray-600 text-md">
           {"Don't have an account? "}
-          <Link href="/signup">
+          <Link passHref href="/signup">
             <Button variant="link" color="secondary.100">
               <a className="text-blue-500">Sign Up</a>
             </Button>

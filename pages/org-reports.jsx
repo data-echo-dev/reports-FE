@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import ReportsGrid from '../components/Grids/ReportsGrid'
 import { db } from '../config/firebase'

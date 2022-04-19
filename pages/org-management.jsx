@@ -1,7 +1,5 @@
-// @ts-nocheck
 import { PlusIcon } from '@heroicons/react/outline'
 import { Button } from '@chakra-ui/button'
-import NProgress from 'nprogress'
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import { db } from '../config/firebase'
 import OrgsGrid from '../components/Grids/OrgsGrid'

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { PlusIcon } from '@heroicons/react/outline'
 import { Button } from '@chakra-ui/button'
 import { useRequireAuth } from '../hooks/useRequireAuth'
