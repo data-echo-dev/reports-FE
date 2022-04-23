@@ -21,6 +21,8 @@ export const useAuth = () => useContext(authContext)
 const useAuthProvider = () => {
   // Q: will I have to create a custom user type?
   const [user, setUser] = useState(null)
+  const [orgs, setOrgs] = useState(null)
+
 
   const signUp = ({ name, email, password }) => {
     const DEFAULT_ROLES = ['Default']
@@ -102,6 +104,18 @@ const useAuthProvider = () => {
     }
   }, [user?.uid])
 
+  useEffect(() => {
+  if(user?.isSuperAdmin){
+    const unsubscribe = db.collection('organisations').get().then((querySnapshot) => {
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setOrgs(data)
+  })
+    return () => unsubscribe()
+  }
+
+  }, [user?.isSuperAdmin])
+  
+
   const signOut = () =>
     auth.signOut().then(() => {
       setUser(null)
@@ -113,6 +127,7 @@ const useAuthProvider = () => {
 
   return {
     user,
+    orgs,
     signUp,
     signIn,
     signOut,
