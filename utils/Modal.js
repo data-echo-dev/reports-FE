@@ -37,7 +37,7 @@ function Modal({
     <>
       {/* Modal backdrop */}
       <Transition
-        className="fixed inset-0 z-50 bg-white bg-opacity-75 transition-opacity blur"
+        className="fixed inset-0 z-50 transition-opacity bg-white bg-opacity-75 blur"
         show={show}
         enter="transition ease-out duration-200"
         enterStart="opacity-0"
@@ -51,7 +51,7 @@ function Modal({
       {/* Modal dialog */}
       <Transition
         id={id}
-        className="fixed inset-0 z-50 overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
+        className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-hidden sm:px-6"
         role="dialog"
         aria-modal="true"
         aria-labelledby={ariaLabel}
@@ -63,7 +63,7 @@ function Modal({
         leaveStart="opacity-100 scale-100"
         leaveEnd="opacity-0 scale-95"
       >
-        <div className="bg-white overflow-auto max-w-6xl w-full max-h-full" ref={modalContent}>          
+        <div className="w-full max-w-6xl max-h-full overflow-auto bg-white" ref={modalContent}>          
           {children}
         </div>
       </Transition>    

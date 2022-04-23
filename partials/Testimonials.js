@@ -9,7 +9,7 @@ function Testimonials() {
     <section className="relative">
       {/* Illustration behind content */}
       <div
-        className="absolute bottom-0 -mb-32 transform -translate-x-1/2 pointer-events-none left-1/2"
+        className="absolute bottom-0 -mb-32 -translate-x-1/2 pointer-events-none left-1/2"
         aria-hidden="true"
       >
         <svg
@@ -83,7 +83,7 @@ function Testimonials() {
             <div className="relative flex items-start bg-white border-2 border-gray-200 rounded">
               {/* Testimonial */}
               <div className="px-12 py-8 pt-20 mx-4 text-center md:mx-0">
-                <div className="absolute top-0 -mt-8 transform -translate-x-1/2 left-1/2">
+                <div className="absolute top-0 -mt-8 -translate-x-1/2 left-1/2">
                   <svg
                     className="absolute top-0 right-0 w-16 h-16 -mt-3 -mr-8 text-blue-500 fill-current"
                     viewBox="0 0 64 64"
