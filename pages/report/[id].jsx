@@ -45,17 +45,6 @@ const SingleReport = ({ params: { id } }) => {
   } = useFirestoreQuery(
     db.collection('users').where('organisation', '==', organisationID)
   )
-  // this query allows us to get roles of an org
-  const {
-    data: singleOrg,
-    status: singleOrgStatus,
-    error: singleOrgError,
-  } = useFirestoreQuery(
-    db.collection('organisations').where('id', '==', organisationID)
-  )
-
-  // console.log(organisationID)
-  // console.log(teachers)
 
   // init form data
   useEffect(() => {
@@ -74,13 +63,11 @@ const SingleReport = ({ params: { id } }) => {
       setTitle(title || databaseTitle)
       setSelectedRoles(roles)
       setTeacherID(teacher)
+      console.log('teacher:', teacher)
       setUrl(url || databaseUrl)
     }
 
-    if (singleOrg) {
-      setAvailableRoles(singleOrg[0].roles)
-    }
-  }, [data, singleOrg])
+  }, [data])
 
   function handleOrgChange(e) {
     const { value } = e.target
@@ -135,7 +122,6 @@ const SingleReport = ({ params: { id } }) => {
               </label>
             </div>
             <input
-              id="name"
               readOnly
               autoComplete="false"
               tabIndex={0}
@@ -151,7 +137,6 @@ const SingleReport = ({ params: { id } }) => {
               </label>
             </div>
             <select
-              id="org"
               autoComplete="false"
               tabIndex={0}
               type="text"
@@ -174,7 +159,6 @@ const SingleReport = ({ params: { id } }) => {
               </label>
             </div>
             <input
-              id="org"
               autoComplete="false"
               tabIndex={0}
               type="text"
@@ -190,17 +174,18 @@ const SingleReport = ({ params: { id } }) => {
               </label>
             </div>
             <select
-              id="org"
               autoComplete="false"
               tabIndex={0}
               type="text"
-              value={teacherID || ''}
+              value={teacherID }
               onChange={handleTeacherChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             >
+              {/* haha what an ugly hack, this is so the default selected item is an empty string, that way you're forced to trigger an onChange */}
+              <option value=""/>
               {teachersStatus === 'success' &&
                 teachers?.map((teacher) => (
-                  <option value={teacher.uid} key={teacher.uid}>
+                  <option value={teacher.uid}  key={teacher.uid}>
                     {teacher.name}
                   </option>
                 ))}
@@ -213,7 +198,6 @@ const SingleReport = ({ params: { id } }) => {
               </label>
             </div>
             <textarea
-              id="org"
               autoComplete="false"
               tabIndex={0}
               type="text"
