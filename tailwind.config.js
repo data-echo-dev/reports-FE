@@ -1,10 +1,10 @@
 module.exports = {
-  purge: [
+  mode: 'jit',
+  content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
     './partials/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
@@ -140,9 +140,6 @@ module.exports = {
         '-1': '-1',
       },
     },
-  },
-  variants: {
-    extend: { cursor: ['hover', 'focus'] },
   },
   plugins: [],
 }

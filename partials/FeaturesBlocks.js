@@ -8,7 +8,7 @@ function FeaturesBlocks() {
         className="absolute inset-0 bg-gray-900 pointer-events-none top-1/2 md:mt-24 lg:mt-0"
         aria-hidden="true"
       />
-      <div className="absolute bottom-0 left-0 right-0 w-px h-20 p-px m-auto transform translate-y-1/2 bg-gray-200" />
+      <div className="absolute bottom-0 left-0 right-0 w-px h-20 p-px m-auto translate-y-1/2 bg-gray-200" />
 
       <div className="relative max-w-6xl px-4 mx-auto sm:px-6">
         <div className="py-12 md:py-20">

@@ -30,7 +30,7 @@ function Features() {
         className="absolute inset-0 mb-16 bg-gray-100 pointer-events-none"
         aria-hidden="true"
       />
-      <div className="absolute left-0 right-0 w-px h-20 p-px m-auto transform -translate-y-1/2 bg-gray-200" />
+      <div className="absolute left-0 right-0 w-px h-20 p-px m-auto -translate-y-1/2 bg-gray-200" />
 
       <div className="relative max-w-6xl px-4 mx-auto sm:px-6">
         <div className="pt-12 md:pt-20">
@@ -177,10 +177,10 @@ function Features() {
                   show={tab === 1}
                   appear
                   className="w-full"
-                  enter="transition ease-in-out duration-700 transform order-first"
+                  enter="transition ease-in-out duration-700  order-first"
                   enterStart="opacity-0 translate-y-16"
                   enterEnd="opacity-100 translate-y-0"
-                  leave="transition ease-in-out duration-300 transform absolute"
+                  leave="transition ease-in-out duration-300  absolute"
                   leaveStart="opacity-100 translate-y-0"
                   leaveEnd="opacity-0 -translate-y-16"
                 >
@@ -200,10 +200,10 @@ function Features() {
                   show={tab === 2}
                   appear
                   className="w-full"
-                  enter="transition ease-in-out duration-700 transform order-first"
+                  enter="transition ease-in-out duration-700  order-first"
                   enterStart="opacity-0 translate-y-16"
                   enterEnd="opacity-100 translate-y-0"
-                  leave="transition ease-in-out duration-300 transform absolute"
+                  leave="transition ease-in-out duration-300  absolute"
                   leaveStart="opacity-100 translate-y-0"
                   leaveEnd="opacity-0 -translate-y-16"
                 >
@@ -222,10 +222,10 @@ function Features() {
                   show={tab === 3}
                   appear
                   className="w-full"
-                  enter="transition ease-in-out duration-700 transform order-first"
+                  enter="transition ease-in-out duration-700  order-first"
                   enterStart="opacity-0 translate-y-16"
                   enterEnd="opacity-100 translate-y-0"
-                  leave="transition ease-in-out duration-300 transform absolute"
+                  leave="transition ease-in-out duration-300  absolute"
                   leaveStart="opacity-100 translate-y-0"
                   leaveEnd="opacity-0 -translate-y-16"
                 >
