@@ -6,12 +6,6 @@ import PageTitle from '../components/PageTitle'
 
 const OrgReports = () => {
   const auth = useRequireAuth()
-
-  const {
-    data: organisations,
-    status: statusOrgs,
-    error: errorOrgs,
-  } = useFirestoreQuery(db.collection('organisations'))
   const { data: reports, status, error } = useFirestoreQuery(
     db
       .collection('reports')
@@ -34,7 +28,7 @@ const OrgReports = () => {
       <PageTitle text="Organisation Reports" />
 
       <div className="flex flex-col justify-center">
-        <ReportsGrid reportsData={reports} orgs={organisations} />
+        <ReportsGrid reportsData={reports} />
       </div>
     </div>
   )

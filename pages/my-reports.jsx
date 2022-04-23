@@ -7,16 +7,9 @@ import PageTitle from '../components/PageTitle'
 
 const MyReports = () => {
   const auth = useRequireAuth()
-  // console.log(fakeData);
-  const {
-    data: organisations,
-    status: statusOrgs,
-    error: errorOrgs,
-  } = useFirestoreQuery(db.collection('organisations'))
   const { data, status, error } = useFirestoreQuery(
     db
       .collection('reports')
-      // .where('organisation', '==', auth.user.organisation)
       .where('teacher', '==', auth.user?.uid)
   )
   if (status === 'loading') {
@@ -33,7 +26,7 @@ const MyReports = () => {
       <PageTitle text="My Reports" />
 
       <div className="flex flex-col justify-center">
-        <ReportsGrid reportsData={data} orgs={organisations} />
+        <ReportsGrid reportsData={data} />
       </div>
     </div>
   )

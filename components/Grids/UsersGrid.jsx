@@ -13,21 +13,9 @@ import {
   TableCaption,
 } from '@chakra-ui/react'
 import DeleteUserButton from '../Buttons/DeleteUserButton'
+import { OrganisationMapper } from '../../utils/organisationMapper'
 
-const UsersGrid = ({ usersData, orgs }) => {
-  console.log(usersData)
-
-  function organisationMapper(id) {
-    let theOrg = { name: 'Unassigned Organisation' }
-
-    if (orgs) {
-      const search = orgs.find((organisation) => organisation.id === id)
-      if (search) {
-        theOrg = search
-      }
-    }
-    return theOrg.name
-  }
+const UsersGrid = ({ usersData }) => {
 
   return (
     <div className="flex items-center justify-center w-full ">
@@ -56,7 +44,7 @@ const UsersGrid = ({ usersData, orgs }) => {
                     <Td>{user.email}</Td>
                     <Td>
                       {user.organisation
-                        ? organisationMapper(user.organisation)
+                        ? OrganisationMapper(user.organisation)
                         : ''}
                     </Td>
                     <Td>
@@ -75,7 +63,7 @@ const UsersGrid = ({ usersData, orgs }) => {
                     </Td>
                     <Td className="p-3 whitespace-nowrap">
                       <span className="flex items-center justify-center w-full space-x-2">
-                        <Link href={`/user/${user.uid}`}>
+                        <Link passHref href={`/user/${user.uid}`}>
                           <Button size="sm" colorScheme="facebook">
                             <PencilIcon className="w-5 h-5" />
                           </Button>

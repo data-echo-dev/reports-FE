@@ -10,12 +10,6 @@ import { addReport } from '../CRUD/report'
 const ReportManagement = () => {
   const auth = useRequireAuth()
 
-  const {
-    data: organisations,
-    status: statusOrgs,
-    error: errorOrgs,
-  } = useFirestoreQuery(db.collection('organisations'))
-
   const { data: reports, status, error } = useFirestoreQuery(
     db.collection('reports')
   )
@@ -42,7 +36,7 @@ const ReportManagement = () => {
             Report
           </Button>
         </span>
-        <ReportsGrid reportsData={reports} orgs={organisations} />
+        <ReportsGrid reportsData={reports} />
       </div>
     </div>
   )

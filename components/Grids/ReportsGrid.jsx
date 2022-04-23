@@ -14,21 +14,10 @@ import {
 import { ExternalLinkIcon, PencilIcon } from '@heroicons/react/outline'
 import DeleteReportButton from '../Buttons/DeleteReportButton'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
+import { OrganisationMapper } from '../../utils/organisationMapper'
 
-const ReportsGrid = ({ reportsData, orgs }) => {
+const ReportsGrid = ({ reportsData }) => {
   const auth = useRequireAuth()
-
-  function organisationMapper(id) {
-    let theOrg = { name: 'Unassigned Organisation' }
-
-    if (orgs) {
-      const search = orgs.find((organisation) => organisation.id === id)
-      if (search) {
-        theOrg = search
-      }
-    }
-    return theOrg.name
-  }
 
   return (
     <div className="flex items-center justify-center w-full h-full ">
@@ -52,7 +41,7 @@ const ReportsGrid = ({ reportsData, orgs }) => {
                     <div>{report.title}</div>
                   </div>
                 </Td>
-                <Td>{organisationMapper(report.organisation)}</Td>
+                <Td>{OrganisationMapper(report.organisation)}</Td>
                 <Td>
                   {report.roles?.map((role) => (
                     <Badge
