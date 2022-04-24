@@ -23,7 +23,7 @@ const LoginForm = () => {
         return setError(response.error)
       }
       setIsLoading(false)
-      Router.push('/dashboard')
+      Router.push('/my-reports')
     })
   }
 
