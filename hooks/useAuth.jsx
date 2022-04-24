@@ -5,7 +5,6 @@ import {
   useContext,
   createContext,
 } from 'react'
-import firebase from 'firebase/app'
 import { auth, db } from '../config/firebase'
 
 const authContext = createContext(null)
@@ -80,7 +79,7 @@ const useAuthProvider = () => {
     setUser(user)
     if (user) {
       getUserAdditionalData(user)
-      Router.push('/dashboard')
+      Router.push('/my-reports')
     }
   }
   useEffect(() => {
@@ -107,8 +106,8 @@ const useAuthProvider = () => {
     const unsubscribe = db.collection('organisations').get().then((querySnapshot) => {
       const data = querySnapshot.docs.map((doc) => doc.data());
       setOrgs(data)
+      return () => unsubscribe()
   })
-    return () => unsubscribe()
   }
 
   }, [user?.isSuperAdmin])
@@ -117,7 +116,7 @@ const useAuthProvider = () => {
   const signOut = () =>
     auth.signOut().then(() => {
       setUser(null)
-      Router.push('/login')
+      Router.push('/')
     })
 
   const sendPasswordResetEmail = (email) =>
