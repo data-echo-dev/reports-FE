@@ -16,7 +16,6 @@ const updateOrg = (data) => {
 const addOrg = async () => {
   const newOrg = {
     name: '',
-    roles: [],
   }
   db.collection('organisations')
     .add(newOrg)

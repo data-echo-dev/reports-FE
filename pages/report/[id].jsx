@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { Badge, Button } from '@chakra-ui/react'
+import {  Button } from '@chakra-ui/react'
 import { CloudIcon } from '@heroicons/react/outline'
 import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
@@ -15,8 +14,6 @@ const SingleReport = ({ params: { id } }) => {
   const [reportID, setReportID] = useState('')
   const [organisationID, setOrganisationID] = useState('')
   const [title, setTitle] = useState('')
-  const [selectedRoles, setSelectedRoles] = useState([])
-  const [availableRoles, setAvailableRoles] = useState([])
   const [teacherID, setTeacherID] = useState('')
   const [url, setUrl] = useState('')
 
@@ -24,7 +21,6 @@ const SingleReport = ({ params: { id } }) => {
     reportID,
     organisationID,
     title,
-    selectedRoles,
     teacherID,
     url,
   }
@@ -53,7 +49,6 @@ const SingleReport = ({ params: { id } }) => {
       const {
         // id,
         organisation,
-        roles,
         teacher,
         title: databaseTitle,
         url: databaseUrl,
@@ -61,7 +56,6 @@ const SingleReport = ({ params: { id } }) => {
       setReportID(id)
       setOrganisationID(organisationID || organisation)
       setTitle(title || databaseTitle)
-      setSelectedRoles(roles)
       setTeacherID(teacher)
       console.log('teacher:', teacher)
       setUrl(url || databaseUrl)
@@ -89,25 +83,6 @@ const SingleReport = ({ params: { id } }) => {
     setTitle(value)
   }
 
-  function selectRole(e) {
-    const value = e.target.textContent
-    const currentlyActiveRoles = [...selectedRoles]
-
-    if (!currentlyActiveRoles.includes(value)) {
-      currentlyActiveRoles.push(value)
-      setSelectedRoles([...currentlyActiveRoles])
-    }
-  }
-
-  function deselectRole(e) {
-    const value = e.target.textContent
-    const currentlyActiveRoles = [...selectedRoles]
-
-    const iHaveBeenRemoved = currentlyActiveRoles.filter(
-      (role) => role !== value
-    )
-    setSelectedRoles([...iHaveBeenRemoved])
-  }
 
   if (!auth.user) return null
   return (
@@ -205,47 +180,6 @@ const SingleReport = ({ params: { id } }) => {
               onChange={handleURLChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none"
             />
-          </div>
-          <div className="relative p-1 transition-all duration-500 border rounded ">
-            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
-                Available Roles
-              </label>
-            </div>
-            <div className="absolute right-0 px-1 -mt-4 text-xs tracking-wider uppercase">
-              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
-                Selected Roles
-              </label>
-            </div>
-            <div className="flex justify-between">
-              <div className="relative p-1 space-x-1 transition-all duration-500 border rounded ">
-                {availableRoles?.map((role, index) => (
-                  <Badge
-                    key={index}
-                    className="cursor-pointer"
-                    variant="solid"
-                    type="button"
-                    colorScheme="blue"
-                    onClick={selectRole}
-                  >
-                    {role}
-                  </Badge>
-                ))}
-              </div>
-              <div className="relative p-1 space-x-1 transition-all duration-500 border rounded ">
-                {selectedRoles?.map((role, index) => (
-                  <Badge
-                    className="cursor-pointer"
-                    onClick={deselectRole}
-                    key={index}
-                    variant="solid"
-                    colorScheme="blue"
-                  >
-                    {role}
-                  </Badge>
-                ))}
-              </div>
-            </div>
           </div>
           <Button
             colorScheme="teal"

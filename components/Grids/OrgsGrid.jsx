@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import {
   Button,
-  Badge,
   Table,
   Thead,
   Tbody,
@@ -23,7 +22,6 @@ const OrgsGrid = ({ orgsData }) => (
         <Thead>
           <Tr>
             <Th>Name</Th>
-            <Th>Roles</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
@@ -32,20 +30,8 @@ const OrgsGrid = ({ orgsData }) => (
             <Tr key={org.id}>
               <Td>{org.name}</Td>
               <Td>
-                {org.roles?.map((role) => (
-                  <Badge
-                    variant="subtle"
-                    colorScheme="messenger"
-                    className="mr-1"
-                    key={`${role}-your-boat`}
-                  >
-                    {role}
-                  </Badge>
-                ))}
-              </Td>
-              <Td>
                 <span className="flex items-center justify-start w-full space-x-2">
-                  <Link href={`/organisation/${org.id}`}>
+                  <Link passHref href={`/organisation/${org.id}`}>
                     <Button size="sm" colorScheme="facebook">
                       <PencilIcon className="w-5 h-5 text-blue-300" />
                     </Button>

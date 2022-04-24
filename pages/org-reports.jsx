@@ -10,7 +10,6 @@ const OrgReports = () => {
     db
       .collection('reports')
       .where('organisation', '==', auth.user.organisation)
-      .where('roles', 'array-contains-any', auth.user.roles)
   )
   if (status === 'loading') {
     return null

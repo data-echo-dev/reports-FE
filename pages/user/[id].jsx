@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Badge } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import NProgress from 'nprogress'
 import { CloudIcon } from '@heroicons/react/outline'
 import PageTitle from '../../components/PageTitle'
@@ -14,15 +14,12 @@ const SingleUser = ({ params: { id } }) => {
   const [userID, setUserID] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [selectedRoles, setSelectedRoles] = useState([])
-  const [availableRoles, setAvailableRoles] = useState([])
   const [organisationID, setOrganisationID] = useState('')
 
   const consolidated = {
     uid: userID,
     name,
     email,
-    roles: selectedRoles,
     organisation: organisationID,
   }
 
@@ -37,35 +34,21 @@ const SingleUser = ({ params: { id } }) => {
   } = useFirestoreQuery(db.collection('organisations'))
   console.log(data)
 
-  // this query allows us to get roles of an org
-  const {
-    data: singleOrg,
-    status: singleOrgStatus,
-    error: singleOrgError,
-  } = useFirestoreQuery(
-    db.collection('organisations').where('id', '==', organisationID)
-  )
-
   useEffect(() => {
     if (data) {
       const {
         email: databaseEmail,
         name: databaseName,
         organisation: databaseOrganisation,
-        roles: databaseRoles,
       } = data
 
       setEmail(email || databaseEmail)
       setName(name || databaseName)
       setUserID(id)
       setOrganisationID(organisationID || databaseOrganisation)
-      setSelectedRoles(databaseRoles || selectedRoles)
     }
 
-    if (singleOrg) {
-      setAvailableRoles(singleOrg[0].roles)
-    }
-  }, [data, singleOrg])
+  }, [data])
 
   function handleOrgChange(e) {
     const { value } = e.target
@@ -78,25 +61,6 @@ const SingleUser = ({ params: { id } }) => {
   function handleEmailChange(e) {
     const { value } = e.target
     setEmail(value)
-  }
-  function selectRole(e) {
-    const value = e.target.textContent
-    const currentlyActiveRoles = [...selectedRoles]
-
-    if (!currentlyActiveRoles.includes(value)) {
-      currentlyActiveRoles.push(value)
-      setSelectedRoles([...currentlyActiveRoles])
-    }
-  }
-
-  function deselectRole(e) {
-    const value = e.target.textContent
-    const currentlyActiveRoles = [...selectedRoles]
-
-    const iHaveBeenRemoved = currentlyActiveRoles.filter(
-      (role) => role !== value
-    )
-    setSelectedRoles([...iHaveBeenRemoved])
   }
 
   async function updateOan(oanId) {
@@ -188,47 +152,6 @@ const SingleUser = ({ params: { id } }) => {
               onChange={handleEmailChange}
               className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
             />
-          </div>
-          <div className="relative p-1 transition-all duration-500 border rounded ">
-            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
-                Available Roles
-              </label>
-            </div>
-            <div className="absolute right-0 px-1 -mt-4 text-xs tracking-wider uppercase">
-              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
-                Selected Roles
-              </label>
-            </div>
-            <div className="flex justify-between">
-              <div className="relative p-1 space-x-1 transition-all duration-500 border rounded">
-                {availableRoles?.map((role, index) => (
-                  <Badge
-                    key={index}
-                    className="cursor-pointer"
-                    variant="solid"
-                    type="button"
-                    colorScheme="blue"
-                    onClick={selectRole}
-                  >
-                    {role}
-                  </Badge>
-                ))}
-              </div>
-              <div className="relative p-1 space-x-1 transition-all duration-500 border rounded ">
-                {selectedRoles?.map((role, index) => (
-                  <Badge
-                    className="cursor-pointer"
-                    onClick={deselectRole}
-                    key={index}
-                    variant="solid"
-                    colorScheme="blue"
-                  >
-                    {role}
-                  </Badge>
-                ))}
-              </div>
-            </div>
           </div>
           <Button
             colorScheme="teal"
