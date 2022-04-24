@@ -2,10 +2,12 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import hero from '../images/hero-image.png'
+import { useAuth } from '../hooks/useAuth'
 // import Modal from '../utils/Modal'
 
 function HeroHome() {
   // const [videoModalOpen, setVideoModalOpen] = useState(false)
+  const { user } = useAuth()
 
   return (
     <section className="relative">
@@ -70,16 +72,19 @@ function HeroHome() {
                 data-aos-delay="300"
               >
                 <div>
+                  {!user && (
                   <Link href="/signup">
                     <a className="w-full mb-4 text-white bg-blue-600 btn hover:bg-blue-700 sm:w-auto sm:mb-0">
                       Start free trial
                     </a>
                   </Link>
+
+                  )}
                 </div>
                 <div>
                   <a
                     className="w-full text-white bg-gray-900 btn hover:bg-gray-800 sm:w-auto sm:ml-4"
-                    href="#0"
+                    href="#about"
                   >
                     Learn more
                   </a>

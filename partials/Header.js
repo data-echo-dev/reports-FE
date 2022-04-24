@@ -44,9 +44,9 @@ function Header() {
             <ul className="flex flex-wrap items-center justify-end flex-grow">
               <li>
                 {user ? (
-                    <a onClick={() => signOut() } type='button' className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
+                    <button onClick={() => signOut() } type='button' className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
                         Sign Out
-                    </a>
+                    </button>
                   ) : (
                     <Link href='/login'>
                       <a type='button' className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
@@ -58,9 +58,9 @@ function Header() {
               <li>
               {user ? (
                 <Link passHref href='/my-reports'>
-                  <button type='button' className="ml-3 text-gray-200 bg-gray-900 btn-sm hover:bg-gray-800">
+                  <button type='button' className="w-full mb-4 text-white bg-blue-600 btn-sm hover:bg-blue-700 sm:w-auto sm:mb-0">
                     <span>My Reports</span>
-                    <ArrowRightIcon className="flex-shrink-0 w-4 h-4 ml-2 -mr-1 text-gray-400 fill-current"/>
+                    <ArrowRightIcon className="flex-shrink-0 w-4 h-4 ml-2 -mr-1 fill-current"/>
                   </button>
                 </Link>
                   ) : (
