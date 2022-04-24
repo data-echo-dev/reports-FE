@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { PencilIcon } from '@heroicons/react/outline'
 import {
   Button,
-  Badge,
   Table,
   Thead,
   Tbody,
@@ -34,7 +33,6 @@ const UsersGrid = ({ usersData }) => {
                   <Th>Name</Th>
                   <Th>Email</Th>
                   <Th>Organisation</Th>
-                  <Th>Roles</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -45,20 +43,6 @@ const UsersGrid = ({ usersData }) => {
                     <Td>
                       {user.organisation
                         ? OrganisationMapper(user.organisation)
-                        : ''}
-                    </Td>
-                    <Td>
-                      {user.roles
-                        ? user.roles.map((role) => (
-                            <Badge
-                              variant="subtle"
-                              colorScheme="messenger"
-                              className="mr-1"
-                              key={`${role}-your-boat`}
-                            >
-                              {role}
-                            </Badge>
-                          ))
                         : ''}
                     </Td>
                     <Td className="p-3 whitespace-nowrap">

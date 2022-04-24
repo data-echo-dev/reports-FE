@@ -54,20 +54,6 @@ const DashBoardPage = () => {
             </h2>
             <p>{auth?.user?.email}</p>
             <p>{organisationMapper(auth?.user?.organisation)}</p>
-
-            <section className="space-x-1 ">
-              {auth?.user?.roles?.map((role, index) => (
-                <Badge
-                  key={index}
-                  className="cursor-pointer"
-                  variant="solid"
-                  type="button"
-                  colorScheme="blue"
-                >
-                  {role}
-                </Badge>
-              ))}
-            </section>
           </div>
         </div>
       </Center>

@@ -2,7 +2,6 @@ import Link from 'next/link'
 import React from 'react'
 import {
   Button,
-  Badge,
   Table,
   Thead,
   Tbody,
@@ -29,7 +28,6 @@ const ReportsGrid = ({ reportsData }) => {
               <Th>Title</Th>
               {/* <Th >URL</Th> */}
               <Th>Organisation</Th>
-              <Th>Roles</Th>
               <Th>Actions</Th>
             </Tr>
           </Thead>
@@ -43,22 +41,10 @@ const ReportsGrid = ({ reportsData }) => {
                 </Td>
                 <Td>{OrganisationMapper(report.organisation)}</Td>
                 <Td>
-                  {report.roles?.map((role) => (
-                    <Badge
-                      variant="subtle"
-                      colorScheme="messenger"
-                      className="mr-1"
-                      key={`${role}-your-boat`}
-                    >
-                      {role}
-                    </Badge>
-                  ))}
-                </Td>
-                <Td>
                   <span className="flex items-center justify-start w-full space-x-2">
                     {auth.user.isSuperAdmin && (
                       <>
-                        <Link href={`/report/${report.id}`}>
+                        <Link passHref href={`/report/${report.id}`}>
                           <Button size="sm" colorScheme="facebook">
                             <PencilIcon className="w-5 h-5" />
                           </Button>

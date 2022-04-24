@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
-import { CloudIcon, MinusCircleIcon, PlusIcon } from '@heroicons/react/outline'
+import { CloudIcon } from '@heroicons/react/outline'
 import { Button } from '@chakra-ui/react'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
@@ -14,29 +14,18 @@ const SingleOrganisationPage = ({ params: { id } }) => {
   // state
   const [orgId, setOrgId] = useState('')
   const [name, setName] = useState('')
-  const [roles, setRoles] = useState([])
 
   // Subscribe to Firestore document
   const { data, status, error } = useFirestoreQuery(
     db.collection('organisations').doc(id)
   )
-  // Subscribe to Firestore stuffs
-  const {
-    data: reports,
-    status: reportsStatus,
-    error: reportsError,
-  } = useFirestoreQuery(
-    db.collection('reports').where('organisation', '==', id)
-  )
 
   // initialise form data
   useEffect(() => {
     if (data) {
-      const { name: zita, id: organisationId, roles: rolesRenamed } = data
+      const { name: zita, id: organisationId } = data
       setName(zita)
       setOrgId(organisationId)
-      setRoles(rolesRenamed)
-      console.log(rolesRenamed)
     }
   }, [data])
 
@@ -47,36 +36,16 @@ const SingleOrganisationPage = ({ params: { id } }) => {
     return `Error: ${error.message}`
   }
 
-  function handleRoleChange(e) {
-    const { value } = e.target
-    const updateIndex = Number(e.target.attributes.index.value)
-    roles.splice(updateIndex, 1, value)
-    // remember when Mitchell helped me with this line below that one time?
-    setRoles([...roles])
-  }
-
-  function removeRole(dataRenamed) {
-    const removeIndex = roles.findIndex((role) => role === dataRenamed)
-    const copy = roles
-    copy.splice(removeIndex, 1)
-    setRoles([...copy])
-  }
 
   function handleNameChange(e) {
     const { value } = e.target
     setName(value)
   }
 
-  function addRole() {
-    const rolesPlusOne = roles
-    rolesPlusOne.push('')
-    setRoles([...rolesPlusOne])
-  }
 
   const consolidated = {
     id,
     name,
-    roles,
   }
 
   if (!auth.user) return null
@@ -117,46 +86,8 @@ const SingleOrganisationPage = ({ params: { id } }) => {
             className="block w-full h-full px-1 py-1 outline-none"
           />
         </div>
-        {roles.map((role, index) => (
-          <div key={index} className="flex">
-            <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
-              <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-                <label
-                  htmlFor="username"
-                  className="px-1 text-gray-600 bg-white"
-                >
-                  Role {index + 1}
-                </label>
-              </div>
-              <input
-                index={index}
-                value={role}
-                onChange={handleRoleChange}
-                autoComplete="false"
-                tabIndex={0}
-                type="text"
-                className="block w-full h-full px-1 py-1 outline-none "
-              />
-            </div>
-            <button type="button">
-              <MinusCircleIcon
-                index={index}
-                onClick={() => removeRole(role)}
-                className="w-6 h-6 ml-2 text-red-900 transition duration-500 ease-in-out hover:text-red-500"
-              />
-            </button>
-          </div>
-        ))}
       </div>
       <div className="flex pt-3 mt-6 space-x-3 border-t">
-        <Button
-          type="button"
-          onClick={addRole}
-          colorScheme="facebook"
-          leftIcon={<PlusIcon className="w-5 h-5" />}
-        >
-          Role
-        </Button>
         <Button
           type="button"
           onClick={() => updateOrg(consolidated)}

@@ -6,7 +6,6 @@ const addReport = () => {
   const newReport = {
     // this is the unassigned org ID
     organisation: 'XNcDtlEkoTFw3ybonFua',
-    roles: ['default'],
     teacher: '',
     title: '',
     url: '',
@@ -23,14 +22,12 @@ const updateReport = (data) => {
   const {
     organisationID: organisation,
     title,
-    selectedRoles: roles,
     teacherID: teacher,
     url,
   } = data
 
   const preFlight = {
     organisation,
-    roles,
     teacher,
     title,
     url,
