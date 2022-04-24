@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useAuth } from '../hooks/useAuth'
+
+import { ArrowRightIcon } from '@heroicons/react/solid'
 
 function Header() {
   const [top, setTop] = useState(true)
-
+  const { user, signOut } = useAuth()
+  
   // detect whether user has scrolled the page down by 10px
   useEffect(() => {
     const scrollHandler = () => {
@@ -39,28 +43,35 @@ function Header() {
           <nav className="flex flex-grow">
             <ul className="flex flex-wrap items-center justify-end flex-grow">
               <li>
-                <Link href="/login">
-                  <a className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
-                    Sign in
-                  </a>
-                </Link>
+                {user ? (
+                    <button onClick={() => signOut() } type='button' className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
+                        Sign Out
+                    </button>
+                  ) : (
+                    <Link href='/login'>
+                      <a type='button' className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
+                        Sign In
+                      </a> 
+                    </Link>
+                  )}
               </li>
               <li>
-                <Link href="/signup">
-                  <a className="ml-3 text-gray-200 bg-gray-900 btn-sm hover:bg-gray-800">
-                    <span>Sign up</span>
-                    <svg
-                      className="flex-shrink-0 w-3 h-3 ml-2 -mr-1 text-gray-400 fill-current"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z"
-                        fillRule="nonzero"
-                      />
-                    </svg>
-                  </a>
+              {user ? (
+                <Link passHref href='/my-reports'>
+                  <button type='button' className="w-full mb-4 text-white bg-blue-600 btn-sm hover:bg-blue-700 sm:w-auto sm:mb-0">
+                    <span>My Reports</span>
+                    <ArrowRightIcon className="flex-shrink-0 w-4 h-4 ml-2 -mr-1 fill-current"/>
+                  </button>
                 </Link>
+                  ) : (
+                    <Link href='/signup' passHref>
+                      <button type='button' className="ml-3 text-gray-200 bg-gray-900 btn-sm hover:bg-gray-800">
+                        <span>Sign Up</span>
+                        <ArrowRightIcon className="flex-shrink-0 w-4 h-4 ml-2 -mr-1 text-gray-400 fill-current"/>
+                      </button>
+                    </Link>
+                  )}
+                
               </li>
             </ul>
           </nav>

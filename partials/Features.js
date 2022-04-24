@@ -36,7 +36,7 @@ function Features() {
         <div className="pt-12 md:pt-20">
           {/* Section header */}
           <div className="max-w-3xl pb-12 mx-auto text-center md:pb-16">
-            <h1 className="mb-4 h2">Who we are</h1>
+            <h1 className="mb-4 h2" id="about">Who we are</h1>
             <p className="text-xl text-gray-600">
               An analytics company founded on the belief that “data is ripe to
               give education the transformative jolt it needs.”

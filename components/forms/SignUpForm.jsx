@@ -23,7 +23,7 @@ const SignUpForm = () => {
         setError(response.error.message)
         return
       }
-      Router.push('/dashboard')
+      Router.push('/my-reports')
     })
   }
 
