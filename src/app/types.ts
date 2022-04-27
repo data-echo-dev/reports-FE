@@ -7,14 +7,14 @@ export interface Organisation {
 export interface User {
   email: string
   name: string
-  organisationId: string
+  organisation: string
   uid: string
   isSuperAdmin?: boolean
 }
 
 export interface Report {
-  organisationId: string
-  teacherId: string
+  organisation: string
+  teacher: string
   title: string
   url: string
 }
