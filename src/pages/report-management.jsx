@@ -5,7 +5,7 @@ import { db } from '../config/firebase'
 import ReportsGrid from '../components/Grids/ReportsGrid'
 import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 import PageTitle from '../components/PageTitle'
-import { addReport } from '../CRUD/report'
+import { addReport } from '../services/report'
 
 const ReportManagement = () => {
   const auth = useRequireAuth()

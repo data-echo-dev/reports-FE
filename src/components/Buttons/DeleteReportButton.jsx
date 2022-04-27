@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { TrashIcon } from '@heroicons/react/outline'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
-import { deleteReport } from '../../CRUD/report'
+import { deleteReport } from '../../services/report'
 
 function DeleteOrgButton({ reportID }) {
   const auth = useRequireAuth()

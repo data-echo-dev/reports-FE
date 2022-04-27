@@ -5,7 +5,7 @@ import { Button } from '@chakra-ui/react'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
 import PageTitle from '../../components/PageTitle'
-import { updateOrg } from '../../CRUD/org'
+import { updateOrg } from '../../services/org'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 
 const SingleOrganisationPage = ({ params: { id } }) => {
