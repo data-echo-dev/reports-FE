@@ -10,6 +10,7 @@ export interface User {
   organisation: string
   uid: string
   isSuperAdmin?: boolean
+  isEditor?: boolean
 }
 
 export interface Report {
