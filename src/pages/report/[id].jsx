@@ -3,7 +3,7 @@ import { CloudIcon } from '@heroicons/react/outline'
 import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { db } from '../../config/firebase'
-import { updateReport } from '../../CRUD/report'
+import { updateReport } from '../../services/report'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 

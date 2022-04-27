@@ -8,7 +8,7 @@ import Layout from '../components/Layout'
 
 import '../styles/style.scss'
 import { theme } from '../styles/chakraTheme'
-import logo from '../public/favicon.svg'
+import logo from '../../public/favicon.svg'
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())

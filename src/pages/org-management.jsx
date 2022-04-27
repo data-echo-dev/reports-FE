@@ -5,7 +5,7 @@ import { db } from '../config/firebase'
 import OrgsGrid from '../components/Grids/OrgsGrid'
 import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 import PageTitle from '../components/PageTitle'
-import { addOrg } from '../CRUD/org'
+import { addOrg } from '../services/org'
 
 const OrgManagement = () => {
   const auth = useRequireAuth()
