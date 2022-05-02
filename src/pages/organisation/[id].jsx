@@ -26,6 +26,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
       const { name: zita, id: organisationId } = data
       setName(zita)
       setOrgId(organisationId)
+    console.log(data);
     }
   }, [data])
 
@@ -106,6 +107,5 @@ export default SingleOrganisationPage
 export async function getServerSideProps(context) {
   const { params } = context
 
-  console.log(params)
   return { props: { params } }
 }
