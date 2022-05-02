@@ -23,6 +23,7 @@ const OrgsGrid = ({ orgsData }) => (
           <Tr>
             <Th>Name</Th>
             <Th>Actions</Th>
+            <Th>Active</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -39,6 +40,7 @@ const OrgsGrid = ({ orgsData }) => (
                   <DeleteOrgButton orgID={org.id} />
                 </span>
               </Td>
+              <Td>{JSON.stringify(org.isActive)}</Td>
             </Tr>
           ))}
         </Tbody>
