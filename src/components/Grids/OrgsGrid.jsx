@@ -1,51 +1,28 @@
 import React from 'react'
 import Link from 'next/link'
-import {
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-} from '@chakra-ui/react'
 
-import { PencilIcon } from '@heroicons/react/outline'
 import DeleteOrgButton from '../Buttons/DeleteOrgButton'
+import { BanIcon, CheckIcon } from '@heroicons/react/outline'
 
 const OrgsGrid = ({ orgsData }) => (
-  <div className="flex items-center justify-center w-full h-full ">
-    {orgsData.length > 0 && (
-      <Table className="max-w-6xl" colorScheme="facebook" variant="striped">
-        <TableCaption>Organisations</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>Name</Th>
-            <Th>Actions</Th>
-            <Th>Active</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {orgsData.map((org) => (
-            <Tr key={org.id}>
-              <Td>{org.name}</Td>
-              <Td>
-                <span className="flex items-center justify-start w-full space-x-2">
-                  <Link passHref href={`/organisation/${org.id}`}>
-                    <Button size="sm" colorScheme="facebook">
-                      <PencilIcon className="w-5 h-5 text-blue-300" />
-                    </Button>
-                  </Link>
-                  <DeleteOrgButton orgID={org.id} />
-                </span>
-              </Td>
-              <Td>{JSON.stringify(org.isActive)}</Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    )}
+  <div className="grid grid-cols-4 gap-4 p-5">
+    {orgsData.map((org) => (
+      <div key={org.id} className="shadow-xl card w-96 bg-base-100">
+          <div className="card-body">
+          <div className="justify-between card-actions">
+          <Link passHref href={`/organisation/${org.id}`}>
+              <h2 className="cursor-pointer card-title">{org.name || 'No Name'}</h2>
+          </Link>
+            {org.isActive ? <CheckIcon className='w-6 h-6 text-green-900 bg-green-200 rounded-full'/> : <BanIcon className='w-6 h-6 text-red-900 bg-red-200 rounded-full'/>}
+          </div>
+
+            {/* <p>If a dog chews shoes whose shoes does he choose?</p> */}
+            {/* <div className="justify-end card-actions">
+                <DeleteOrgButton orgID={org.id} />
+            </div> */}
+          </div>
+      </div>
+    ))}
   </div>
 )
 
