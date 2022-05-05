@@ -14,6 +14,7 @@ import {
 import { MenuIcon } from '@heroicons/react/outline'
 import { useAuth } from '../hooks/useAuth'
 import { useRouter } from 'next/router'
+import Image from 'next/image';
 
 const SideNav = () => {
   const auth = useAuth()
@@ -43,8 +44,20 @@ const SideNav = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
+          <nav style={{
+            paddingLeft: "7%",
+            paddingTop: "7%"
+            }}>
+            <Link href="/" passHref> 
+                  <Image
+                    src = { "/dataecho-logo.svg" } 
+                    width = {"250%"}
+                    height = {"100%"}
+                    alt ={"home"}    
+                    />
+            </Link>
+          </nav>
           <DrawerHeader>Quick Links</DrawerHeader>
-
           <DrawerBody>
             <nav>
               <Link href="/" passHref>
