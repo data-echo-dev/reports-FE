@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import { CloudIcon } from '@heroicons/react/outline'
 import { Button } from '@chakra-ui/react'
@@ -7,6 +6,7 @@ import { db } from '../../config/firebase'
 import PageTitle from '../../components/PageTitle'
 import { updateOrg } from '../../services/org'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
+import Toggle from '../../components/common/toggle.tsx'
 
 const SingleOrganisationPage = ({ params: { id } }) => {
   const auth = useRequireAuth()
@@ -14,6 +14,7 @@ const SingleOrganisationPage = ({ params: { id } }) => {
   // state
   const [orgId, setOrgId] = useState('')
   const [name, setName] = useState('')
+  const [isActive, setIsActive] = useState(false)
 
   // Subscribe to Firestore document
   const { data, status, error } = useFirestoreQuery(
@@ -23,9 +24,10 @@ const SingleOrganisationPage = ({ params: { id } }) => {
   // initialise form data
   useEffect(() => {
     if (data) {
-      const { name: zita, id: organisationId } = data
+      const { name: zita, id: organisationId, isActive: renamedIsActiveFFS } = data
       setName(zita)
       setOrgId(organisationId)
+      setIsActive(renamedIsActiveFFS)
     }
   }, [data])
 
@@ -42,11 +44,17 @@ const SingleOrganisationPage = ({ params: { id } }) => {
     setName(value)
   }
 
+  function handleToggleIsActive(e){
+    setIsActive(!isActive)
+  }
+
 
   const consolidated = {
     id,
     name,
+    isActive
   }
+
 
   if (!auth.user) return null
 
@@ -87,6 +95,9 @@ const SingleOrganisationPage = ({ params: { id } }) => {
           />
         </div>
       </div>
+      <div className='w-16'>
+        <Toggle label='Active' checked={isActive} onChange={handleToggleIsActive}/>
+      </div>
       <div className="flex pt-3 mt-6 space-x-3 border-t">
         <Button
           type="button"
@@ -106,6 +117,5 @@ export default SingleOrganisationPage
 export async function getServerSideProps(context) {
   const { params } = context
 
-  console.log(params)
   return { props: { params } }
 }

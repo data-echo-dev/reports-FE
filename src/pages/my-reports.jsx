@@ -24,7 +24,6 @@ const MyReports = () => {
   return (
     <div className="w-full">
       <PageTitle text="My Reports" />
-
       <div className="flex flex-col justify-center">
         <ReportsGrid reportsData={data} />
       </div>

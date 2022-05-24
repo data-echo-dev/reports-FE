@@ -90,21 +90,6 @@ const SideNav = () => {
                   <span className="flex-grow text-right" />
                 </Button>
               </Link>
-              <Link href="/org-reports">
-                <Button
-                  textAlign="left"
-                  size="lg"
-                  onClick={onClose}
-                  disabled={!auth}
-                  isFullWidth
-                  variant="ghost"
-                  color="blue.700"
-                  colorScheme="blue"
-                >
-                  <span className="my-4">Organisation Reports</span>
-                  <span className="flex-grow text-right" />
-                </Button>
-              </Link>
               {auth.user.isSuperAdmin && (
                 <>
                   <Link href="/org-management">
