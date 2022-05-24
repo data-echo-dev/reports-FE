@@ -5,18 +5,4 @@
     "titleBar.activeBackground": "#649664CC",
     "titleBar.inactiveBackground": "#649664"
   },
-  "editor.formatOnSave": true,
-  "[javascript]": {
-    "editor.formatOnSave": false
-  },
-  "[javascriptreact]": {
-    "editor.formatOnSave": false
-  },
-  "eslint.alwaysShowStatus": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
-  },
-  "cSpell.ignoreWords": [
-    "authenticateditem"
-  ]
 }

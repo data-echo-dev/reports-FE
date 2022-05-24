@@ -14,11 +14,12 @@ import {
 import { MenuIcon } from '@heroicons/react/outline'
 import { useAuth } from '../hooks/useAuth'
 import { useRouter } from 'next/router'
+import Logo from '../images/logo'
 
 const SideNav = () => {
   const auth = useAuth()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const {pathname} = useRouter()
+  const { pathname } = useRouter()
 
   const btnRef = React.useRef()
 
@@ -43,8 +44,14 @@ const SideNav = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
+          <nav className="pb-0 p-7">
+            <Link href="/" passHref>
+              <button>
+                <Logo />
+              </button>
+            </Link>
+          </nav>
           <DrawerHeader>Quick Links</DrawerHeader>
-
           <DrawerBody>
             <nav>
               <Link href="/" passHref>
@@ -62,7 +69,7 @@ const SideNav = () => {
                   <span className="flex-grow text-right" />
                 </Button>
               </Link>
-              <Link href="/my-reports">
+              <Link passHref href="/my-reports">
                 <Button
                   size="lg"
                   variant="ghost"
@@ -79,7 +86,7 @@ const SideNav = () => {
               </Link>
               {auth.user.isSuperAdmin && (
                 <>
-                  <Link href="/org-management">
+                  <Link passHref href="/org-management">
                     <Button
                       size="lg"
                       onClick={onClose}
@@ -92,7 +99,7 @@ const SideNav = () => {
                       <span className="flex-grow text-right" />
                     </Button>
                   </Link>
-                  <Link href="/report-management">
+                  <Link passHref href="/report-management">
                     <Button
                       size="lg"
                       onClick={onClose}
@@ -105,7 +112,7 @@ const SideNav = () => {
                       <span className="flex-grow text-right" />
                     </Button>
                   </Link>
-                  <Link href="/user-management">
+                  <Link passHref href="/user-management">
                     <Button
                       size="lg"
                       onClick={onClose}
