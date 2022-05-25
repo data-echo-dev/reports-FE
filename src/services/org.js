@@ -1,6 +1,7 @@
 import Router from 'next/router'
 import NProgress from 'nprogress'
 import { db } from '../config/firebase'
+import { defaultOrganisation } from '../app/fixtures/organisations'
 
 const updateOrg = (data) => {
   NProgress.start()
@@ -13,19 +14,13 @@ const updateOrg = (data) => {
   NProgress.done()
 }
 
-const addOrg = async () => {
-  const newOrg = {
-    name: '',
-  }
+const addOrg = async (data) => {
   db.collection('organisations')
-    .add(newOrg)
+    .add(data)
     .then((doc) => {
-      Router.push(`/organisation/${doc.id}`)
-      const withID = { id: doc.id, ...newOrg }
-      console.log(withID)
-      return updateOrg(withID)
+      Router.push(`/org-management`)
     })
-    .catch((error) => ({ error }))
+    .catch((error) => console.error(error.mesage))
 }
 
 const deleteOrg = (id) => {

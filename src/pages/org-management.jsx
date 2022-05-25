@@ -5,7 +5,7 @@ import { db } from '../config/firebase'
 import OrgsGrid from '../components/Grids/OrgsGrid'
 import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 import PageTitle from '../components/PageTitle'
-import { addOrg } from '../services/org'
+import NewOrgModal from '../components/Modals/NewOrgModal'
 
 const OrgManagement = () => {
   const auth = useRequireAuth()
@@ -26,14 +26,15 @@ const OrgManagement = () => {
       <PageTitle text="Organisation Management" />
       <div className="flex flex-col justify-center">
         <span className="flex justify-end max-w-full md:mx-12 lg:mx-32 xl:mx-60">
-          <Button
-            disabled={!auth.user}
-            onClick={addOrg}
-            colorScheme="facebook"
-            leftIcon={<PlusIcon className="w-5 h-5" />}
-          >
-            Org
-          </Button>
+          <NewOrgModal>
+            <Button
+              disabled={!auth.user}
+              colorScheme="facebook"
+              leftIcon={<PlusIcon className="w-5 h-5" />}
+            >
+              Org
+            </Button>
+          </NewOrgModal>
         </span>
         <OrgsGrid orgsData={data} />
       </div>
