@@ -1,4 +1,4 @@
-# Welcome, Victor
+# Welcome, Adrian
 Hey brother, some notes to help you get going as quickly as possible. Please don't hesitate to reach out if anything doesn't make sense.
 
 ## some house keeping
