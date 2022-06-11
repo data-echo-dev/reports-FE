@@ -15,6 +15,8 @@ const SingleReport = ({ params: { id } }) => {
   const [organisationID, setOrganisationID] = useState('')
   const [title, setTitle] = useState('')
   const [teacherID, setTeacherID] = useState('')
+  const [subject, setSubject] = useState('')
+  const [reportClass, setReportClass] = useState('')
   const [url, setUrl] = useState('')
 
   const consolidated = {
@@ -22,6 +24,8 @@ const SingleReport = ({ params: { id } }) => {
     organisationID,
     title,
     teacherID,
+    subject,
+    reportClass,
     url,
   }
 
@@ -52,10 +56,14 @@ const SingleReport = ({ params: { id } }) => {
         teacher,
         title: databaseTitle,
         url: databaseUrl,
+        subject,
+        reportClass,
       } = data
       setReportID(id)
       setOrganisationID(organisationID || organisation)
       setTitle(title || databaseTitle)
+      setSubject(subject)
+      setReportClass(reportClass)
       setTeacherID(teacher)
       console.log('teacher:', teacher)
       setUrl(url || databaseUrl)
@@ -81,6 +89,16 @@ const SingleReport = ({ params: { id } }) => {
   function handleTitleChange(e) {
     const { value } = e.target
     setTitle(value)
+  }
+
+  function handleSubjectChange(e) {
+    const { value } = e.target
+    setSubject(value)
+  }
+
+  function handleClassChange(e) {
+    const { value } = e.target
+    setReportClass(value)
   }
 
 
@@ -165,6 +183,36 @@ const SingleReport = ({ params: { id } }) => {
                   </option>
                 ))}
             </select>
+          </div>
+          <div className="relative p-1 transition-all duration-500 border rounded ">
+            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
+                Class
+              </label>
+            </div>
+            <input
+              autoComplete="false"
+              tabIndex={0}
+              type="text"
+              value={reportClass}
+              onChange={handleClassChange}
+              className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+            />
+          </div>
+          <div className="relative p-1 transition-all duration-500 border rounded ">
+            <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+              <label htmlFor="org" className="px-1 text-gray-600 bg-white">
+                Subject
+              </label>
+            </div>
+            <input
+              autoComplete="false"
+              tabIndex={0}
+              type="text"
+              value={subject}
+              onChange={handleSubjectChange}
+              className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+            />
           </div>
           <div className="relative p-1 transition-all duration-500 border rounded ">
             <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">

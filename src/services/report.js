@@ -24,6 +24,8 @@ const updateReport = (data) => {
     title,
     teacherID: teacher,
     url,
+    subject,
+    reportClass,
   } = data
 
   const preFlight = {
@@ -31,6 +33,8 @@ const updateReport = (data) => {
     teacher,
     title,
     url,
+    subject,
+    reportClass, 
   }
 
   db.collection('reports')
