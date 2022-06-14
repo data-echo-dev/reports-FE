@@ -7,13 +7,18 @@ import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 import PageTitle from '../components/PageTitle'
 import { addReport } from '../services/report'
 import ReportsFilter from '../components/ReportsFilter'
+import { useState } from 'react'
 
 const ReportManagement = () => {
   const auth = useRequireAuth()
+  const [useFilter, setUseFilter] = useState(false)
+  const [filterResult, setFilterResult] = useState([])
+ 
 
   const { data: reports, status, error } = useFirestoreQuery(
     db.collection('reports')
   )
+
   if (status === 'loading') {
     return 'Loading...'
   }
@@ -21,14 +26,13 @@ const ReportManagement = () => {
     return `Error: ${error.message}`
   }
 
-  if (!auth.user) return null; 
-
+  if (!auth.user) return null
 
   const filterOptions = {
     organization: true,
     subject: true,
     reportClass: true,
-    activeStatus: true,
+    activeStatus: false,
   }
 
   return (
@@ -37,7 +41,12 @@ const ReportManagement = () => {
       <div className="flex flex-col justify-center">
         <div className="flex items-center justify-center w-full">
           <div className="flex  mb-6 items-center justify-between max-w-6xl w-full">
-            <ReportsFilter activeFilters={filterOptions}/>
+            <ReportsFilter
+              data={reports}
+              setUseFilter={setUseFilter}
+              setFilterResult={setFilterResult}
+              activeFilters={filterOptions}
+            />
             <Button
               disabled={!auth.user}
               onClick={addReport}
@@ -48,7 +57,7 @@ const ReportManagement = () => {
             </Button>
           </div>
         </div>
-        <ReportsGrid reportsData={reports} />
+        <ReportsGrid reportsData={useFilter ? filterResult : reports} />
       </div>
     </div>
   )

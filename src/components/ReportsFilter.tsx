@@ -1,5 +1,11 @@
-import React from 'react'
+import { setPriority } from 'os'
+import React, { useEffect, useState } from 'react'
 import { Interface } from 'readline'
+import { Organisation, Report, User } from '../app/types'
+import { db } from '../config/firebase'
+import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
+
+type Data = Report[] | User[] | Organisation[]
 
 interface FilterOptions {
   organization: boolean
@@ -10,83 +16,29 @@ interface FilterOptions {
 
 interface PropTypes {
   activeFilters: FilterOptions
+  data: Data
+  setUseFilter: React.Dispatch<React.SetStateAction<boolean>>
+  setFilterResult: React.Dispatch<React.SetStateAction<Data>>
 }
 
 const ReportsFilter = (props: PropTypes) => {
-  const { activeFilters } = props
+  const { activeFilters, data, setUseFilter, setFilterResult } = props
   const { organization, subject, reportClass, activeStatus } = activeFilters
+  const [inputValues, setInputValues] = useState({
+    organisation: '',
+    activeStatus: '',
+    class: '',
+    subject: '',
+  })
+  const {
+    data: orgOptions,
+    status: orgStatus,
+    error: orgError,
+  } = useFirestoreQuery(db.collection('organisations'))
 
-  const data1 = [
-    {
-      id: 0,
-      name: 'Option0',
-      organization: 'org1',
-      activeStatus: 'Active',
-      reportClass: 'Class1' ,
-      subject: 'Subject1'
-    },
-    {
-      id: 1,
-      name: 'Option1',
-      organization: 'org2',
-      activeStatus: 'Active',
-      reportClass: 'Class2',
-      subject: 'Subject2'
-    },
-    {
-      id: 2,
-      name: 'Option2',
-      organization: 'org3',
-      activeStatus: 'Active',
-      reportClass: 'Class3',
-      subject: 'Subject3'
-    },
-    {
-      id: 3,
-      name: 'Option3',
-      organization: 'org4',
-      activeStatus: 'Active',
-      reportClass: 'Class4',
-      subject: 'Subject5'
-    },
-    {
-      id: 4,
-      name: 'Option4',
-      organization: 'org7',
-      activeStatus: 'Not-Active',
-      reportClass: 'Class5',
-      subject: 'Subject6'
-    },
-    {
-      id: 5,
-      name: 'Option5',
-      organization: 'org7',
-      activeStatus: 'Active',
-      reportClass: 'Class7',
-      subject: 'Subject7'
-    },
-    {
-      id: 6,
-      name: 'Option6',
-      organization: 'org7',
-      activeStatus: 'Not-Active',
-      reportClass: 'Class8',
-      subject: 'Subject8'
-
-    },
-  ]
-
-  const orgOptions = organization
-    ? data1.reduce((prev, current, index) => {
-        if (prev.find((item) => item === current.organization)) {
-          return prev
-        }
-        return [...prev, current.organization]
-      }, [])
-    : []
-
+  // could convert this in generic function, to improve readability
   const activeStatusOpt = activeStatus
-    ? data1.reduce((prev, current, index) => {
+    ? data.reduce((prev, current, index) => {
         if (prev.find((item) => item === current.activeStatus)) {
           return prev
         }
@@ -94,9 +46,8 @@ const ReportsFilter = (props: PropTypes) => {
       }, [])
     : []
 
-
-    const classOptions = reportClass
-    ? data1.reduce((prev, current, index) => {
+  const classOptions = reportClass
+    ? data.reduce((prev, current, index) => {
         if (prev.find((item) => item === current.reportClass)) {
           return prev
         }
@@ -104,15 +55,56 @@ const ReportsFilter = (props: PropTypes) => {
       }, [])
     : []
 
-
-    const subjectOptions = subject
-    ? data1.reduce((prev, current, index) => {
+  const subjectOptions = subject
+    ? data.reduce((prev, current, index) => {
         if (prev.find((item) => item === current.subject)) {
           return prev
         }
         return [...prev, current.subject]
       }, [])
     : []
+
+  useEffect(() => {
+    updateParent()
+  }, [inputValues])
+
+  const updateParent = () => {
+    let filtered = false
+    let result = data
+    if (
+      !(
+        inputValues.organisation === '' &&
+        inputValues.activeStatus === '' &&
+        inputValues.class === '' &&
+        inputValues.subject === ''
+      )
+    ) {
+      if (organization && inputValues.organisation !== '') {
+        result = result.filter(
+          (item) => item.organisation === inputValues.organisation
+        )
+      }
+      if (activeStatus && inputValues.activeStatus !== '') {
+        result = result.filter(
+          (item) => item.isActive === inputValues.activeStatus
+        )
+      }
+      if (reportClass && inputValues.class !== '') {
+        result = result.filter((item) => item.reportClass === inputValues.class)
+      }
+      if (subject && inputValues.subject !== '') {
+        result = result.filter((item) => item.subject === inputValues.subject)
+      }
+      filtered = true
+    }
+    setFilterResult(result)
+    setUseFilter(filtered)
+  }
+
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setInputValues((prev) => ({ ...prev, [id]: value }))
+  }
 
   return (
     <div id="filterContainer">
@@ -127,15 +119,17 @@ const ReportsFilter = (props: PropTypes) => {
                 </label>
               </div>
               <select
+                id="organisation"
                 autoComplete="false"
                 tabIndex={0}
-                //   value={organisationID}
-                //   onChange={handleOrgChange}
+                value={inputValues.organisation}
+                onChange={handleChange}
                 className="block w-full h-full px-1 py-1 text-gray-900 outline-none  bg-inherit"
               >
+                <option value="" />
                 {orgOptions?.map((org) => (
-                  <option value={org} key={org}>
-                    {org}
+                  <option value={org.id} key={org.id}>
+                    {org.name}
                   </option>
                 ))}
               </select>
@@ -151,12 +145,14 @@ const ReportsFilter = (props: PropTypes) => {
                 </label>
               </div>
               <select
+                id="activeStatus"
                 autoComplete="false"
                 tabIndex={0}
-                //   value={organisationID}
-                //   onChange={handleOrgChange}
+                value={inputValues.activeStatus}
+                onChange={handleChange}
                 className="block w-full h-full px-1 py-1 text-gray-900 outline-none  bg-inherit"
               >
+                <option value="" />
                 {activeStatusOpt?.map((option) => (
                   <option value={option} key={option}>
                     {option}
@@ -175,12 +171,14 @@ const ReportsFilter = (props: PropTypes) => {
                 </label>
               </div>
               <select
+                id="class"
                 autoComplete="false"
                 tabIndex={0}
-                //   value={organisationID}
-                //   onChange={handleOrgChange}
+                value={inputValues.class}
+                onChange={handleChange}
                 className="block w-full h-full px-1 py-1 text-gray-900 outline-none  bg-inherit"
               >
+                <option value="" />
                 {classOptions?.map((option) => (
                   <option value={option} key={option}>
                     {option}
@@ -199,12 +197,14 @@ const ReportsFilter = (props: PropTypes) => {
                 </label>
               </div>
               <select
+                id="subject"
                 autoComplete="false"
                 tabIndex={0}
-                //   value={organisationID}
-                //   onChange={handleOrgChange}
+                value={inputValues.subject}
+                onChange={handleChange}
                 className="block w-full h-full px-1 py-1 text-gray-900 outline-none  bg-inherit"
               >
+                <option value="" />
                 {subjectOptions?.map((option) => (
                   <option value={option} key={option}>
                     {option}
