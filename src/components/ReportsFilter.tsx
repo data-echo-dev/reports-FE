@@ -1,6 +1,4 @@
-import { setPriority } from 'os'
 import React, { useEffect, useState } from 'react'
-import { Interface } from 'readline'
 import { Organisation, Report, User } from '../app/types'
 import { db } from '../config/firebase'
 import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
@@ -36,9 +34,10 @@ const ReportsFilter = (props: PropTypes) => {
     error: orgError,
   } = useFirestoreQuery(db.collection('organisations'))
 
-  // could convert this in generic function, to improve readability
+  const reducibleData: any = data
+
   const activeStatusOpt = activeStatus
-    ? data.reduce((prev, current, index) => {
+    ? reducibleData.reduce((prev, current, index) => {
         if (prev.find((item) => item === current.activeStatus)) {
           return prev
         }
@@ -47,7 +46,7 @@ const ReportsFilter = (props: PropTypes) => {
     : []
 
   const classOptions = reportClass
-    ? data.reduce((prev, current, index) => {
+    ? reducibleData.reduce((prev, current, index) => {
         if (prev.find((item) => item === current.reportClass)) {
           return prev
         }
@@ -56,7 +55,7 @@ const ReportsFilter = (props: PropTypes) => {
     : []
 
   const subjectOptions = subject
-    ? data.reduce((prev, current, index) => {
+    ? reducibleData.reduce((prev, current, index) => {
         if (prev.find((item) => item === current.subject)) {
           return prev
         }
@@ -65,41 +64,42 @@ const ReportsFilter = (props: PropTypes) => {
     : []
 
   useEffect(() => {
+    const updateParent = () => {
+      let filtered = false
+      let result = reducibleData
+      if (
+        !(
+          inputValues.organisation === '' &&
+          inputValues.activeStatus === '' &&
+          inputValues.class === '' &&
+          inputValues.subject === ''
+        )
+      ) {
+        if (organization && inputValues.organisation !== '') {
+          result = result.filter(
+            (item) => item.organisation === inputValues.organisation
+          )
+        }
+        if (activeStatus && inputValues.activeStatus !== '') {
+          result = result.filter(
+            (item) => item.isActive === inputValues.activeStatus
+          )
+        }
+        if (reportClass && inputValues.class !== '') {
+          result = result.filter(
+            (item) => item.reportClass === inputValues.class
+          )
+        }
+        if (subject && inputValues.subject !== '') {
+          result = result.filter((item) => item.subject === inputValues.subject)
+        }
+        filtered = true
+      }
+      setFilterResult(result)
+      setUseFilter(filtered)
+    }
     updateParent()
   }, [inputValues])
-
-  const updateParent = () => {
-    let filtered = false
-    let result = data
-    if (
-      !(
-        inputValues.organisation === '' &&
-        inputValues.activeStatus === '' &&
-        inputValues.class === '' &&
-        inputValues.subject === ''
-      )
-    ) {
-      if (organization && inputValues.organisation !== '') {
-        result = result.filter(
-          (item) => item.organisation === inputValues.organisation
-        )
-      }
-      if (activeStatus && inputValues.activeStatus !== '') {
-        result = result.filter(
-          (item) => item.isActive === inputValues.activeStatus
-        )
-      }
-      if (reportClass && inputValues.class !== '') {
-        result = result.filter((item) => item.reportClass === inputValues.class)
-      }
-      if (subject && inputValues.subject !== '') {
-        result = result.filter((item) => item.subject === inputValues.subject)
-      }
-      filtered = true
-    }
-    setFilterResult(result)
-    setUseFilter(filtered)
-  }
 
   const handleChange = (e) => {
     const { id, value } = e.target
