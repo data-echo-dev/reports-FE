@@ -36,7 +36,7 @@ const ReportsFilter = (props: PropTypes) => {
 
   const reducibleData: any = data
 
-  const activeStatusOpt = activeStatus
+  const activeStatusOptions = activeStatus
     ? reducibleData.reduce((prev, current, index) => {
         if (prev.find((item) => item === current.activeStatus)) {
           return prev
