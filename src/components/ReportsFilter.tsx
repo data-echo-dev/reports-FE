@@ -153,7 +153,7 @@ const ReportsFilter = (props: PropTypes) => {
                 className="block w-full h-full px-1 py-1 text-gray-900 outline-none  bg-inherit"
               >
                 <option value="" />
-                {activeStatusOpt?.map((option) => (
+                {activeStatusOptions?.map((option) => (
                   <option value={option} key={option}>
                     {option}
                   </option>
