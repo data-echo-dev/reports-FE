@@ -6,4 +6,6 @@ export const defaultReport: Report = {
   teacher: '',
   title: '',
   url: '',
+  reportClass: '',
+  subject: '',
 }

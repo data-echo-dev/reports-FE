@@ -18,4 +18,6 @@ export interface Report {
   teacher: string
   title: string
   url: string
+  subject: string
+  reportClass: string 
 }
