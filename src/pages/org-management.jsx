@@ -6,12 +6,24 @@ import OrgsGrid from '../components/Grids/OrgsGrid'
 import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 import PageTitle from '../components/PageTitle'
 import NewOrgModal from '../components/Modals/NewOrgModal'
+import ReportsFilter from '../components/ReportsFilter'
+import { useState } from 'react'
 
 const OrgManagement = () => {
+  const [useFilter, setUseFilter] = useState(false)
+  const [filterResult, setFilterResult] = useState([])
   const auth = useRequireAuth()
   const { data, status, error } = useFirestoreQuery(
     db.collection('organisations')
   )
+
+  const filterOptions = {
+    organization: false,
+    subject: false,
+    reportClass: false,
+    activeStatus: true,
+  }
+
   if (status === 'loading') {
     return null
   }
@@ -25,9 +37,16 @@ const OrgManagement = () => {
     <div className="w-full">
       <PageTitle text="Organisation Management" />
       <div className="flex flex-col justify-center">
-        <span className="flex justify-end max-w-full md:mx-12 lg:mx-32 xl:mx-60">
+        <span className="flex justify-between max-w-full px-5">
+          <ReportsFilter
+            data={data}
+            setUseFilter={setUseFilter}
+            setFilterResult={setFilterResult}
+            activeFilters={filterOptions}
+          />
           <NewOrgModal>
             <Button
+              className="shadow-xl my-auto"
               disabled={!auth.user}
               colorScheme="facebook"
               leftIcon={<PlusIcon className="w-5 h-5" />}
@@ -36,7 +55,7 @@ const OrgManagement = () => {
             </Button>
           </NewOrgModal>
         </span>
-        <OrgsGrid orgsData={data} />
+        <OrgsGrid orgsData={useFilter ? filterResult : data} />
       </div>
     </div>
   )

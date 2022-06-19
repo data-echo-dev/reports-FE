@@ -24,7 +24,7 @@ const ReportsFilter = (props: PropTypes) => {
   const { organization, subject, reportClass, activeStatus } = activeFilters
   const [inputValues, setInputValues] = useState({
     organisation: '',
-    activeStatus: '',
+    activeStatus: 'null',
     class: '',
     subject: '',
   })
@@ -38,16 +38,17 @@ const ReportsFilter = (props: PropTypes) => {
 
   const activeStatusOptions = activeStatus
     ? reducibleData.reduce((prev, current, index) => {
-        if (prev.find((item) => item === current.activeStatus)) {
+        if (prev.includes(current.isActive)) {
           return prev
         }
-        return [...prev, current.activeStatus]
+        return [...prev, current.isActive]
       }, [])
     : []
 
+
   const classOptions = reportClass
     ? reducibleData.reduce((prev, current, index) => {
-        if (prev.find((item) => item === current.reportClass)) {
+        if (prev.includes(current.reportClass)) {
           return prev
         }
         return [...prev, current.reportClass]
@@ -56,7 +57,7 @@ const ReportsFilter = (props: PropTypes) => {
 
   const subjectOptions = subject
     ? reducibleData.reduce((prev, current, index) => {
-        if (prev.find((item) => item === current.subject)) {
+        if (prev.includes(current.subject)) {
           return prev
         }
         return [...prev, current.subject]
@@ -70,7 +71,7 @@ const ReportsFilter = (props: PropTypes) => {
       if (
         !(
           inputValues.organisation === '' &&
-          inputValues.activeStatus === '' &&
+          inputValues.activeStatus === 'null' &&
           inputValues.class === '' &&
           inputValues.subject === ''
         )
@@ -80,9 +81,10 @@ const ReportsFilter = (props: PropTypes) => {
             (item) => item.organisation === inputValues.organisation
           )
         }
-        if (activeStatus && inputValues.activeStatus !== '') {
+        if (activeStatus && inputValues.activeStatus !== 'null') {
           result = result.filter(
-            (item) => item.isActive === inputValues.activeStatus
+            (item) =>
+              (item.isActive ? 'true' : 'false') === inputValues.activeStatus
           )
         }
         if (reportClass && inputValues.class !== '') {
@@ -152,10 +154,10 @@ const ReportsFilter = (props: PropTypes) => {
                 onChange={handleChange}
                 className="block w-full h-full px-1 py-1 text-gray-900 outline-none  bg-inherit"
               >
-                <option value="" />
+                <option value={'null'} />
                 {activeStatusOptions?.map((option) => (
                   <option value={option} key={option}>
-                    {option}
+                    {`${option}`}
                   </option>
                 ))}
               </select>
