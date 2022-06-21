@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import {
   Modal,
   ModalOverlay,
@@ -12,12 +12,8 @@ import {
 } from '@chakra-ui/react'
 import { Organisation } from '../../app/types'
 import { defaultOrganisation } from '../../app/fixtures/organisations'
-import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
-import { db } from '../../config/firebase'
 import Toggle from '../common/toggle'
-import Loading from '../common/loading'
-import DeleteOrgButton from '../Buttons/DeleteOrgButton'
-import { addOrg, updateOrg } from '../../services/org'
+import { addOrg } from '../../services/org'
 
 interface Props {
   id: string
@@ -47,10 +43,7 @@ const OrgDetailsModal: FC<Props> = ({ id, children }) => {
 
   return (
     <>
-      <div
-        className="cursor-pointer card w-96"
-        onClick={onOpen}
-      >
+      <div className="cursor-pointer card w-96" onClick={onOpen}>
         {children}
       </div>
 
