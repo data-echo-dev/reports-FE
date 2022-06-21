@@ -46,7 +46,7 @@ const OrgManagement = () => {
           />
           <NewOrgModal>
             <Button
-              className="shadow-xl my-auto"
+              className="my-auto"
               disabled={!auth.user}
               colorScheme="facebook"
               leftIcon={<PlusIcon className="w-5 h-5" />}
