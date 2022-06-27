@@ -6,6 +6,7 @@ import { db } from '../config/firebase'
 import PageTitle from '../components/PageTitle'
 import ReportsFilter from '../components/ReportsFilter'
 import { useEffect, useState } from 'react'
+import { Alert, AlertIcon } from '@chakra-ui/react'
 
 const MyReports = () => {
   const auth = useRequireAuth()
@@ -24,7 +25,9 @@ const MyReports = () => {
   )
 
   useEffect(() => {
-    organisations && organisations[0] && setIsOrgActive(organisations[0].isActive)
+    organisations &&
+      organisations[0] &&
+      setIsOrgActive(organisations[0].isActive)
   }, [organisations])
 
   const filterOptions = {
@@ -50,7 +53,7 @@ const MyReports = () => {
         {isOrgActive ? (
           <>
             <div className="flex items-center justify-center w-full">
-              <div className="flex  mb-6 items-center justify-between max-w-6xl w-full">
+              <div className="flex items-center justify-between w-full max-w-6xl mb-6">
                 <ReportsFilter
                   data={data}
                   setUseFilter={setUseFilter}
@@ -62,12 +65,11 @@ const MyReports = () => {
             <ReportsGrid reportsData={useFilter ? filterResult : data} />
           </>
         ) : (
-          <div className="flex items-center justify-center w-full">
-            <p className="font-semibold mt-12">
-              Your organization is currently Inactive, please contact your
-              Administration department
-            </p>
-          </div>
+          <Alert className="max-w-lg mx-auto" status="warning">
+            <AlertIcon />
+            Your organization is currently Inactive, please contact your
+            Administration department
+          </Alert>
         )}
       </div>
     </div>
