@@ -12,6 +12,10 @@ module.exports = {
           black: '#000000',
           blue: '#0082b3',
           white: '#F1F1F1',
+          blue1: '#A3E2F9',
+          blue2: '#66CEF5',
+          blue3: '#339BC2',
+          blue4: '#0082B3',
         },
         secondary: {
           100: '#339bc2',
@@ -141,5 +145,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require('daisyui')],
 }
