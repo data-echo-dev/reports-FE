@@ -46,7 +46,6 @@ const OrgManagement = () => {
           />
           <NewOrgModal>
             <Button
-              className="bg-primary-blue4"
               disabled={!auth.user}
               leftIcon={<PlusIcon className="w-5 h-5" />}
               bgColor="#66CEF5"

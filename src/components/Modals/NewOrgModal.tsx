@@ -51,7 +51,7 @@ const OrgDetailsModal: FC<Props> = ({ id, children }) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add New Organisation</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton color="#FF0000" />
           <ModalBody>
             <>
               <div className="grid gap-6 lg:grid-cols-2">
@@ -89,10 +89,15 @@ const OrgDetailsModal: FC<Props> = ({ id, children }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant="ghost" colorScheme="blue" mr={3} onClick={onClose}>
+            <Button mr={3} onClick={onClose} className="text-primary-blue4">
               Discard Changes
             </Button>
-            <Button onClick={handleSave} colorScheme="blue">
+            <Button
+              bgColor="#66CEF5"
+              _hover={{ bg: '#339BC2' }}
+              _active={{ bg: '#0082B3' }}
+              onClick={handleSave}
+            >
               Save
             </Button>
           </ModalFooter>

@@ -17,11 +17,11 @@ const Toggle: FC<Props> = ({
 }) => {
   return (
     <div className="form-control">
-      <label className="flex flex-col cursor-pointer label">
+      <label className="flex flex-col cursor-pointer">
         <span className="label-text">{label}</span>
         <input
           type="checkbox"
-          className="toggle toggle-accent"
+          className={`toggle ${checked ? 'bg-primary-blue3' : ''}`}
           checked={checked}
           onChange={onChange}
         />
