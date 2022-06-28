@@ -43,7 +43,7 @@ const OrgDetailsModal: FC<Props> = ({ id, children }) => {
 
   return (
     <>
-      <div className="cursor-pointer card w-96" onClick={onOpen}>
+      <div className="flex items-end" onClick={onOpen}>
         {children}
       </div>
 

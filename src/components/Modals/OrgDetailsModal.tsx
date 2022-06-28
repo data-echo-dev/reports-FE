@@ -59,7 +59,7 @@ const OrgDetailsModal: FC<Props> = ({ id, children }) => {
   return (
     <>
       <div
-        className="shadow-xl cursor-pointer card w-96 bg-base-100"
+        className="shadow-xl cursor-pointer card bg-base-100"
         onClick={onOpen}
       >
         {children}

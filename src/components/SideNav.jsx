@@ -29,9 +29,11 @@ const SideNav = () => {
     <span className="absolute top-0 z-10 m-4">
       <Button
         ref={btnRef}
-        bgColor="primary.blue"
         className="opacity-80"
         onClick={onOpen}
+        bgColor="#66CEF5"
+        _hover={{ bg: '#339BC2' }}
+        _active={{ bg: '#0082B3' }}
       >
         <MenuIcon className="w-5 h-5 text-primary-black" />
       </Button>
@@ -43,7 +45,7 @@ const SideNav = () => {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
+          <DrawerCloseButton color="#FF0000" />
           <nav className="pb-0 p-7">
             <Link href="/" passHref>
               <button>
