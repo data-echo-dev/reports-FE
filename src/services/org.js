@@ -3,7 +3,7 @@ import NProgress from 'nprogress'
 import { db } from '../config/firebase'
 import { defaultOrganisation } from '../app/fixtures/organisations'
 
-const updateOrg = (data) => {
+const updateOrg = async (data) => {
   NProgress.start()
   db.collection('organisations')
     .doc(data.id)

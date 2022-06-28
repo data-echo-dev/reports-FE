@@ -52,8 +52,9 @@ const OrgDetailsModal: FC<Props> = ({ id, children }) => {
     setOrganisation({ ...organisation, isActive: !organisation.isActive })
   }
 
-  function handleSave() {
-    updateOrg(organisation)
+  async function handleSave() {
+    await updateOrg(organisation)
+    onClose()
   }
 
   return (
