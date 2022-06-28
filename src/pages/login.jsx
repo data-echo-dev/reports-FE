@@ -15,7 +15,9 @@ const LoginPage = () => (
           {"Don't have an account? "}
           <Link passHref href="/signup">
             <Button variant="link" color="secondary.100">
-              <a className="text-blue-500">Sign Up</a>
+              <a className="text-primary-blue4 hover:text-primary-blue3">
+                Sign Up
+              </a>
             </Button>
           </Link>
         </p>
