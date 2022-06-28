@@ -44,34 +44,45 @@ function Header() {
             <ul className="flex flex-wrap items-center justify-end flex-grow">
               <li>
                 {user ? (
-                    <button onClick={() => signOut() } type='button' className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
-                        Sign Out
-                    </button>
-                  ) : (
-                    <Link href='/login'>
-                      <a type='button' className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900">
-                        Sign In
-                      </a> 
-                    </Link>
-                  )}
+                  <button
+                    onClick={() => signOut()}
+                    type="button"
+                    className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900"
+                  >
+                    Sign Out
+                  </button>
+                ) : (
+                  <Link href="/login">
+                    <a
+                      type="button"
+                      className="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900"
+                    >
+                      Sign In
+                    </a>
+                  </Link>
+                )}
               </li>
               <li>
-              {user ? (
-                <Link passHref href='/my-reports'>
-                  <button type='button' className="w-full mb-4 text-white bg-blue-600 btn-sm hover:bg-blue-700 sm:w-auto sm:mb-0">
-                    <span>My Reports</span>
-                    <ArrowRightIcon className="flex-shrink-0 w-4 h-4 ml-2 -mr-1 fill-current"/>
+                {user ? (
+                  <Link passHref href="/my-reports">
+                    <button
+                      type="button"
+                      className="w-full mb-4 text-white bg-blue-600 btn-sm hover:bg-blue-700 sm:w-auto sm:mb-0"
+                    >
+                      <span>My Reports</span>
+                      <ArrowRightIcon className="flex-shrink-0 w-4 h-4 ml-2 -mr-1 fill-current" />
+                    </button>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    className="ml-3 text-gray-200 bg-gray-900 btn-sm hover:bg-gray-800"
+                  >
+                    <a href="#contact">
+                      <span>Request Demo</span>
+                    </a>
                   </button>
-                </Link>
-                  ) : (
-                    <Link href='/signup' passHref>
-                      <button type='button' className="ml-3 text-gray-200 bg-gray-900 btn-sm hover:bg-gray-800">
-                        <span>Sign Up</span>
-                        <ArrowRightIcon className="flex-shrink-0 w-4 h-4 ml-2 -mr-1 text-gray-400 fill-current"/>
-                      </button>
-                    </Link>
-                  )}
-                
+                )}
               </li>
             </ul>
           </nav>

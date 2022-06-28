@@ -36,10 +36,14 @@ function Features() {
         <div className="pt-12 md:pt-20">
           {/* Section header */}
           <div className="max-w-3xl pb-12 mx-auto text-center md:pb-16">
-            <h1 className="mb-4 h2" id="about">Who we are</h1>
-            <p className="text-xl text-gray-600">
+            <h1 className="mb-4 h2" id="about">
+              About Us
+            </h1>
+            <p className="text-xl text-left text-gray-600">
               An analytics company founded on the belief that “data is ripe to
-              give education the transformative jolt it needs.”
+              give education the transformative jolt it needs.” Effective
+              interpretation of data can be used to better understand student
+              needs and employ strategies to differentiate instruction.
             </p>
           </div>
 
@@ -54,11 +58,6 @@ function Features() {
                 <h3 className="mb-3 h3">
                   Productive report management & analysis
                 </h3>
-                <p className="text-xl text-gray-600">
-                  Effective interpretation of data can be used to better
-                  understand student needs and employ strategies to
-                  differentiate instruction.
-                </p>
               </div>
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
@@ -107,7 +106,7 @@ function Features() {
                 >
                   <div>
                     <div className="mb-1 font-bold leading-snug tracking-tight">
-                      Get more out of your reports
+                      Get more out of your data
                     </div>
                     <div className="text-gray-600">
                       Helps teachers understand their students’ learning

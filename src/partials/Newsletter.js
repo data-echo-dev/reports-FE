@@ -2,7 +2,7 @@ import React from 'react'
 
 function Newsletter() {
   return (
-    <section>
+    <section id="contact">
       <div className="max-w-6xl px-4 mx-auto sm:px-6">
         <div className="pb-12 md:pb-20">
           {/* CTA box */}
@@ -100,11 +100,14 @@ function Newsletter() {
                 <h3 className="mb-2 text-white h3">
                   Find out how we can help you
                 </h3>
-                <p className="mb-6 text-lg text-gray-300">
-                  We'd love to chat with you about our product and how it can
-                  make reports more productive for your students <br />
-                  get in touch via{' '}
-                  <a className="text-blue-600 hover:underline" href="mailto:#">
+                <p className="mb-6 text-lg text-left text-gray-300">
+                  We&apos;d love to chat with you about our product and how it
+                  can make reports more productive for your students <br />
+                  Get in touch via{' '}
+                  <a
+                    className="text-blue-600 hover:underline"
+                    href="mailto:someone@somedomain.tld?subject=Data%20Echo%20Demo&body=Hello%2C%20I'd%20like%20to%20find%20out%20how%20Dataecho%20can%20help%20my%20organisation"
+                  >
                     email
                   </a>
                 </p>

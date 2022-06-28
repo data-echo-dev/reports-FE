@@ -46,8 +46,11 @@ function Testimonials() {
         <div className="py-12 md:py-20">
           {/* Section header */}
           <div className="max-w-3xl pb-12 mx-auto text-center md:pb-16">
-            <h2 className="mb-4 h2">Data analytics partners</h2>
-            <p className="text-xl text-gray-600" data-aos="zoom-y-out">
+            <h2 className="mb-4 h2">In Partnership with</h2>
+            <p
+              className="text-xl text-left text-gray-600"
+              data-aos="zoom-y-out"
+            >
               Organisations we've collaborated with on data analytics projects
               for corporate & school LMS's
             </p>
@@ -100,7 +103,7 @@ function Testimonials() {
                     alt="Testimonial 01"
                   />
                 </div>
-                <blockquote className="mb-4 text-xl font-medium">
+                <blockquote className="mb-4 text-xl font-medium text-left">
                   “ Gone are the days when teachers had to page through chunky
                   exercise books with scattered student marks. That system was
                   rigid and carried limited ability. With DataEcho, you can

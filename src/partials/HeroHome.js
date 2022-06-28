@@ -58,7 +58,7 @@ function HeroHome() {
             </h1>
             <div className="max-w-3xl mx-auto">
               <p
-                className="mb-8 text-xl text-gray-600"
+                className="mb-8 text-xl text-left text-gray-600"
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
@@ -73,12 +73,12 @@ function HeroHome() {
               >
                 <div>
                   {!user && (
-                  <Link href="/signup">
-                    <a className="w-full mb-4 text-white bg-blue-600 btn hover:bg-blue-700 sm:w-auto sm:mb-0">
-                      Start free trial
+                    <a
+                      href="#contact"
+                      className="w-full mb-4 text-white bg-blue-600 btn hover:bg-blue-700 sm:w-auto sm:mb-0"
+                    >
+                      Request A Demo
                     </a>
-                  </Link>
-
                   )}
                 </div>
                 <div>

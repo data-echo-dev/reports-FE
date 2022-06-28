@@ -62,9 +62,10 @@ function FeaturesBlocks() {
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
                 Feedback
               </h4>
-              {/* <p className="text-center text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p> */}
+              <p className="text-left text-gray-600">
+                Information can be easily relayed to students about their
+                performace relative to learning goals or their outcomes.
+              </p>
             </div>
 
             {/* 2nd item */}
@@ -103,6 +104,10 @@ function FeaturesBlocks() {
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
                 Individualisation
               </h4>
+              <p className="text-left text-gray-600">
+                Tailoring instruction to individual needs is necessiated through
+                our robust empirical tool.
+              </p>
             </div>
 
             {/* 3rd item */}
@@ -134,6 +139,11 @@ function FeaturesBlocks() {
               <h4 className="mb-1 text-xl font-bold leading-snug tracking-tight">
                 Probabilistic Prediction
               </h4>
+              <p className="text-left text-gray-600">
+                Prediction helps you gain valuable insights about future
+                results. It can be readily applied to help guide strategies that
+                enable better performance.
+              </p>
             </div>
           </div>
         </div>
