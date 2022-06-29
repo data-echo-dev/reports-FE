@@ -2,6 +2,7 @@
 .next
 node_modules/
 
+.devcontainer/
 .DS_Store
 .env
 .env.local

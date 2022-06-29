@@ -2,19 +2,18 @@ import Router from 'next/router'
 import NProgress from 'nprogress'
 import { db } from '../config/firebase'
 
-const addReport = () => {
+const addReport = (report) => {
+  NProgress.start()
   const newReport = {
-    // this is the unassigned org ID
-    organisation: 'XNcDtlEkoTFw3ybonFua',
-    teacher: '',
-    title: '',
-    url: '',
+    ...report,
   }
   db.collection('reports')
     .add(newReport)
     .then((doc) => {
-      Router.push(`/report/${doc.id}`)
+      console.log('successfully added new doc:', doc.id)
     })
+    .catch((error) => console.error('Error adding new doc:', error))
+  NProgress.done()
 }
 
 const updateReport = (data) => {
@@ -34,7 +33,7 @@ const updateReport = (data) => {
     title,
     url,
     subject,
-    reportClass, 
+    reportClass,
   }
 
   db.collection('reports')
