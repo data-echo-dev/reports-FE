@@ -9,18 +9,22 @@ import {
   ModalCloseButton,
   Button,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { Report } from '../../app/types'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
 import { defaultReport } from '../../app/fixtures/reports'
 import { addReport } from '../../services/report'
+import NProgress from 'nprogress'
 
 interface Props {
   children: React.ReactNode
 }
 
 const NewReportModal: FC<Props> = ({ children }) => {
+  const toast = useToast()
+
   const [reportID, setReportID] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [report, setReport] = useState<Report>({
@@ -46,12 +50,40 @@ const NewReportModal: FC<Props> = ({ children }) => {
     setReport((prevRep) => ({ ...prevRep, [id]: value }))
   }
 
-  function handleSave() {
-    addReport({
-      ...report,
-    })
-    setReport(defaultReport)
-    onClose()
+  async function handleSave() {
+    NProgress.start()
+    try {
+      const doc = await addReport({
+        ...report,
+      })
+      if (!doc.id) {
+        throw Error('failed to create new report')
+      }
+      toast({
+        title: 'Report created.',
+        description: 'You successfully created your report. You can now access it from the table below',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position:"top-right"
+      })
+      setReport(defaultReport)
+      NProgress.done()
+      onClose()
+    } catch (e) {
+      toast({
+        title: 'Failed to create report.',
+        description:
+          'A problem occurred whilst attempting to create your report.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position:"top-right"
+      })
+      setReport(defaultReport)
+      NProgress.done()
+      onClose()
+    }
   }
 
   return (

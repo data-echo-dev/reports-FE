@@ -9,13 +9,15 @@ import {
   ModalCloseButton,
   Button,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { Report } from '../../app/types'
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
 import { db } from '../../config/firebase'
 import Loading from '../common/loading'
 import { defaultReport } from '../../app/fixtures/reports'
-import {  updateReport } from '../../services/report'
+import { updateReport } from '../../services/report'
+import NProgress from 'nprogress'
 
 interface Props {
   id: string
@@ -23,6 +25,7 @@ interface Props {
 }
 
 const ReportDetailsModal: FC<Props> = ({ id, children }) => {
+  const toast = useToast()
   const [reportID, setReportID] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [report, setReport] = useState<Report>({
@@ -47,13 +50,12 @@ const ReportDetailsModal: FC<Props> = ({ id, children }) => {
     db.collection('users').where('organisation', '==', report.organisation)
   )
 
-
   useEffect(() => {
-    if (data) {
+    if (data && isOpen) {
       setReportID(id)
       setReport(data)
     }
-  }, [data, id])
+  }, [data, id, isOpen])
 
   function handleChange(e) {
     const { id, value } = e.target
@@ -61,13 +63,38 @@ const ReportDetailsModal: FC<Props> = ({ id, children }) => {
   }
 
   async function handleSave() {
-    await updateReport({
-      ...report,
-      reportID,
-      organisationID: report.organisation,
-      teacherID: report.teacher,
-    })
-    onClose()
+    NProgress.start()
+    try {
+       await updateReport({
+        ...report,
+        reportID,
+        organisationID: report.organisation,
+        teacherID: report.teacher,
+      })
+      toast({
+        title: 'Update Successful.',
+        description:
+          'You successfully updated your report',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      })
+      NProgress.done()
+      onClose()
+    } catch(e) {
+      toast({
+        title: 'Failed to update report.',
+        description:
+          'A problem occurred whilst attempting to update your report.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      })
+      NProgress.done()
+      onClose()
+    }
   }
 
   return (

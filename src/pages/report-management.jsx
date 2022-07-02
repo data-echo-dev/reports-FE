@@ -51,7 +51,6 @@ const ReportManagement = () => {
             <NewReportModal>
             <Button
               disabled={!auth.user}
-              // colorScheme="facebook"
               leftIcon={<PlusIcon className="w-5 h-5" />}
               bgColor="#66CEF5"
               _hover={{ bg: '#339BC2' }}

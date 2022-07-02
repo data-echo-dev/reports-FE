@@ -3,21 +3,13 @@ import NProgress from 'nprogress'
 import { db } from '../config/firebase'
 
 const addReport = (report) => {
-  NProgress.start()
   const newReport = {
     ...report,
   }
-  db.collection('reports')
-    .add(newReport)
-    .then((doc) => {
-      console.log('successfully added new doc:', doc.id)
-    })
-    .catch((error) => console.error('Error adding new doc:', error))
-  NProgress.done()
+  return db.collection('reports').add(newReport)
 }
 
 const updateReport = (data) => {
-  NProgress.start()
   const {
     organisationID: organisation,
     title,
@@ -36,25 +28,15 @@ const updateReport = (data) => {
     reportClass,
   }
 
-  db.collection('reports')
+  return db.collection('reports')
     .doc(data.reportID)
     .update(preFlight)
-    .then((doc) => {
-      NProgress.done()
-      console.log(doc)
-    })
 }
 
 const deleteReport = (id) => {
-  NProgress.start()
-  db.collection('reports')
+  return db.collection('reports')
     .doc(id)
     .delete()
-    .then(() => {
-      console.log('it gone bruh')
-      NProgress.done()
-    })
-    .catch((error) => console.error('Error deleting the doc:', error))
 }
 
 export { addReport, updateReport, deleteReport }
