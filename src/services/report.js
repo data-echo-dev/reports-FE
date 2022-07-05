@@ -1,5 +1,3 @@
-import Router from 'next/router'
-import NProgress from 'nprogress'
 import { db } from '../config/firebase'
 
 const addReport = (report) => {
@@ -28,15 +26,11 @@ const updateReport = (data) => {
     reportClass,
   }
 
-  return db.collection('reports')
-    .doc(data.reportID)
-    .update(preFlight)
+  return db.collection('reports').doc(data.reportID).update(preFlight)
 }
 
 const deleteReport = (id) => {
-  return db.collection('reports')
-    .doc(id)
-    .delete()
+  return db.collection('reports').doc(id).delete()
 }
 
 export { addReport, updateReport, deleteReport }
