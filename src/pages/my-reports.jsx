@@ -13,15 +13,23 @@ const MyReports = () => {
   const [useFilter, setUseFilter] = useState(false)
   const [filterResult, setFilterResult] = useState([])
   const [isOrgActive, setIsOrgActive] = useState(false)
+
+  const defaultUser = {
+    uid: 'defaultuser',
+    organisation: 'XNcDtlEkoTFw3ybonFua',
+  }
+
+  const uid = auth.user?.uid ? auth.user.uid : defaultUser.uid
+  const org = auth.user?.organisation ? auth.user.organisation : defaultUser.organisation
   const { data, status, error } = useFirestoreQuery(
-    db.collection('reports').where('teacher', '==', auth.user?.uid)
+    db.collection('reports').where('teacher', '==', uid)
   )
   const {
     data: organisations,
     status: orgStatus,
     error: orgError,
   } = useFirestoreQuery(
-    db.collection('organisations').where('id', '==', auth.user?.organisation)
+    db.collection('organisations').where('id', '==', org)
   )
 
   useEffect(() => {

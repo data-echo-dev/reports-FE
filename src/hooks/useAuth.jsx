@@ -1,16 +1,11 @@
 import Router from 'next/router'
-import {
-  useState,
-  useEffect,
-  useContext,
-  createContext,
-} from 'react'
+import { useState, useEffect, useContext, createContext } from 'react'
 import { auth, db } from '../config/firebase'
 
 const authContext = createContext(null)
 const { Provider } = authContext
 
-export function AuthProvider({children}) {
+export function AuthProvider({ children }) {
   const auth = useAuthProvider()
   return <Provider value={auth}>{children}</Provider>
 }
@@ -21,7 +16,6 @@ const useAuthProvider = () => {
   // Q: will I have to create a custom user type?
   const [user, setUser] = useState(null)
   const [orgs, setOrgs] = useState(null)
-
 
   const signUp = ({ name, email, password }) => {
     const UNASSIGNED_ORG = 'XNcDtlEkoTFw3ybonFua'
@@ -53,14 +47,18 @@ const useAuthProvider = () => {
   const signIn = ({ email, password }) =>
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((response) => {
+      .then(async (response) => {
         if (response.user) {
-          setUser(response.user)
-          getUserAdditionalData(user)
+          await getUserAdditionalData(response.user)
           return response.user
         }
       })
-      .catch((error) => ({ error }))
+      .catch((error) => {
+        console.log(error)
+        const loginError = new Error('Login Failed')
+        return  ({ error: loginError})
+      })
+
   const getUserAdditionalData = (user) =>
     db
       .collection('users')
@@ -76,7 +74,6 @@ const useAuthProvider = () => {
   // handleAuthStateChanged & the useEffect allow you to refresh a page & remain logged in.
   // need to read into this
   const handleAuthStateChanged = (user) => {
-    setUser(user)
     if (user) {
       getUserAdditionalData(user)
       Router.push('/my-reports')
@@ -102,16 +99,17 @@ const useAuthProvider = () => {
   }, [user?.uid])
 
   useEffect(() => {
-  if(user?.isSuperAdmin){
-    const unsubscribe = db.collection('organisations').get().then((querySnapshot) => {
-      const data = querySnapshot.docs.map((doc) => doc.data());
-      setOrgs(data)
-      return () => unsubscribe()
-  })
-  }
-
+    if (user?.isSuperAdmin) {
+      const unsubscribe = db
+        .collection('organisations')
+        .get()
+        .then((querySnapshot) => {
+          const data = querySnapshot.docs.map((doc) => doc.data())
+          setOrgs(data)
+          return () => unsubscribe()
+        })
+    }
   }, [user?.isSuperAdmin])
-  
 
   const signOut = () =>
     auth.signOut().then(() => {
