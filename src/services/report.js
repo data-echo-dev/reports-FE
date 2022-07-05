@@ -1,24 +1,13 @@
-import Router from 'next/router'
-import NProgress from 'nprogress'
 import { db } from '../config/firebase'
 
-const addReport = () => {
+const addReport = (report) => {
   const newReport = {
-    // this is the unassigned org ID
-    organisation: 'XNcDtlEkoTFw3ybonFua',
-    teacher: '',
-    title: '',
-    url: '',
+    ...report,
   }
-  db.collection('reports')
-    .add(newReport)
-    .then((doc) => {
-      Router.push(`/report/${doc.id}`)
-    })
+  return db.collection('reports').add(newReport)
 }
 
 const updateReport = (data) => {
-  NProgress.start()
   const {
     organisationID: organisation,
     title,
@@ -34,28 +23,14 @@ const updateReport = (data) => {
     title,
     url,
     subject,
-    reportClass, 
+    reportClass,
   }
 
-  db.collection('reports')
-    .doc(data.reportID)
-    .update(preFlight)
-    .then((doc) => {
-      NProgress.done()
-      console.log(doc)
-    })
+  return db.collection('reports').doc(data.reportID).update(preFlight)
 }
 
 const deleteReport = (id) => {
-  NProgress.start()
-  db.collection('reports')
-    .doc(id)
-    .delete()
-    .then(() => {
-      console.log('it gone bruh')
-      NProgress.done()
-    })
-    .catch((error) => console.error('Error deleting the doc:', error))
+  return db.collection('reports').doc(id).delete()
 }
 
 export { addReport, updateReport, deleteReport }

@@ -7,6 +7,7 @@ import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
 import PageTitle from '../components/PageTitle'
 import { addReport } from '../services/report'
 import ReportsFilter from '../components/ReportsFilter'
+import NewReportModal from '../components/Modals/NewReportModal'
 import { useState } from 'react'
 
 const ReportManagement = () => {
@@ -47,14 +48,17 @@ const ReportManagement = () => {
               setFilterResult={setFilterResult}
               activeFilters={filterOptions}
             />
+            <NewReportModal>
             <Button
               disabled={!auth.user}
-              onClick={addReport}
-              colorScheme="facebook"
               leftIcon={<PlusIcon className="w-5 h-5" />}
+              bgColor="#66CEF5"
+              _hover={{ bg: '#339BC2' }}
+              _active={{ bg: '#0082B3' }}
             >
               Report
             </Button>
+            </NewReportModal>
           </div>
         </div>
         <ReportsGrid reportsData={useFilter ? filterResult : reports} />

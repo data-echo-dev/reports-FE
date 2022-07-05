@@ -14,6 +14,7 @@ import { ExternalLinkIcon, PencilIcon } from '@heroicons/react/outline'
 import DeleteReportButton from '../Buttons/DeleteReportButton'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
 import { OrganisationMapper } from '../../utils/organisationMapper'
+import ReportDetailsModal from '../../components/Modals/ReportDetailsModal'
 
 const ReportsGrid = ({ reportsData }) => {
   const auth = useRequireAuth()
@@ -44,11 +45,11 @@ const ReportsGrid = ({ reportsData }) => {
                   <span className="flex items-center justify-start w-full space-x-2">
                     {auth.user.isSuperAdmin && (
                       <>
-                        <Link passHref href={`/report/${report.id}`}>
+                        <ReportDetailsModal id={report.id}>
                           <Button size="sm" colorScheme="facebook">
                             <PencilIcon className="w-5 h-5" />
                           </Button>
-                        </Link>
+                        </ReportDetailsModal>
                         <DeleteReportButton reportID={report.id} />
                       </>
                     )}
