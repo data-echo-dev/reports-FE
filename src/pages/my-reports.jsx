@@ -1,6 +1,6 @@
 import { useRequireAuth } from '../hooks/useRequireAuth'
 import { useFirestoreQuery } from '../hooks/useFirestoreQuery'
-
+import { defaultUser } from '../app/fixtures/users'
 import ReportsGrid from '../components/Grids/ReportsGrid'
 import { db } from '../config/firebase'
 import PageTitle from '../components/PageTitle'
@@ -14,13 +14,10 @@ const MyReports = () => {
   const [filterResult, setFilterResult] = useState([])
   const [isOrgActive, setIsOrgActive] = useState(false)
 
-  const defaultUser = {
-    uid: 'defaultuser',
-    organisation: 'XNcDtlEkoTFw3ybonFua',
-  }
-
   const uid = auth.user?.uid ? auth.user.uid : defaultUser.uid
-  const org = auth.user?.organisation ? auth.user.organisation : defaultUser.organisation
+  const org = auth.user?.organisation
+    ? auth.user.organisation
+    : defaultUser.organisation
   const { data, status, error } = useFirestoreQuery(
     db.collection('reports').where('teacher', '==', uid)
   )
@@ -28,9 +25,7 @@ const MyReports = () => {
     data: organisations,
     status: orgStatus,
     error: orgError,
-  } = useFirestoreQuery(
-    db.collection('organisations').where('id', '==', org)
-  )
+  } = useFirestoreQuery(db.collection('organisations').where('id', '==', org))
 
   useEffect(() => {
     organisations &&
