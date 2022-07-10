@@ -43,9 +43,13 @@ const ReportsGrid = ({ reportsData }) => {
                 <Td>{OrganisationMapper(report.organisation)}</Td>
                 <Td>
                   <span className="flex items-center justify-start w-full space-x-2">
-                    {auth.user.isSuperAdmin && (
+                    {(auth.user.isSuperAdmin || auth.user.isEditor) && (
                       <>
-                        <ReportDetailsModal id={report.id}>
+                        <ReportDetailsModal
+                          id={report.id}
+                          isSuperAdmin={auth.user.isSuperAdmin}
+                          orgId={auth.user.organisation}
+                        >
                           <Button size="sm" colorScheme="facebook">
                             <PencilIcon className="w-5 h-5" />
                           </Button>

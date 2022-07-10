@@ -19,10 +19,12 @@ import { addReport } from '../../services/report'
 import NProgress from 'nprogress'
 
 interface Props {
+  isSuperAdmin?: boolean
+  orgId?: string
   children: React.ReactNode
 }
 
-const NewReportModal: FC<Props> = ({ children }) => {
+const NewReportModal: FC<Props> = ({ isSuperAdmin, orgId, children }) => {
   const toast = useToast()
 
   const [reportID, setReportID] = useState('')
@@ -31,11 +33,22 @@ const NewReportModal: FC<Props> = ({ children }) => {
     ...defaultReport,
   })
 
+  const organisationId = orgId ?? 'fakeorgid'
+  const isEditor = isSuperAdmin ? false : true
+
   const {
     data: organisations,
     status: orgStatus,
     error: orgError,
   } = useFirestoreQuery(db.collection('organisations'))
+
+  const {
+    data: editorOrg,
+    status: editorOrgStatus,
+    error: editorOrgError,
+  } = useFirestoreQuery(
+    db.collection('organisations').where('id', '==', organisationId)
+  )
 
   const {
     data: teachers,
@@ -61,11 +74,12 @@ const NewReportModal: FC<Props> = ({ children }) => {
       }
       toast({
         title: 'Report created.',
-        description: 'You successfully created your report. You can now access it from the table below',
+        description:
+          'You successfully created your report. You can now access it from the table below',
         status: 'success',
         duration: 5000,
         isClosable: true,
-        position:"top-right"
+        position: 'top-right',
       })
       setReport(defaultReport)
       NProgress.done()
@@ -78,7 +92,7 @@ const NewReportModal: FC<Props> = ({ children }) => {
         status: 'error',
         duration: 5000,
         isClosable: true,
-        position:"top-right"
+        position: 'top-right',
       })
       setReport(defaultReport)
       NProgress.done()
@@ -125,21 +139,39 @@ const NewReportModal: FC<Props> = ({ children }) => {
                       Organisation
                     </label>
                   </div>
-                  <select
-                    id="organisation"
-                    autoComplete="false"
-                    tabIndex={0}
-                    value={report.organisation}
-                    onChange={handleChange}
-                    className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
-                  >
-                    {orgStatus === 'success' &&
-                      organisations?.map((org) => (
-                        <option value={org.id} key={org.id}>
-                          {org.name}
-                        </option>
-                      ))}
-                  </select>
+                  {isEditor ? (
+                    <select
+                      id="organisation"
+                      autoComplete="false"
+                      tabIndex={0}
+                      value={report.organisation}
+                      onChange={handleChange}
+                      className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+                    >
+                      {editorOrgStatus === 'success' &&
+                        editorOrg?.map((org) => (
+                          <option value={org.id} key={org.id}>
+                            {org.name}
+                          </option>
+                        ))}
+                    </select>
+                  ) : (
+                    <select
+                      id="organisation"
+                      autoComplete="false"
+                      tabIndex={0}
+                      value={report.organisation}
+                      onChange={handleChange}
+                      className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+                    >
+                      {orgStatus === 'success' &&
+                        organisations?.map((org) => (
+                          <option value={org.id} key={org.id}>
+                            {org.name}
+                          </option>
+                        ))}
+                    </select>
+                  )}
                 </div>
                 <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
                   <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
