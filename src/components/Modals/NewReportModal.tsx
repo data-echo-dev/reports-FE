@@ -109,7 +109,7 @@ const NewReportModal: FC<Props> = ({ isSuperAdmin, orgId, children }) => {
       <Modal isOpen={isOpen} size="lg" onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit Report Details</ModalHeader>
+          <ModalHeader>New Report Details</ModalHeader>
           <ModalCloseButton color="#FF0000" />
           <ModalBody>
             <>
