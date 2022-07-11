@@ -20,9 +20,6 @@ const EditorReportManagement = () => {
 
   const user = auth.user?.uid ? auth.user : defaultUser
 
-  console.log(user)
-  // const user =  defaultUser
-
   const { data: reports, status, error } = useFirestoreQuery(
     db.collection('reports').where('organisation', '==', user.organisation)
   )
@@ -62,7 +59,7 @@ const EditorReportManagement = () => {
           user.isSuperAdmin ||
           (user.isEditor && org.isActive)
         ) ? (
-          organisations[0]?.isActive ? (
+          org.isActive ? (
             <Alert className="max-w-lg mx-auto" status="error">
               <AlertIcon />
               You are not authorised to view this page, please contact your
@@ -85,7 +82,7 @@ const EditorReportManagement = () => {
                   setFilterResult={setFilterResult}
                   activeFilters={filterOptions}
                 />
-                <NewReportModal isSuperAdmin={user.isSuperAdmin} orgId={user.organisation}>
+                <NewReportModal isEditor={!(user.isSuperAdmin)} orgId={user.organisation}>
                   <Button
                     disabled={!auth.user}
                     leftIcon={<PlusIcon className="w-5 h-5" />}

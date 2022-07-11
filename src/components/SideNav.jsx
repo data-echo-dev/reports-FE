@@ -96,7 +96,7 @@ const SideNav = () => {
                     color="blue.700"
                     colorScheme="blue"
                   >
-                    <span className="my-4">Organisation Reports</span>
+                    <span className="my-4">Org Reports</span>
                     <span className="flex-grow text-right" />
                   </Button>
                 </Link>

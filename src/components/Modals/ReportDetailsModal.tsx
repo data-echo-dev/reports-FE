@@ -21,15 +21,13 @@ import NProgress from 'nprogress'
 
 interface Props {
   id: string
-  isSuperAdmin?: boolean
-  orgId?: string
+  isEditor?: boolean
   children: React.ReactNode
 }
 
 const ReportDetailsModal: FC<Props> = ({
   id,
-  isSuperAdmin,
-  orgId,
+  isEditor,
   children,
 }) => {
   const toast = useToast()
@@ -38,9 +36,6 @@ const ReportDetailsModal: FC<Props> = ({
   const [report, setReport] = useState<Report>({
     ...defaultReport,
   })
-
-  const organisationId = orgId ?? 'fakeorgid'
-  const isEditor = isSuperAdmin ? false : true
 
   const { data, status, error } = useFirestoreQuery(
     db.collection('reports').doc(id)
@@ -51,14 +46,6 @@ const ReportDetailsModal: FC<Props> = ({
     status: orgStatus,
     error: orgError,
   } = useFirestoreQuery(db.collection('organisations'))
-
-  const {
-    data: editorOrg,
-    status: editorOrgStatus,
-    error: editorOrgError,
-  } = useFirestoreQuery(
-    db.collection('organisations').where('id', '==', organisationId)
-  )
 
   const {
     data: teachers,
@@ -129,68 +116,54 @@ const ReportDetailsModal: FC<Props> = ({
             {data ? (
               <>
                 <div className="grid gap-6 lg:grid-cols-2">
-                  <div className="relative p-1 transition-all duration-500 border rounded ">
-                    <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-                      <label
-                        htmlFor="id"
-                        className="px-1 text-gray-600 bg-white"
-                      >
-                        ID
-                      </label>
-                    </div>
-                    <input
-                      id="id"
-                      readOnly
-                      autoComplete="false"
-                      tabIndex={0}
-                      type="text"
-                      value={reportID}
-                      className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
-                    />
-                  </div>
-                  <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
-                    <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-                      <label
-                        htmlFor="organisation"
-                        className="px-1 text-gray-600 bg-white"
-                      >
-                        Organisation
-                      </label>
-                    </div>
-                    {isEditor ? (
-                      <select
-                        id="organisation"
-                        autoComplete="false"
-                        tabIndex={0}
-                        value={report.organisation}
-                        onChange={handleChange}
-                        className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
-                      >
-                        {editorOrgStatus === 'success' &&
-                          editorOrg?.map((org) => (
-                            <option value={org.id} key={org.id}>
-                              {org.name}
-                            </option>
-                          ))}
-                      </select>
-                    ) : (
-                      <select
-                        id="organisation"
-                        autoComplete="false"
-                        tabIndex={0}
-                        value={report.organisation}
-                        onChange={handleChange}
-                        className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
-                      >
-                        {orgStatus === 'success' &&
-                          organisations?.map((org) => (
-                            <option value={org.id} key={org.id}>
-                              {org.name}
-                            </option>
-                          ))}
-                      </select>
-                    )}
-                  </div>
+                  {!isEditor && (
+                    <>
+                      <div className="relative p-1 transition-all duration-500 border rounded ">
+                        <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+                          <label
+                            htmlFor="id"
+                            className="px-1 text-gray-600 bg-white"
+                          >
+                            ID
+                          </label>
+                        </div>
+                        <input
+                          id="id"
+                          readOnly
+                          autoComplete="false"
+                          tabIndex={0}
+                          type="text"
+                          value={reportID}
+                          className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
+                        />
+                      </div>
+                      <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
+                        <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+                          <label
+                            htmlFor="organisation"
+                            className="px-1 text-gray-600 bg-white"
+                          >
+                            Organisation
+                          </label>
+                        </div>
+                        <select
+                          id="organisation"
+                          autoComplete="false"
+                          tabIndex={0}
+                          value={report.organisation}
+                          onChange={handleChange}
+                          className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+                        >
+                          {orgStatus === 'success' &&
+                            organisations?.map((org) => (
+                              <option value={org.id} key={org.id}>
+                                {org.name}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    </>
+                  )}
                   <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
                     <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
                       <label
