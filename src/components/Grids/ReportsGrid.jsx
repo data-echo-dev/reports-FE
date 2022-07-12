@@ -47,7 +47,7 @@ const ReportsGrid = ({ reportsData }) => {
                       <>
                         <ReportDetailsModal
                           id={report.id}
-                          isEditor={!(auth.user.isSuperAdmin)}
+                          isEditor={auth.user.isEditor}
                         >
                           <Button size="sm" colorScheme="facebook">
                             <PencilIcon className="w-5 h-5" />

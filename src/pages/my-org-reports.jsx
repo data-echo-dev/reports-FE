@@ -82,7 +82,7 @@ const EditorReportManagement = () => {
                   setFilterResult={setFilterResult}
                   activeFilters={filterOptions}
                 />
-                <NewReportModal isEditor={!(user.isSuperAdmin)} orgId={user.organisation}>
+                <NewReportModal isEditor={user.isEditor} orgId={user.organisation}>
                   <Button
                     disabled={!auth.user}
                     leftIcon={<PlusIcon className="w-5 h-5" />}
