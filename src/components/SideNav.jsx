@@ -86,6 +86,21 @@ const SideNav = () => {
                   <span className="flex-grow text-right" />
                 </Button>
               </Link>
+              {(auth.user.isSuperAdmin || auth.user.isEditor) && (
+                <Link passHref href="/my-org-reports">
+                  <Button
+                    size="lg"
+                    onClick={onClose}
+                    isFullWidth
+                    variant="ghost"
+                    color="blue.700"
+                    colorScheme="blue"
+                  >
+                    <span className="my-4">Org Reports</span>
+                    <span className="flex-grow text-right" />
+                  </Button>
+                </Link>
+              )}
               {auth.user.isSuperAdmin && (
                 <>
                   <Link passHref href="/org-management">

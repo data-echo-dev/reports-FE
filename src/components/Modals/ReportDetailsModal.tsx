@@ -21,10 +21,15 @@ import NProgress from 'nprogress'
 
 interface Props {
   id: string
+  isEditor?: boolean
   children: React.ReactNode
 }
 
-const ReportDetailsModal: FC<Props> = ({ id, children }) => {
+const ReportDetailsModal: FC<Props> = ({
+  id,
+  isEditor,
+  children,
+}) => {
   const toast = useToast()
   const [reportID, setReportID] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -65,7 +70,7 @@ const ReportDetailsModal: FC<Props> = ({ id, children }) => {
   async function handleSave() {
     NProgress.start()
     try {
-       await updateReport({
+      await updateReport({
         ...report,
         reportID,
         organisationID: report.organisation,
@@ -73,8 +78,7 @@ const ReportDetailsModal: FC<Props> = ({ id, children }) => {
       })
       toast({
         title: 'Update Successful.',
-        description:
-          'You successfully updated your report',
+        description: 'You successfully updated your report',
         status: 'success',
         duration: 5000,
         isClosable: true,
@@ -82,7 +86,7 @@ const ReportDetailsModal: FC<Props> = ({ id, children }) => {
       })
       NProgress.done()
       onClose()
-    } catch(e) {
+    } catch (e) {
       toast({
         title: 'Failed to update report.',
         description:
@@ -112,50 +116,54 @@ const ReportDetailsModal: FC<Props> = ({ id, children }) => {
             {data ? (
               <>
                 <div className="grid gap-6 lg:grid-cols-2">
-                  <div className="relative p-1 transition-all duration-500 border rounded ">
-                    <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-                      <label
-                        htmlFor="id"
-                        className="px-1 text-gray-600 bg-white"
-                      >
-                        ID
-                      </label>
-                    </div>
-                    <input
-                      id="id"
-                      readOnly
-                      autoComplete="false"
-                      tabIndex={0}
-                      type="text"
-                      value={reportID}
-                      className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
-                    />
-                  </div>
-                  <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
-                    <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-                      <label
-                        htmlFor="organisation"
-                        className="px-1 text-gray-600 bg-white"
-                      >
-                        Organisation
-                      </label>
-                    </div>
-                    <select
-                      id="organisation"
-                      autoComplete="false"
-                      tabIndex={0}
-                      value={report.organisation}
-                      onChange={handleChange}
-                      className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
-                    >
-                      {orgStatus === 'success' &&
-                        organisations?.map((org) => (
-                          <option value={org.id} key={org.id}>
-                            {org.name}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
+                  {!isEditor && (
+                    <>
+                      <div className="relative p-1 transition-all duration-500 border rounded ">
+                        <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+                          <label
+                            htmlFor="id"
+                            className="px-1 text-gray-600 bg-white"
+                          >
+                            ID
+                          </label>
+                        </div>
+                        <input
+                          id="id"
+                          readOnly
+                          autoComplete="false"
+                          tabIndex={0}
+                          type="text"
+                          value={reportID}
+                          className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
+                        />
+                      </div>
+                      <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
+                        <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+                          <label
+                            htmlFor="organisation"
+                            className="px-1 text-gray-600 bg-white"
+                          >
+                            Organisation
+                          </label>
+                        </div>
+                        <select
+                          id="organisation"
+                          autoComplete="false"
+                          tabIndex={0}
+                          value={report.organisation}
+                          onChange={handleChange}
+                          className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+                        >
+                          {orgStatus === 'success' &&
+                            organisations?.map((org) => (
+                              <option value={org.id} key={org.id}>
+                                {org.name}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    </>
+                  )}
                   <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
                     <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
                       <label
