@@ -42,3 +42,8 @@ assume these are written in order of importance/priority. start from the top
 # backlog
 - [ ] button situation with the forms has to be addressed, if I fill in a form and press enter, nothing happens. can't go to production with this.
   - [ ] This can be fixed with an event listener for the enter key. But also that might not be the most accessible solution, check out other ways of doing this, if time permits.
+
+
+# Playwright E2E tests
+- Codegen
+- env vars
