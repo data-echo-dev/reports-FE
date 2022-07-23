@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import {
   Modal,
   ModalOverlay,
@@ -20,8 +20,8 @@ import { defaultUser } from '../../app/fixtures/users'
 import { updateUser } from '../../services/user'
 
 interface Props {
-  user: User;
-  children: React.ReactNode;
+  user: User
+  children: React.ReactNode
 }
 
 const UserDetailsModal: FC<Props> = ({ user, children }) => {
@@ -30,7 +30,6 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
   const [newUser, setNewUser] = useState<User>({
     ...defaultUser,
   })
-
 
   const {
     data: organisations,
@@ -44,9 +43,15 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
     }
   }, [user, isOpen])
 
-  function handleChange(e) {
+  function handleChange(e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) {
     const { id, value } = e.target
     setNewUser((currentUser) => ({ ...currentUser, [id]: value }))
+  }
+
+  function handleRoles(e: ChangeEvent<HTMLSelectElement>) {
+    const { id, value } = e.target
+    const bool = value === 'true' ? true : false
+    setNewUser((currentUser) => ({ ...currentUser, [id]: bool }))
   }
 
   async function handleSave() {
@@ -173,6 +178,48 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
                       value={newUser.email}
                       className="block w-full h-full px-1 py-1 outline-none"
                     />
+                  </div>
+                  <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
+                    <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+                      <label
+                        htmlFor="organisation"
+                        className="px-1 text-gray-600 bg-white"
+                      >
+                        IsEditor
+                      </label>
+                    </div>
+                    <select
+                      id="isEditor"
+                      autoComplete="false"
+                      tabIndex={0}
+                      value={newUser.isEditor?.toString()}
+                      onChange={handleRoles}
+                      className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+                    >
+                      <option value={'true'}>True</option>
+                      <option value={'false'}>False</option>
+                    </select>
+                  </div>
+                  <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
+                    <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
+                      <label
+                        htmlFor="organisation"
+                        className="px-1 text-gray-600 bg-white"
+                      >
+                        isSuperAdmin
+                      </label>
+                    </div>
+                    <select
+                      id="isSuperAdmin"
+                      autoComplete="false"
+                      tabIndex={0}
+                      value={newUser.isSuperAdmin?.toString()}
+                      onChange={handleRoles}
+                      className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
+                    >
+                      <option value={'true'}>True</option>
+                      <option value={'false'}>False</option>
+                    </select>
                   </div>
                 </div>
               </>
