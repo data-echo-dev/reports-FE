@@ -9,10 +9,10 @@ test('Can we still login', async ({ page }) => {
   await expect(page).toHaveURL('http://localhost:3000/login')
 
   // Fill input[name="email"]
-  await page.locator('input[name="email"]').fill('guideg6+playwright@gmail.com')
+  await page.locator('input[name="email"]').fill(process.env.E2E_USERNAME)
 
   // Fill input[name="password"]
-  await page.locator('input[name="password"]').fill(process.env.PASSWORD)
+  await page.locator('input[name="password"]').fill(process.env.E2E_PASSWORD)
 
   // Click text=Login
   await page.locator('text=Login').click()
