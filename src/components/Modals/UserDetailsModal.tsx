@@ -196,8 +196,8 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
                       onChange={handleRoles}
                       className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
                     >
-                      <option value={'true'}>True</option>
                       <option value={'false'}>False</option>
+                      <option value={'true'}>True</option>
                     </select>
                   </div>
                   <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
@@ -217,8 +217,8 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
                       onChange={handleRoles}
                       className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
                     >
-                      <option value={'true'}>True</option>
                       <option value={'false'}>False</option>
+                      <option value={'true'}>True</option>
                     </select>
                   </div>
                 </div>
