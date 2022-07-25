@@ -26,21 +26,21 @@ const ReportCard = ({
 
   return (
     <div {...otherProps}>
-      <div className="card bg-base-100 shadow-xl">
+      <div className="shadow-xl card bg-base-100">
         <div className="card-body">
           <h2 className="card-title">{`${report.title}`}</h2>
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex flex-wrap gap-3">
             <div className="badge ">{`${report.reportClass}`}</div>
             <div className="badge badge-outline">{`${report.subject}`}</div>
           </div>
           <p className="mb-2">
             {`${OrganisationMapper(report.organisation)}`}{' '}
             <div className="badge bg-sky-300 text-inherit border-cyan-300 ">
-              {`${teacher}`}
+              {`${teacher || 'No Teacher Assigned'}`}
             </div>{' '}
           </p>
 
-          <div className="card-actions justify-start">
+          <div className="justify-start card-actions">
             <span className="flex items-center gap-2">
               {(user.isSuperAdmin || user.isEditor) && (
                 <>
