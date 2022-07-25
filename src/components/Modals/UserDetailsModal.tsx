@@ -200,27 +200,6 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
                       <option value={'true'}>True</option>
                     </select>
                   </div>
-                  <div className="relative p-1 transition-all duration-500 border rounded focus-within:border-blue-500 focus-within:text-blue-500">
-                    <div className="absolute px-1 -mt-4 text-xs tracking-wider uppercase">
-                      <label
-                        htmlFor="organisation"
-                        className="px-1 text-gray-600 bg-white"
-                      >
-                        isSuperAdmin
-                      </label>
-                    </div>
-                    <select
-                      id="isSuperAdmin"
-                      autoComplete="false"
-                      tabIndex={0}
-                      value={newUser.isSuperAdmin?.toString()}
-                      onChange={handleRoles}
-                      className="block w-full h-full px-1 py-1 text-gray-900 outline-none "
-                    >
-                      <option value={'false'}>False</option>
-                      <option value={'true'}>True</option>
-                    </select>
-                  </div>
                 </div>
               </>
             ) : (
