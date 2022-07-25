@@ -8,7 +8,7 @@ const ReportsGrid = ({ reportsData }) => {
 
   return (
     <>
-      <div className="w-full h-full grid grid-cols-2 gap-4 py-5 px-8 lg:grid-cols-3 max-w-7xl lg:mx-auto">
+      <div className="grid w-full h-full grid-cols-2 gap-4 px-8 py-5 lg:grid-cols-3 max-w-7xl lg:mx-auto">
         {reportsData.length > 0 &&
           reportsData.map((report, index) => (
             <ReportCard
@@ -18,9 +18,6 @@ const ReportsGrid = ({ reportsData }) => {
               className="w-96"
             />
           ))}
-      </div>
-      <div className="flex justify-center">
-        <p className="mt-4">Reports</p>
       </div>
     </>
   )
