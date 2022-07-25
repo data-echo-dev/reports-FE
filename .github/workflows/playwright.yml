@@ -34,6 +34,8 @@ jobs:
       run: yarn playwright test
       env:
         PLAYWRIGHT_TEST_BASE_URL: ${{ needs.test_setup.outputs.preview_url }}
+        E2E_USERNAME: ${{ secrets.E2E_USERNAME }}
+        E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
     - uses: actions/upload-artifact@v2
       if: always()
       with:
