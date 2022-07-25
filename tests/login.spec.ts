@@ -2,16 +2,11 @@ import { test, expect } from '@playwright/test'
 
 test('Can we still login', async ({ page }) => {
   // Go to http://localhost:3000/
-  await page.goto(
-    process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000'
-  )
+  await page.goto('/')
 
   // Click text=Sign In
   await page.locator('text=Sign In').click()
-  await expect(page).toHaveURL(
-    `${process.env.PLAYWRIGHT_TEST_BASE_URL}/login` ||
-      'http://localhost:3000/login'
-  )
+  await expect(page).toHaveURL('/')
 
   // Fill input[name="email"]
   await page.locator('input[name="email"]').fill(process.env.E2E_USERNAME)
@@ -21,7 +16,5 @@ test('Can we still login', async ({ page }) => {
 
   // Click text=Login
   await page.locator('text=Login').click()
-  await expect(page).toHaveURL(
-    `${process.env.PLAYWRIGHT_TEST_BASE_URL}/my-reports`
-  )
+  await expect(page).toHaveURL('/my-reports')
 })
