@@ -54,14 +54,13 @@ const ReportCard = ({
               )}
               <Button size="sm" colorScheme="green" title="View Report">
                 <Link
+                  passHref
                   href={{
                     pathname: '/report',
                     query: { id: `${report.id}` },
                   }}
                 >
-                  <a>
-                    <ExternalLinkIcon className="w-5 h-5" />
-                  </a>
+                  <ExternalLinkIcon className="w-5 h-5" />
                 </Link>
               </Button>
             </span>
