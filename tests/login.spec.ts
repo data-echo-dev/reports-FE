@@ -6,7 +6,7 @@ test('Can we still login', async ({ page }) => {
 
   // Click text=Sign In
   await page.locator('text=Sign In').click()
-  await expect(page).toHaveURL('/')
+  await expect(page).toHaveURL('/login')
 
   // Fill input[name="email"]
   await page.locator('input[name="email"]').fill(process.env.E2E_USERNAME)
