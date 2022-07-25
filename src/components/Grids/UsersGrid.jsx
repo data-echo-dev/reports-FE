@@ -13,9 +13,9 @@ import {
 } from '@chakra-ui/react'
 import DeleteUserButton from '../Buttons/DeleteUserButton'
 import { OrganisationMapper } from '../../utils/organisationMapper'
+import UserDetailsModal from '../Modals/UserDetailsModal'
 
 const UsersGrid = ({ usersData }) => {
-
   return (
     <div className="flex items-center justify-center w-full ">
       <div className="col-span-12">
@@ -47,11 +47,13 @@ const UsersGrid = ({ usersData }) => {
                     </Td>
                     <Td className="p-3 whitespace-nowrap">
                       <span className="flex items-center justify-center w-full space-x-2">
-                        <Link passHref href={`/user/${user.uid}`}>
+                        <UserDetailsModal
+                          user={user}
+                        >
                           <Button size="sm" colorScheme="facebook">
                             <PencilIcon className="w-5 h-5" />
                           </Button>
-                        </Link>
+                        </UserDetailsModal>
                         <DeleteUserButton userID={user.uid} />
                       </span>
                     </Td>

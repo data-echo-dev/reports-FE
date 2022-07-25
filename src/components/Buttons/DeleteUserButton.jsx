@@ -6,30 +6,47 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  useToast,
   Button,
 } from '@chakra-ui/react'
 import { TrashIcon } from '@heroicons/react/outline'
 import NProgress from 'nprogress'
 import { useRequireAuth } from '../../hooks/useRequireAuth'
+import { deleteUser } from '../../services/user'
 
 function DeleteUserButton({ userID }) {
   const auth = useRequireAuth()
-
+  const toast = useToast()
   const [isOpen, setIsOpen] = React.useState(false)
   const onClose = () => setIsOpen(false)
   const cancelRef = React.useRef()
 
   if (!auth.user) return null
 
-  function deleteOan(oanID) {
+  async function deleteOan(oanID) {
     NProgress.start()
-    fetch(`/api/user/${oanID}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    NProgress.done()
+    try {
+      await deleteUser(oanID)
+      toast({
+        title: 'Delete Successful.',
+        description: 'You successfully deleted the user',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      })
+      NProgress.done()
+    } catch (e) {
+      toast({
+        title: 'Failed to delete user.',
+        description: 'A problem occurred whilst attempting to delete the user.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      })
+      NProgress.done()
+    }
   }
 
   return (
