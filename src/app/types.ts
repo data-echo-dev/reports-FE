@@ -14,7 +14,7 @@ export interface User {
 }
 
 export interface Report {
-  id?: string
+  id: string
   organisation: string
   teacher: string
   title: string

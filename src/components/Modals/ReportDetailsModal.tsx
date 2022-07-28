@@ -31,10 +31,10 @@ const ReportDetailsModal: FC<Props> = ({
   children,
 }) => {
   const toast = useToast()
-  const [reportID, setReportID] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [report, setReport] = useState<Report>({
     ...defaultReport,
+    id:''
   })
 
   const { data, status, error } = useFirestoreQuery(
@@ -57,7 +57,6 @@ const ReportDetailsModal: FC<Props> = ({
 
   useEffect(() => {
     if (data && isOpen) {
-      setReportID(id)
       setReport(data)
     }
   }, [data, id, isOpen])
@@ -72,7 +71,6 @@ const ReportDetailsModal: FC<Props> = ({
     try {
       await updateReport({
         ...report,
-        reportID,
         organisationID: report.organisation,
         teacherID: report.teacher,
       })
@@ -133,7 +131,7 @@ const ReportDetailsModal: FC<Props> = ({
                           autoComplete="false"
                           tabIndex={0}
                           type="text"
-                          value={reportID}
+                          value={report.id}
                           className="block w-full h-full px-1 py-1 text-gray-900 outline-none cursor-not-allowed"
                         />
                       </div>

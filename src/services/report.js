@@ -26,7 +26,7 @@ const updateReport = (data) => {
     reportClass,
   }
 
-  return db.collection('reports').doc(data.reportID).update(preFlight)
+  return db.collection('reports').doc(data.id).update(preFlight)
 }
 
 const deleteReport = (id) => {
