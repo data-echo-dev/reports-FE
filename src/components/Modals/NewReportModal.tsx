@@ -28,7 +28,7 @@ const NewReportModal: FC<Props> = ({ isEditor, orgId, children }) => {
   const toast = useToast()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [report, setReport] = useState<Report>({
+  const [report, setReport] = useState<Omit<Report,'id'>>({
     ...defaultReport,
   })
 
