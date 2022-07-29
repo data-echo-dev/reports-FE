@@ -20,9 +20,10 @@ const ReportCard = ({
   ...otherProps
 }: Props & HTMLAttributes<HTMLDivElement>) => {
   const { data, status, error } = useFirestoreQuery(
-    db.collection('users').where('id', '==', report.teacher)
+    db.collection('users').where('uid', '==', report.teacher)
   )
-  const teacher: string = data ? data[0]?.name : ''
+
+  const teacher = data && data[0]?.name
 
   return (
     <div {...otherProps}>
@@ -36,7 +37,7 @@ const ReportCard = ({
           <p className="mb-2">
             {`${OrganisationMapper(report.organisation)}`}{' '}
             <div className="badge bg-sky-300 text-inherit border-cyan-300 ">
-              {`${teacher || 'No Teacher Assigned'}`}
+              {`${teacher ?? 'No Teacher Assigned'}`}
             </div>{' '}
           </p>
 

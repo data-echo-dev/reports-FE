@@ -1,10 +1,7 @@
 import { Button } from '@chakra-ui/react'
 import { PencilIcon } from '@heroicons/react/outline'
-import Link from 'next/link'
 import { HTMLAttributes } from 'react'
-import { Report, User } from '../../app/types'
-import { db } from '../../config/firebase'
-import { useFirestoreQuery } from '../../hooks/useFirestoreQuery'
+import { User } from '../../app/types'
 import { OrganisationMapper } from '../../utils/organisationMapper'
 import UserDetailsModal from '../Modals/UserDetailsModal'
 import DeleteUserButton from '../Buttons/DeleteUserButton'
@@ -28,7 +25,7 @@ const UserCard = ({
             <div className="badge badge-outline">{`${item.email}`}</div>
           </div>
           <p className="mb-2">
-            {`${OrganisationMapper(item.organisation)}`}
+            {`${OrganisationMapper(item.organisation)}`}{' '}
             {item.isEditor && (
               <div className="badge bg-sky-300 text-inherit border-cyan-300 ">
                 Editor
