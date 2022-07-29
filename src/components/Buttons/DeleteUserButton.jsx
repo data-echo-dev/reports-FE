@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   AlertDialog,
   AlertDialogBody,
@@ -17,7 +17,8 @@ import { deleteUser } from '../../services/user'
 function DeleteUserButton({ userID }) {
   const auth = useRequireAuth()
   const toast = useToast()
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const onClose = () => setIsOpen(false)
   const cancelRef = React.useRef()
 
@@ -25,8 +26,10 @@ function DeleteUserButton({ userID }) {
 
   async function deleteOan(oanID) {
     NProgress.start()
+    setIsLoading(true)
     try {
       await deleteUser(oanID)
+      setIsLoading(false)
       toast({
         title: 'Delete Successful.',
         description: 'You successfully deleted the user',
@@ -35,8 +38,10 @@ function DeleteUserButton({ userID }) {
         isClosable: true,
         position: 'top-right',
       })
+      onClose()
       NProgress.done()
     } catch (e) {
+      setIsLoading(false)
       toast({
         title: 'Failed to delete user.',
         description: 'A problem occurred whilst attempting to delete the user.',
@@ -45,6 +50,7 @@ function DeleteUserButton({ userID }) {
         isClosable: true,
         position: 'top-right',
       })
+      onClose()
       NProgress.done()
     }
   }
@@ -77,6 +83,7 @@ function DeleteUserButton({ userID }) {
               </Button>
               {auth.user.isSuperAdmin && (
                 <Button
+                  isLoading={isLoading}
                   colorScheme="red"
                   onClick={() => deleteOan(userID)}
                   ml={3}

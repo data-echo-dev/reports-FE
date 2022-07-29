@@ -1,69 +1,20 @@
 import React from 'react'
-import Link from 'next/link'
-import { PencilIcon } from '@heroicons/react/outline'
-import {
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-} from '@chakra-ui/react'
-import DeleteUserButton from '../Buttons/DeleteUserButton'
-import { OrganisationMapper } from '../../utils/organisationMapper'
-import UserDetailsModal from '../Modals/UserDetailsModal'
+import { useRequireAuth } from '../../hooks/useRequireAuth'
+import UserCard from '../Cards/UserCard'
 
 const UsersGrid = ({ usersData }) => {
+  const auth = useRequireAuth()
   return (
-    <div className="flex items-center justify-center w-full ">
-      <div className="col-span-12">
-        <div className="overflow-auto lg:overflow-visible ">
-          {usersData.length > 0 && (
-            <Table
-              className="max-w-6xl"
-              colorScheme="facebook"
-              variant="striped"
-            >
-              <TableCaption>Users</TableCaption>
-
-              <Thead>
-                <Tr>
-                  <Th>Name</Th>
-                  <Th>Email</Th>
-                  <Th>Organisation</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {usersData.map((user) => (
-                  <Tr key={user.email}>
-                    <Td>{user.name}</Td>
-                    <Td>{user.email}</Td>
-                    <Td>
-                      {user.organisation
-                        ? OrganisationMapper(user.organisation)
-                        : ''}
-                    </Td>
-                    <Td className="p-3 whitespace-nowrap">
-                      <span className="flex items-center justify-center w-full space-x-2">
-                        <UserDetailsModal
-                          user={user}
-                        >
-                          <Button size="sm" colorScheme="facebook">
-                            <PencilIcon className="w-5 h-5" />
-                          </Button>
-                        </UserDetailsModal>
-                        <DeleteUserButton userID={user.uid} />
-                      </span>
-                    </Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          )}
-        </div>
-      </div>
+    <div className="grid w-full h-full grid-cols-2 gap-4 px-8 py-5 lg:grid-cols-3 max-w-7xl lg:mx-auto">
+      {usersData.length > 0 &&
+        usersData.map((item, index) => (
+          <UserCard
+            key={item.id}
+            item={item}
+            user={auth.user}
+            className="w-96"
+          />
+        ))}
     </div>
   )
 }

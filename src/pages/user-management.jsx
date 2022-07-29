@@ -6,7 +6,6 @@ import PageTitle from '../components/PageTitle'
 import ReportsFilter from '../components/ReportsFilter'
 import { Fragment, useState } from 'react'
 
-
 const UserManagement = () => {
   const auth = useRequireAuth()
   const [useFilter, setUseFilter] = useState(false)
@@ -30,7 +29,7 @@ const UserManagement = () => {
         {data && (
           <Fragment>
             <div className="flex items-center justify-center w-full">
-              <div className="mb-6 items-center  w-[848px]">
+              <div className="mb-6 items-center justify-between max-w-6xl w-full">
                 <ReportsFilter
                   data={data}
                   setUseFilter={setUseFilter}

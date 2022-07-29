@@ -22,14 +22,13 @@ const userApi = async (req, res) => {
         console.log(x)
         const userRecord = await auth.updateUser(uid, req.body)
         console.log('Successfully updated user', userRecord.toJSON())
-        res.send({
-          status: 200,
+        res.status(200).send({
           message: 'entry added successfully',
           data: req.body,
         })
-      } catch (e) {
+      } catch (error) {
         console.log('Error updating user:', error)
-        return res.json({ error })
+        return res.status(500).json({ error })
       }
 
       break
@@ -39,13 +38,13 @@ const userApi = async (req, res) => {
         console.log('jahman vabaya')
         await db.collection('users').doc(uid).delete()
         console.log('jahman vabaya oan')
-        res.send({
-          status: 200,
+        res.status(200).send({
           message: 'entry deleted successfully',
           data: req.body,
         })
-      } catch (e) {
-        return res.json({ error })
+      } catch (error) {
+        console.log('error deleting user :', error)
+        return res.status(500).json({ error })
       }
       break
     default:
