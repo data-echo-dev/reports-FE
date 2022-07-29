@@ -27,6 +27,7 @@ interface Props {
 const UserDetailsModal: FC<Props> = ({ user, children }) => {
   const toast = useToast()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isLoading, setIsLoading] = useState(false)
   const [newUser, setNewUser] = useState<User>({
     ...defaultUser,
   })
@@ -56,8 +57,10 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
 
   async function handleSave() {
     NProgress.start()
+    setIsLoading(true)
     try {
       await updateUser(newUser)
+      setIsLoading(false)
       toast({
         title: 'Update Successful.',
         description: 'You successfully updated the user',
@@ -69,6 +72,7 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
       NProgress.done()
       onClose()
     } catch (e) {
+      setIsLoading(false)
       toast({
         title: 'Failed to update user.',
         description: 'A problem occurred whilst attempting to update the user.',
@@ -214,6 +218,7 @@ const UserDetailsModal: FC<Props> = ({ user, children }) => {
               Discard Changes
             </Button>
             <Button
+              isLoading={isLoading}
               bgColor="#66CEF5"
               _hover={{ bg: '#339BC2' }}
               _active={{ bg: '#0082B3' }}
